@@ -8,6 +8,8 @@
 #include "vector"
 #include "Array.h"
 #include "Matrix.h"
+#include "iostream"
+#include "cmath"
 
 // 1.3.1
 void CholeskyFactorization(const Matrix &A, Matrix *L);

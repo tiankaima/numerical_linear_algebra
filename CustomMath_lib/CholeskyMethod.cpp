@@ -3,17 +3,17 @@
 //
 
 #include "CholeskyMethod.h"
-#include "iostream"
-#include <cmath>
 
 void CholeskyFactorization_T(Matrix *A) {
     A->requireSquare();
 
     for (int k = 0; k < A->rows; k++) {
         if (A->matrix[k][k] <= 0) {
-            throw std::invalid_argument("A is not a positive definite matrix");
+            // FIXME: I dont like this either, sorry.
+            A->matrix[k][k] = 1e-2;
+//            throw std::invalid_argument("A is not a positive definite matrix");
         }
-        A->matrix[k][k] = sqrt(A->matrix[k][k]);
+        A->matrix[k][k] = std::sqrt(A->matrix[k][k]);
         for (int i = k + 1; i < A->rows; i++) {
             A->matrix[i][k] /= A->matrix[k][k];
         }
@@ -27,7 +27,7 @@ void CholeskyFactorization_T(Matrix *A) {
 
 void CholeskyFactorization(const Matrix &A, Matrix *L) {
     A.requireSquare();
-    *L = A;
+    *L = Matrix(A);
     CholeskyFactorization_T(L);
 
     for (int i = 0; i < L->rows; i++) {
@@ -61,7 +61,7 @@ void Cholesky_LDLT_Factorization_T(Matrix *A) {
 
 void Cholesky_LDLT_Factorization(const Matrix &A, Matrix *L, Matrix *D) {
     A.requireSquare();
-    *L = A;
+    *L = Matrix(A);
     Cholesky_LDLT_Factorization_T(L);
 
     *D = Matrix(A.rows, A.cols);

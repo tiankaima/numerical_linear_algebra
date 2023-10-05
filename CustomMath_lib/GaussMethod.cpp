@@ -2,31 +2,29 @@
 // Created by tiankaima on 23-10-5.
 //
 
-#include "iostream"
-#include "vector"
 #include "GaussMethod.h"
 
 Array LowerGaussSolve(const Matrix &A, const Array &b) {
     A.requireSquare();
 
-    std::vector<double> x(A.rows, 0);
-    for (int i = 0; i < A.rows; i++) {
-        double sum = 0;
+    auto x = Array(A.rows);
+    for (unsigned int i = 0; i < A.rows; i++) {
+        long double sum = 0;
         for (int j = 0; j < i; j++) {
-            sum += A.matrix[i][j] * x[j];
+            sum += A.matrix[i][j] * x.array[j];
         }
-        x[i] = (b.array[i] - sum) / A.matrix[i][i];
+        x.array[i] = (b.array[i] - sum) / A.matrix[i][i];
     }
 
-    return Array(x);
+    return x;
 }
 
-void LowerGaussSolve_T(const Matrix &A, Array &b) {
+[[maybe_unused]] void LowerGaussSolve_T(const Matrix &A, Array &b) {
     A.requireSquare();
 
-    for (int i = 0; i < b.size; i++) {
+    for (unsigned int i = 0; i < b.size; i++) {
         b.array[i] = b.array[i] / A.matrix[i][i];
-        for (int j = i + 1; j < b.size; j++) {
+        for (unsigned int j = i + 1; j < b.size; j++) {
             b.array[j] -= A.matrix[j][i] * b.array[i];
         }
     }
@@ -35,24 +33,24 @@ void LowerGaussSolve_T(const Matrix &A, Array &b) {
 Array UpperGaussSolve(const Matrix &A, const Array &b) {
     A.requireSquare();
 
-    std::vector<double> x(A.rows, 0);
-    for (int i = A.rows - 1; i >= 0; i--) {
-        double sum = 0;
-        for (int j = A.rows - 1; j > i; j--) {
-            sum += A.matrix[i][j] * x[j];
+    auto x = Array(A.rows);
+    for (unsigned int i = A.rows - 1; i != -1; i--) {
+        long double sum = 0;
+        for (unsigned j = A.rows - 1; j > i; j--) {
+            sum += A.matrix[i][j] * x.array[j];
         }
-        x[i] = (b.array[i] - sum) / A.matrix[i][i];
+        x.array[i] = (b.array[i] - sum) / A.matrix[i][i];
     }
 
-    return Array(x);
+    return x;
 }
 
-void UpperGaussSolve_T(const Matrix &A, Array &b) {
+[[maybe_unused]] void UpperGaussSolve_T(const Matrix &A, Array &b) {
     A.requireSquare();
 
-    for (int i = b.size - 1; i >= 0; i--) {
+    for (unsigned int i = b.size - 1; i != -1; i--) {
         b.array[i] = b.array[i] / A.matrix[i][i];
-        for (int j = i - 1; j >= 0; j--) {
+        for (unsigned int j = i - 1; j != -1; j--) {
             b.array[j] -= A.matrix[j][i] * b.array[i];
         }
     }
@@ -74,7 +72,7 @@ void LU_Factorization_T(Matrix *A) {
 void LU_Factorization(const Matrix &A, Matrix *L, Matrix *U) {
     A.requireSquare();
 
-    *U = A;
+    *U = Matrix(A);
     LU_Factorization_T(U);
     *L = Matrix(A.rows, A.cols);
 
@@ -99,7 +97,7 @@ void LU_FP_Factorization_T(Matrix *A, Matrix *P, Matrix *Q) {
     for (int i = 0; i < A->rows; i++) {
         // find the pivot
         int pivot_i = i, pivot_j = i;
-        double pivot = std::abs(A->matrix[i][i]);
+        long double pivot = std::abs(A->matrix[i][i]);
         for (int j = i; j < A->rows; j++) {
             for (int k = i; k < A->rows; k++) {
                 if (std::abs(A->matrix[j][k]) > std::abs(pivot)) {
@@ -143,7 +141,7 @@ void LU_FP_Factorization_T(Matrix *A, Matrix *P, Matrix *Q) {
 void LU_FP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P, Matrix *Q) {
     A.requireSquare();
 
-    *U = A;
+    *U = Matrix(A);
     LU_FP_Factorization_T(U, P, Q);
     *L = Matrix(A.rows, A.cols);
 
@@ -167,7 +165,7 @@ void LU_PP_Factorization_T(Matrix *A, Matrix *P) {
     for (int i = 0; i < A->rows; i++) {
         // find the pivot
         int pivot_i = i;
-        double pivot = std::abs(A->matrix[i][i]);
+        long double pivot = std::abs(A->matrix[i][i]);
         for (int j = i; j < A->rows; j++) {
             if (std::abs(A->matrix[j][i]) > std::abs(pivot)) {
                 pivot = A->matrix[j][i];
@@ -201,7 +199,7 @@ void LU_PP_Factorization_T(Matrix *A, Matrix *P) {
 void LU_PP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P) {
     A.requireSquare();
 
-    *U = A;
+    *U = Matrix(A);
     LU_PP_Factorization_T(U, P);
     *L = Matrix(A.rows, A.cols);
 

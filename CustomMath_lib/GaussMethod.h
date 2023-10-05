@@ -5,6 +5,7 @@
 #ifndef NUMERICAL_ALGEBRA_GAUSSMETHOD_H
 #define NUMERICAL_ALGEBRA_GAUSSMETHOD_H
 
+#include "iostream"
 #include "vector"
 #include "Array.h"
 #include "Matrix.h"
@@ -12,12 +13,12 @@
 // 1.1.1
 Array LowerGaussSolve(const Matrix &A, const Array &b);
 
-void LowerGaussSolve_T(const Matrix &A, Array &b);
+[[maybe_unused]] void LowerGaussSolve_T(const Matrix &A, Array &b);
 
 // 1.1.2
 Array UpperGaussSolve(const Matrix &A, const Array &b);
 
-void UpperGaussSolve_T(const Matrix &A, Array &b);
+[[maybe_unused]] void UpperGaussSolve_T(const Matrix &A, Array &b);
 
 // 1.1.3
 void LU_Factorization(const Matrix &A, Matrix *L, Matrix *U);
