@@ -44,7 +44,7 @@ TEST_CASE("Array::operator+()") {
     double dot_product = array1 * array2;
     CHECK(dot_product == 32);
 
-    array3=Array("[1 2 3 4 5 6 7 8 9 10]");
+    array3 = Array("[1 2 3 4 5 6 7 8 9 10]");
     CHECK_THROWS(array3 = array1 + array3);
     CHECK_THROWS(array3 = array1 - array3);
     CHECK_THROWS(dot_product = array1 * array3);

@@ -3,7 +3,9 @@ project(numerical_algebra)
 
 set(CMAKE_CXX_STANDARD 23)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp
+        homeworks/homework_1.cpp
+        homeworks/homework_1.h)
 add_executable(numerical_algebra ${SOURCE_FILES})
 
 include_directories(CustomMath_lib)

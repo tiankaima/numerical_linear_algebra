@@ -55,7 +55,7 @@ void Array::print() {
     std::cout << "]" << std::endl;
 }
 
-Array Array::operator+(Array &other) {
+Array Array::operator+(const Array &other) {
     if (this->size != other.size) {
         throw std::invalid_argument("Array dimensions must agree.");
     }
@@ -66,7 +66,7 @@ Array Array::operator+(Array &other) {
     return Array(result);
 }
 
-Array Array::operator-(Array &other) {
+Array Array::operator-(const Array &other) {
     if (this->size != other.size) {
         throw std::invalid_argument("Array dimensions must agree.");
     }
@@ -93,7 +93,7 @@ Array Array::operator/(double scalar) {
     return Array(result);
 }
 
-double Array::operator*(Array &other) {
+double Array::operator*(const Array &other) {
     if (this->size != other.size) {
         throw std::invalid_argument("Array dimensions must agree.");
     }
@@ -102,4 +102,16 @@ double Array::operator*(Array &other) {
         result += this->array[i] * other.array[i];
     }
     return result;
+}
+
+bool Array::operator==(const Array &other) const {
+    if (this->size != other.size) {
+        return false;
+    }
+    for (int i = 0; i < this->size; i++) {
+        if (this->array[i] != other.array[i]) {
+            return false;
+        }
+    }
+    return true;
 }

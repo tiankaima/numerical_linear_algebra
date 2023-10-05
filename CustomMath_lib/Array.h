@@ -6,6 +6,7 @@
 #define NUMERICAL_ALGEBRA_ARRAY_H
 
 #include <vector>
+#include "string"
 
 class Matrix;
 
@@ -24,17 +25,19 @@ public:
 
     void print();
 
-    Array operator+(Array &other);
+    Array operator+(const Array &other);
 
-    Array operator-(Array &other);
+    Array operator-(const Array &other);
 
-    double operator*(Array &other);
+    double operator*(const Array &other);
 
     Array operator*(double scalar);
 
     Array operator/(double scalar);
 
-    Array operator*(Matrix &other);
+    Array operator*(const Matrix &other);
+
+    bool operator==(const Array &other) const;
 };
 
 #endif //NUMERICAL_ALGEBRA_ARRAY_H

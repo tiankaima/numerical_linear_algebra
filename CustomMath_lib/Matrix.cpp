@@ -6,6 +6,7 @@
 #include "Matrix.h"
 #include "Array.h"
 #include <string>
+#include <cmath>
 
 Matrix::Matrix() {
     this->rows = 0;
@@ -13,7 +14,7 @@ Matrix::Matrix() {
     this->matrix = std::vector<std::vector<double>>(0, std::vector<double>(0, 0));
 }
 
-Matrix::Matrix(int rows, int cols) {
+Matrix::Matrix(unsigned long rows, unsigned long int cols) {
     // Frankly you shouldn't use this, but why not?
     this->rows = rows;
     this->cols = cols;
@@ -55,6 +56,14 @@ Matrix::Matrix(std::string matlab_matrix) {
     this->matrix = result;
 }
 
+Matrix Matrix::identity(unsigned long n) {
+    std::vector<std::vector<double>> result(n, std::vector<double>(n, 0));
+    for (int i = 0; i < n; i++) {
+        result[i][i] = 1;
+    }
+    return Matrix(result);
+}
+
 void Matrix::print() {
     std::cout << "[";
     for (int i = 0; i < this->rows; i++) {
@@ -73,7 +82,7 @@ void Matrix::print() {
     std::cout << "]" << std::endl;
 }
 
-Matrix Matrix::operator+(Matrix &other) {
+Matrix Matrix::operator+(const Matrix &other) {
     if (this->rows != other.rows || this->cols != other.cols) {
         throw std::invalid_argument("Matrix dimensions must agree.");
     }
@@ -86,7 +95,7 @@ Matrix Matrix::operator+(Matrix &other) {
     return Matrix(result);
 }
 
-Matrix Matrix::operator-(Matrix &other) {
+Matrix Matrix::operator-(const Matrix &other) {
     if (this->rows != other.rows || this->cols != other.cols) {
         throw std::invalid_argument("Matrix dimensions must agree.");
     }
@@ -99,7 +108,7 @@ Matrix Matrix::operator-(Matrix &other) {
     return Matrix(result);
 }
 
-Matrix Matrix::operator*(Matrix &other) {
+Matrix Matrix::operator*(const Matrix &other) {
     if (this->cols != other.rows) {
         throw std::invalid_argument("Matrix dimensions must agree.");
     }
@@ -147,7 +156,7 @@ Matrix Matrix::operator/(double scalar) {
     return Matrix(result);
 }
 
-Array Matrix::operator*(Array &other) {
+Array Matrix::operator*(const Array &other) {
     if (this->cols != other.size) {
         throw std::invalid_argument("Matrix dimensions must agree.");
     }
@@ -160,7 +169,7 @@ Array Matrix::operator*(Array &other) {
     return Array(result);
 }
 
-Array Array::operator*(Matrix &other) {
+Array Array::operator*(const Matrix &other) {
     if (this->size != other.rows) {
         throw std::invalid_argument("Matrix dimensions must agree.");
     }
@@ -173,7 +182,35 @@ Array Array::operator*(Matrix &other) {
     return Array(result);
 }
 
-Matrix product(Array &array1, Array &array2) {
+bool cmp(double a, double b) {
+    return fabs(a - b) < 1e-6;
+}
+
+bool Matrix::operator==(const Matrix &other) const {
+    if (this->rows != other.rows || this->cols != other.cols) {
+        return false;
+    }
+    for (int i = 0; i < this->rows; i++) {
+        for (int j = 0; j < this->cols; j++) {
+            if (!cmp(this->matrix[i][j], other.matrix[i][j])) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Matrix::isSquare() const {
+    return this->rows == this->cols;
+}
+
+void Matrix::requireSquare() const {
+    if (!this->isSquare()) {
+        throw std::invalid_argument("Matrix is not square.");
+    }
+}
+
+Matrix Matrix::product(const Array &array1, const Array &array2) {
     std::vector<std::vector<double>> result(array1.size, std::vector<double>(array2.size, 0));
     for (int i = 0; i < array1.size; i++) {
         for (int j = 0; j < array2.size; j++) {

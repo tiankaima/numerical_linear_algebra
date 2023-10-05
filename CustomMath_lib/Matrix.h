@@ -5,8 +5,9 @@
 #ifndef NUMERICAL_ALGEBRA_MATRIX_H
 #define NUMERICAL_ALGEBRA_MATRIX_H
 
-#include <vector>
+#include "vector"
 #include "Array.h"
+#include "string"
 
 class Matrix {
 public:
@@ -16,19 +17,21 @@ public:
 
     Matrix();
 
-    Matrix(int rows, int cols);
+    Matrix(unsigned long rows, unsigned long cols);
 
     explicit Matrix(std::vector<std::vector<double>> matrix);
 
     explicit Matrix(std::string matlab_matrix);
 
+    static Matrix identity(unsigned long n); // Identity matrix
+
     void print();
 
-    Matrix operator+(Matrix &other);
+    Matrix operator+(const Matrix &other);
 
-    Matrix operator-(Matrix &other);
+    Matrix operator-(const Matrix &other);
 
-    Matrix operator*(Matrix &other);
+    Matrix operator*(const Matrix &other);
 
     Matrix transpose();
 
@@ -38,9 +41,16 @@ public:
 
     Matrix operator/(double scalar);
 
-    Array operator*(Array &other);
+    Array operator*(const Array &other);
+
+    bool operator==(const Matrix &other) const;
+
+    static Matrix product(const Array &array1, const Array &array2);
+
+    bool isSquare() const;
+
+    void requireSquare() const;
 };
 
-Matrix product(Array &array1, Array &array2);
 
 #endif //NUMERICAL_ALGEBRA_MATRIX_H
