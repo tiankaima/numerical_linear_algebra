@@ -17,6 +17,6 @@ void CholeskyFactorization_T(Matrix *A);
 // 1.3.2
 void Cholesky_LDLT_Factorization(const Matrix &A, Matrix *L, Matrix *D);
 
-void Cholesky_LDLT_Factorization_T(Matrix *A, Matrix *D);
+void Cholesky_LDLT_Factorization_T(Matrix *A);
 
 #endif //NUMERICAL_ALGEBRA_CHOLESKYMETHOD_H

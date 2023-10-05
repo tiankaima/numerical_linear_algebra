@@ -147,12 +147,70 @@ void homework_1_2_2() {
     }
 }
 
+/*
+ * 1.3.1
+ *
+ * Test Case:
+ * A = [155 -123 -67; -123 141 -20; -67 -20 153]
+ */
+void homework_1_3_1() {
+    std::cout << "------ 1.3.1 ------" << std::endl;
+
+    Matrix A, L;
+    A = Matrix("[155 -123 -67; -123 141 -20; -67 -20 153]");
+
+    CholeskyFactorization(A, &L);
+    std::cout << "L = " << std::endl;
+    L.print();
+
+    Matrix LLT = L * L.transpose();
+    LLT.print();
+    A.print();
+
+    if (LLT == A) {
+        std::cout << "Test Passed" << std::endl;
+    } else {
+        std::cout << "Test Failed" << std::endl;
+    }
+}
+
+/*
+ * 1.3.2
+ *
+ * Test Case:
+ * A = [155 -123 -67; -123 141 -20; -67 -20 153]
+ */
+void homework_1_3_2() {
+    std::cout << "------ 1.3.2 ------" << std::endl;
+
+    Matrix A, L, D;
+    A = Matrix("[155 -123 -67; -123 141 -20; -67 -20 153]");
+
+    Cholesky_LDLT_Factorization(A, &L, &D);
+    std::cout << "L = " << std::endl;
+    L.print();
+    std::cout << "D = " << std::endl;
+    D.print();
+
+    Matrix LDLT = L * D * L.transpose();
+    LDLT.print();
+    A.print();
+
+    if (LDLT == A) {
+        std::cout << "Test Passed" << std::endl;
+    } else {
+        std::cout << "Test Failed" << std::endl;
+    }
+}
+
+
 int homework_1() {
     homework_1_1_1();
     homework_1_1_2();
     homework_1_1_3();
     homework_1_2_1();
     homework_1_2_2();
-
+    homework_1_3_1();
+    homework_1_3_2();
     return 0;
 }

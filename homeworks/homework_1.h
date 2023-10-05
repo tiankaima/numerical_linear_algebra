@@ -9,6 +9,7 @@
 #include "vector"
 #include "string"
 #include "GaussMethod.h"
+#include "CholeskyMethod.h"
 #include "Matrix.h"
 #include "Array.h"
 

@@ -6,11 +6,8 @@
 #include "iostream"
 #include <cmath>
 
-//void CholeskyFactorization(const Matrix &A, Matrix *L);
 void CholeskyFactorization_T(Matrix *A) {
-    if (A->rows != A->cols) {
-        throw std::invalid_argument("A is not a square matrix");
-    }
+    A->requireSquare();
 
     for (int k = 0; k < A->rows; k++) {
         if (A->matrix[k][k] <= 0) {
@@ -28,7 +25,54 @@ void CholeskyFactorization_T(Matrix *A) {
     }
 }
 
-// 1.3.2
-//void Cholesky_LDLT_Factorization(const Matrix &A, Matrix *L, Matrix *D);
-//void Cholesky_LDLT_Factorization_T(Matrix *A, Matrix *D);
+void CholeskyFactorization(const Matrix &A, Matrix *L) {
+    A.requireSquare();
+    *L = A;
+    CholeskyFactorization_T(L);
 
+    for (int i = 0; i < L->rows; i++) {
+        for (int j = i + 1; j < L->cols; j++) {
+            L->matrix[i][j] = 0;
+        }
+    }
+}
+
+void Cholesky_LDLT_Factorization_T(Matrix *A) {
+    A->requireSquare();
+
+    Array tmp = Array(A->rows);
+
+    for (int j = 0; j < A->rows; j++) {
+        for (int i = 0; i < j; i++) {
+            tmp.array[i] = A->matrix[j][i] * A->matrix[i][i];
+        }
+        for (int i = 0; i < j; i++) {
+            A->matrix[j][j] -= A->matrix[j][i] * tmp.array[i];
+        }
+        for (int i = j + 1; i < A->rows; i++) {
+            for (int k = 0; k < j; k++) {
+                A->matrix[i][j] -= A->matrix[i][k] * tmp.array[k];
+            }
+            A->matrix[i][j] /= A->matrix[j][j];
+        }
+    }
+}
+
+
+void Cholesky_LDLT_Factorization(const Matrix &A, Matrix *L, Matrix *D) {
+    A.requireSquare();
+    *L = A;
+    Cholesky_LDLT_Factorization_T(L);
+
+    *D = Matrix(A.rows, A.cols);
+    for (int i = 0; i < A.rows; i++) {
+        D->matrix[i][i] = L->matrix[i][i];
+        L->matrix[i][i] = 1;
+    }
+    for (int i = 0; i < A.rows; i++) {
+        for (int j = i + 1; j < A.cols; j++) {
+            D->matrix[i][i] *= L->matrix[j][j];
+            L->matrix[i][j] = 0;
+        }
+    }
+}
