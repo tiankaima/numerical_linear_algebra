@@ -56,6 +56,14 @@ Array UpperGaussSolve(const Matrix &A, const Array &b) {
     }
 }
 
+Array LU_Solve(const Matrix &A, const Array &b) {
+    Matrix L, U;
+    LU_Factorization(A, &L, &U);
+    Array y = LowerGaussSolve(L, b);
+    Array x = UpperGaussSolve(U, y);
+    return x;
+}
+
 void LU_Factorization_T(Matrix *A) {
     A->requireSquare();
 
@@ -85,6 +93,16 @@ void LU_Factorization(const Matrix &A, Matrix *L, Matrix *U) {
             U->matrix[i][j] = 0;
         }
     }
+}
+
+Array LU_FP_Solve(const Matrix &A, const Array &b) {
+    Matrix L, U, P, Q;
+    LU_FP_Factorization(A, &L, &U, &P, &Q);
+    Array Pb = P * b;
+    Array UQix = LowerGaussSolve(L, Pb);
+    Array Qix = UpperGaussSolve(U, UQix);
+    Array x = Q * Qix;
+    return x;
 }
 
 void LU_FP_Factorization_T(Matrix *A, Matrix *P, Matrix *Q) {
@@ -154,6 +172,15 @@ void LU_FP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P, Matri
             U->matrix[i][j] = 0;
         }
     }
+}
+
+Array LU_PP_Solve(const Matrix &A, const Array &b) {
+    Matrix L, U, P;
+    LU_PP_Factorization(A, &L, &U, &P);
+    Array Pb = P * b;
+    Array y = LowerGaussSolve(L, Pb);
+    Array x = UpperGaussSolve(U, y);
+    return x;
 }
 
 void LU_PP_Factorization_T(Matrix *A, Matrix *P) {

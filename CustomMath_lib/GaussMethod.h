@@ -21,16 +21,24 @@ Array UpperGaussSolve(const Matrix &A, const Array &b);
 [[maybe_unused]] void UpperGaussSolve_T(const Matrix &A, Array &b);
 
 // 1.1.3
+Array LU_Solve(const Matrix &A, const Array &b);
+
+[[maybe_unused]] void LU_Solve_T(Matrix *A, Array &b);
+
 void LU_Factorization(const Matrix &A, Matrix *L, Matrix *U);
 
 void LU_Factorization_T(Matrix *A);
 
 // 1.2.1
+Array LU_FP_Solve(const Matrix &A, const Array &b);
+
 void LU_FP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P, Matrix *Q);
 
 void LU_FP_Factorization_T(Matrix *A, Matrix *P, Matrix *Q);
 
 // 1.2.2
+Array LU_PP_Solve(const Matrix &A, const Array &b);
+
 void LU_PP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P);
 
 void LU_PP_Factorization_T(Matrix *A, Matrix *P);

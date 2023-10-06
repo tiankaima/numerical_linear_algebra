@@ -4,6 +4,14 @@
 
 #include "CholeskyMethod.h"
 
+Array CholeskySolve(const Matrix &A, const Array &b) {
+    Matrix L;
+    CholeskyFactorization(A, &L);
+    Array y = LowerGaussSolve(L, b);
+    Array x = UpperGaussSolve(L.transpose(), y);
+    return x;
+}
+
 void CholeskyFactorization_T(Matrix *A) {
     A->requireSquare();
 
@@ -35,6 +43,17 @@ void CholeskyFactorization(const Matrix &A, Matrix *L) {
             L->matrix[i][j] = 0;
         }
     }
+}
+
+Array Cholesky_LDLT_Solve(const Matrix &A, const Array &b) {
+    Matrix L, D;
+    Cholesky_LDLT_Factorization(A, &L, &D);
+    Array y = LowerGaussSolve(L, b);
+    for (int i = 0; i < A.rows; i++) {
+        y.array[i] /= D.matrix[i][i];
+    }
+    Array x = UpperGaussSolve(L.transpose(), y);
+    return x;
 }
 
 void Cholesky_LDLT_Factorization_T(Matrix *A) {
