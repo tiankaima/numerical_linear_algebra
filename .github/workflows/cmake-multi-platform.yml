@@ -77,5 +77,5 @@ jobs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: ${{ runner.os }}/${{ matrix.c_compiler }}
+        name: ${{ runner.os }}_${{ matrix.c_compiler }}
         path: ${{ steps.strings.outputs.build-output-dir }}/
