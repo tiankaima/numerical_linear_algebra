@@ -1,0 +1,64 @@
+stages:
+  - build
+
+variables:
+  # Define your matrix variables here as a single string separated by spaces
+  # Example:
+  OS_LIST: "ubuntu-latest windows-latest"
+  BUILD_TYPE_LIST: "Release"
+  C_COMPILER_LIST: "gcc clang cl"
+
+  # Define your specific variables here, such as compilers
+  # Example:
+  C_COMPILER_WINDOWS: "cl"
+  CPP_COMPILER_WINDOWS: "cl"
+  C_COMPILER_LINUX: "gcc"
+  CPP_COMPILER_LINUX: "g++"
+  C_COMPILER_CLANG: "clang"
+  CPP_COMPILER_CLANG: "clang++"
+
+# Define the build job
+build:
+  stage: build
+  script:
+    - |
+      # Set reusable strings
+      # Turn repeated input strings (such as the build output directory) into environment variables.
+      export BUILD_OUTPUT_DIR="$CI_PROJECT_DIR/build"
+
+    - |
+      # Configure CMake
+      # Configure CMake in a 'build' subdirectory.
+      # `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      cmake -B $BUILD_OUTPUT_DIR
+        -DCMAKE_CXX_COMPILER=$CI_C_COMPILER
+        -DCMAKE_C_COMPILER=$CI_C_COMPILER
+        -DCMAKE_BUILD_TYPE=$CI_BUILD_TYPE
+        -S $CI_PROJECT_DIR
+
+    - |
+      # Create Visual Studio 2022 on Windows machine
+      if [ "$CI_RUNNER_OS" = "Windows" ]; then
+        cmake -G "Visual Studio 17 2022"
+      fi
+
+    - |
+      # Build
+      # Build your program with the given configuration.
+      # Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
+      cmake --build $BUILD_OUTPUT_DIR --config $CI_BUILD_TYPE
+
+    - |
+      # Test
+      if [ "$CI_RUNNER_OS" != "Windows" ]; then
+        cd $BUILD_OUTPUT_DIR/Doctest_tests
+        # Execute tests defined by the CMake configuration.
+        # Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
+        ./Doctest_tests_run
+      fi
+
+  # Define artifacts to be uploaded
+  artifacts:
+    paths:
+      - "$BUILD_OUTPUT_DIR/"
+    name: "$CI_RUNNER_OS_$CI_C_COMPILER"
