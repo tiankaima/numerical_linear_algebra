@@ -1,35 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\Matrix.cpp">
+    <ClCompile Include="$(SolutionDir)CustomMath_lib\Matrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\Array.cpp">
+    <ClCompile Include="$(SolutionDir)CustomMath_lib\Array.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\GaussMethod.cpp">
+    <ClCompile Include="$(SolutionDir)CustomMath_lib\GaussMethod.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\CholeskyMethod.cpp">
+    <ClCompile Include="$(SolutionDir)CustomMath_lib\CholeskyMethod.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\GaussMethod.h">
+    <ClInclude Include="$(SolutionDir)CustomMath_lib\GaussMethod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\CholeskyMethod.h">
+    <ClInclude Include="$(SolutionDir)CustomMath_lib\CholeskyMethod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\Matrix.h">
+    <ClInclude Include="$(SolutionDir)CustomMath_lib\Matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\Array.h">
+    <ClInclude Include="$(SolutionDir)CustomMath_lib\Array.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\CMakeLists.txt" />
+    <CustomBuild Include="$(SolutionDir)CustomMath_lib\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

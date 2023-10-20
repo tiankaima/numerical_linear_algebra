@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\Doctest_tests\MatrixTest.cpp">
+    <ClCompile Include="$(SolutionDir)Doctest_tests\MatrixTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\Doctest_tests\ArrayTest.cpp">
+    <ClCompile Include="$(SolutionDir)Doctest_tests\ArrayTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\Doctest_tests\GaussMethodTest.cpp">
+    <ClCompile Include="$(SolutionDir)Doctest_tests\GaussMethodTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Z:\tiankaima\numerical_algebra\Doctest_tests\CMakeLists.txt" />
+    <CustomBuild Include="$(SolutionDir)Doctest_tests\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
