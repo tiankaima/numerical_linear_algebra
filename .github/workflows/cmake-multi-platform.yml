@@ -68,14 +68,16 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         cmake -G "Visual Studio 17 2022" -A x64
+        $sourceDir = "${{ github.workspace }}"
+        $replaceText = "${{ github.workspace }}"
+        $replacement = '$(SolutionDir)'
 
-    - name: Replace absolute path with relative path
-      if: runner.os == 'Windows'
-      uses: jacobtomlinson/gha-find-replace@v3
-      with:
-        find: ${{ github.workspace }}
-        replace: "$(SolutionDir)"
-        regex: false
+        Get-ChildItem -Path $sourceDir -File -Recurse | ForEach-Object {
+            $content = Get-Content $_.FullName
+            $newContent = $content -replace [regex]::Escape($replaceText), $replacement
+            Set-Content -Path $_.FullName -Value $newContent
+        }
+
 
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
