@@ -68,15 +68,15 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         cmake -G "Visual Studio 17 2022" -A x64
-        $sourceDir = "${{ github.workspace }}"
-        $replaceText = "${{ github.workspace }}"
-        $replacement = '$(SolutionDir)'
-
         Get-ChildItem -Path $sourceDir -File -Recurse | ForEach-Object {
             $content = Get-Content $_.FullName
             $newContent = $content -replace [regex]::Escape($replaceText), $replacement
             Set-Content -Path $_.FullName -Value $newContent
         }
+      env:
+        sourceDir: ${{ github.workspace }}
+        replaceText: ${{ github.workspace }}
+        replacement: '$(SolutionDir)'
 
 
     - name: Build
