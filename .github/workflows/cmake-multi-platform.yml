@@ -68,9 +68,9 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         cmake -G "Visual Studio 17 2022" -A x64
-        Get-ChildItem -Path $sourceDir -File -Recurse | ForEach-Object {
+        Get-ChildItem -Path $env:sourceDir -File -Recurse | ForEach-Object {
             $content = Get-Content $_.FullName
-            $newContent = $content -replace [regex]::Escape($replaceText), $replacement
+            $newContent = $content -replace [regex]::Escape($env:replaceText), $env:replacement
             Set-Content -Path $_.FullName -Value $newContent
         }
       env:
