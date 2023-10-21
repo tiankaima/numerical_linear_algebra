@@ -13,17 +13,17 @@
 // 1.1.1
 Array LowerGaussSolve(const Matrix &A, const Array &b);
 
-[[maybe_unused]] void LowerGaussSolve_T(const Matrix &A, Array &b);
+void LowerGaussSolve_T(const Matrix &A, Array &b);
 
 // 1.1.2
 Array UpperGaussSolve(const Matrix &A, const Array &b);
 
-[[maybe_unused]] void UpperGaussSolve_T(const Matrix &A, Array &b);
+void UpperGaussSolve_T(const Matrix &A, Array &b);
 
 // 1.1.3
 Array LU_Solve(const Matrix &A, const Array &b);
 
-[[maybe_unused]] void LU_Solve_T(Matrix *A, Array &b);
+void LU_Solve_T(Matrix *A, Array &b);
 
 void LU_Factorization(const Matrix &A, Matrix *L, Matrix *U);
 
