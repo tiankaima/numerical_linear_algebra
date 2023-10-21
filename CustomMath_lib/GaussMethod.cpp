@@ -5,21 +5,12 @@
 #include "GaussMethod.h"
 
 Array LowerGaussSolve(const Matrix &A, const Array &b) {
-    A.requireSquare();
-
-    auto x = Array(A.rows);
-    for (unsigned int i = 0; i < A.rows; i++) {
-        long double sum = 0;
-        for (int j = 0; j < i; j++) {
-            sum += A.matrix[i][j] * x.array[j];
-        }
-        x.array[i] = (b.array[i] - sum) / A.matrix[i][i];
-    }
-
+    auto x = Array(b);
+    LowerGaussSolve_T(A, x);
     return x;
 }
 
-[[maybe_unused]] void LowerGaussSolve_T(const Matrix &A, Array &b) {
+void LowerGaussSolve_T(const Matrix &A, Array &b) {
     A.requireSquare();
 
     for (unsigned int i = 0; i < b.size; i++) {
@@ -31,21 +22,12 @@ Array LowerGaussSolve(const Matrix &A, const Array &b) {
 }
 
 Array UpperGaussSolve(const Matrix &A, const Array &b) {
-    A.requireSquare();
-
-    auto x = Array(A.rows);
-    for (unsigned int i = A.rows - 1; i != -1; i--) {
-        long double sum = 0;
-        for (unsigned j = A.rows - 1; j > i; j--) {
-            sum += A.matrix[i][j] * x.array[j];
-        }
-        x.array[i] = (b.array[i] - sum) / A.matrix[i][i];
-    }
-
+    auto x = Array(b);
+    UpperGaussSolve_T(A, x);
     return x;
 }
 
-[[maybe_unused]] void UpperGaussSolve_T(const Matrix &A, Array &b) {
+void UpperGaussSolve_T(const Matrix &A, Array &b) {
     A.requireSquare();
 
     for (unsigned int i = b.size - 1; i != -1; i--) {
