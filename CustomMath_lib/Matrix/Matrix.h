@@ -35,20 +35,20 @@
 class Matrix {
 public:
     std::vector<std::vector<long double>> matrix;
-    unsigned long rows;
-    unsigned long cols;
+    ull rows;
+    ull cols;
 
     Matrix();
 
-    Matrix(unsigned long rows, unsigned long cols);
+    Matrix(ull rows, ull cols);
 
     Matrix(const Matrix &other);
 
-    explicit Matrix(std::vector<std::vector<long double>> matrix);
+    explicit Matrix(std::vector<std::vector<lld>> matrix);
 
     explicit Matrix(std::string matlab_matrix);
 
-    static Matrix identity(unsigned long n); // Identity matrix
+    static Matrix identity(ull n); // Identity matrix
 
     void print();
 

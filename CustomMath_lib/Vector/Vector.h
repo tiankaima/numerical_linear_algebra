@@ -10,12 +10,15 @@
 #include "iostream"
 #include "cmath"
 
+#define ull unsigned long long
+#define lld long double
+
 class Matrix;
 
 class Vector {
 public:
-    std::vector<long double> array;
-    unsigned long size;
+    std::vector<lld> array;
+    ull size;
 
     Vector();
 
@@ -23,7 +26,7 @@ public:
 
     explicit Vector(unsigned int size);
 
-    explicit Vector(const std::vector<long double> &array);
+    explicit Vector(const std::vector<lld> &array);
 
     explicit Vector(std::string matlab_array);
 
@@ -33,17 +36,17 @@ public:
 
     Vector operator-(const Vector &other);
 
-    long double operator*(const Vector &other);
+    lld operator*(const Vector &other);
 
-    Vector operator*(long double scalar);
+    Vector operator*(lld scalar);
 
-    Vector operator/(long double scalar);
+    Vector operator/(lld scalar);
 
     Vector operator*(const Matrix &other);
 
     bool operator==(const Vector &other) const;
 
-    [[nodiscard]] long double norm() const;
+    [[nodiscard]] lld norm() const;
 };
 
 #endif //NUMERICAL_ALGEBRA_VECTOR_H

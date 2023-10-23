@@ -57,6 +57,6 @@ Vector LU_FP_Solve(const Matrix &A, const Vector &b);
  * @param A: a square matrix
  * @param b: a vector
  */
-void LU_FP_Solve_InPlace(Matrix *A, Vector &b);
+void LU_FP_Solve_InPlace(Matrix &A, Vector &b);
 
 #endif //NUMERICAL_ALGEBRA_LU_FP_H

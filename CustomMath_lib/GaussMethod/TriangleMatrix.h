@@ -16,7 +16,7 @@
  *
  * @param L: a lower triangular matrix
  */
-Vector LowerTriangleMatrixSolve(const Matrix &L, const Vector &b);
+Vector LowerTriangleMatrixSolve(const Matrix &L, const Vector &b, bool isDiagonalUnit = false);
 
 /*
  * Solve Ux = b, where U is an upper triangular matrix
@@ -24,7 +24,7 @@ Vector LowerTriangleMatrixSolve(const Matrix &L, const Vector &b);
  *
  * @param U: an upper triangular matrix
  */
-Vector UpperTriangleMatrixSolve(const Matrix &U, const Vector &b);
+Vector UpperTriangleMatrixSolve(const Matrix &U, const Vector &b, bool isDiagonalUnit = false);
 
 /*
  * Solve Lx = b, where L is a lower triangular matrix
@@ -33,7 +33,7 @@ Vector UpperTriangleMatrixSolve(const Matrix &U, const Vector &b);
  *
  * @param L: a lower triangular matrix
  */
-void SolveLowerTriangleMatrix_InPlace(const Matrix &L, Vector &b);
+void LowerTriangleMatrixSolve_InPlace(const Matrix &L, Vector &b, bool isDiagonalUnit = false);
 
 /*
  * Solve Ux = b, where U is an upper triangular matrix
@@ -42,6 +42,6 @@ void SolveLowerTriangleMatrix_InPlace(const Matrix &L, Vector &b);
  *
  * @param U: an upper triangular matrix
  */
-void SolveUpperTriangleMatrix_InPlace(const Matrix &U, Vector &b);
+void UpperTriangleMatrixSolve_InPlace(const Matrix &U, Vector &b, bool isDiagonalUnit = false);
 
 #endif //NUMERICAL_ALGEBRA_TRIANGLEMATRIX_H

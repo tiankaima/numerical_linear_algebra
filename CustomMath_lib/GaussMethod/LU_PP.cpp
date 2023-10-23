@@ -4,26 +4,27 @@
 
 #include "LU_PP.h"
 
-void LU_PP_Factorization_InPlace(Matrix *A, Matrix *P) {
-    CHECK_SQUARE_MATRIX(A)
+void LU_PP_Factorization_InPlace(Matrix &A, Matrix *P) {
+    CHECK_SQUARE_MATRIX_REF(A)
+    ull n = A.rows;
 
     // init P
-    *P = Matrix::identity(A->rows);
+    *P = Matrix::identity(n);
 
-    for (int i = 0; i < A->rows; i++) {
+    for (ull i = 0; i < n; i++) {
         // find the pivot
-        int pivot_i = i;
-        long double pivot = std::abs(A->matrix[i][i]);
-        for (int j = i; j < A->rows; j++) {
-            if (std::abs(A->matrix[j][i]) > std::abs(pivot)) {
-                pivot = A->matrix[j][i];
+        ull pivot_i = i;
+        lld pivot = std::abs(A.matrix[i][i]);
+        for (ull j = i; j < n; j++) {
+            if (std::abs(A.matrix[j][i]) > std::abs(pivot)) {
+                pivot = A.matrix[j][i];
                 pivot_i = j;
             }
         }
         // swap rows
         if (pivot_i != i) {
-            for (int j = 0; j < A->rows; j++) {
-                std::swap(A->matrix[i][j], A->matrix[pivot_i][j]);
+            for (ull j = 0; j < n; j++) {
+                std::swap(A.matrix[i][j], A.matrix[pivot_i][j]);
             }
         }
 
@@ -35,36 +36,43 @@ void LU_PP_Factorization_InPlace(Matrix *A, Matrix *P) {
         }
 
         // do the elimination
-        for (int j = i + 1; j < A->rows; j++) {
-            A->matrix[j][i] /= A->matrix[i][i];
-            for (int k = i + 1; k < A->rows; k++) {
-                A->matrix[j][k] -= A->matrix[j][i] * A->matrix[i][k];
+        for (ull j = i + 1; j < n; j++) {
+            A.matrix[j][i] /= A.matrix[i][i];
+            for (ull k = i + 1; k < n; k++) {
+                A.matrix[j][k] -= A.matrix[j][i] * A.matrix[i][k];
             }
         }
     }
 }
 
 void LU_PP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P) {
+    ull n = A.rows;
+    *L = Matrix(n, n);
     *U = Matrix(A);
-    LU_PP_Factorization_InPlace(U, P);
-    *L = Matrix(A.rows, A.cols);
+    LU_PP_Factorization_InPlace(*U, P);
 
-    for (int i = 0; i < A.rows; i++) {
+    for (ull i = 0; i < n; i++) {
         L->matrix[i][i] = 1;
     }
-    for (int i = 0; i < A.rows; i++) {
-        for (int j = 0; j < i; j++) {
+    for (ull i = 0; i < n; i++) {
+        for (ull j = 0; j < i; j++) {
             L->matrix[i][j] = U->matrix[i][j];
             U->matrix[i][j] = 0;
         }
     }
 }
 
-Vector LU_PP_Solve(const Matrix &A, const Vector &b) {
-    Matrix L, U, P;
-    LU_PP_Factorization(A, &L, &U, &P);
+void LU_PP_Solve_InPlace(Matrix &A, Vector &b) {
+    Matrix P;
+    LU_PP_Factorization_InPlace(A, &P);
     Vector Pb = P * b;
-    Vector y = LowerTriangleMatrixSolve(L, Pb);
-    Vector x = UpperTriangleMatrixSolve(U, y);
-    return x;
+    Vector y = LowerTriangleMatrixSolve(A, Pb, true);
+    b = UpperTriangleMatrixSolve(A, y);
+}
+
+Vector LU_PP_Solve(const Matrix &A, const Vector &b) {
+    Matrix A_copy = Matrix(A);
+    Vector b_copy = Vector(b);
+    LU_PP_Solve_InPlace(A_copy, b_copy);
+    return b_copy;
 }

@@ -37,7 +37,7 @@ void LU_PP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P);
  * @param A: a square matrix
  * @param P: a permutation matrix
  */
-void LU_PP_Factorization_InPlace(Matrix *A, Matrix *P);
+void LU_PP_Factorization_InPlace(Matrix &A, Matrix *P);
 
 /*
  * Solve Ax = b using LU decomposition with full pivoting
@@ -57,6 +57,6 @@ Vector LU_PP_Solve(const Matrix &A, const Vector &b);
  * @param A: a square matrix
  * @param b: a vector
  */
-void LU_PP_Solve_InPlace(Matrix *A, Vector &b);
+void LU_PP_Solve_InPlace(Matrix &A, Vector &b);
 
 #endif //NUMERICAL_ALGEBRA_LU_PP_H

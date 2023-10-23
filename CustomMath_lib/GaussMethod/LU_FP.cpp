@@ -6,18 +6,18 @@
 
 void LU_FP_Factorization_InPlace(Matrix &A, Matrix *P, Matrix *Q) {
     CHECK_SQUARE_MATRIX_REF(A)
-    unsigned long int n = A.rows;
+    ull n = A.rows;
 
     // init P and Q
     *P = Matrix::identity(n);
     *Q = Matrix::identity(n);
 
-    for (int i = 0; i < n; i++) {
+    for (ull i = 0; i < n; i++) {
         // find the pivot
-        int pivot_i = i, pivot_j = i;
-        long double pivot = std::abs(A.matrix[i][i]);
-        for (int j = i; j < n; j++) {
-            for (int k = i; k < n; k++) {
+        ull pivot_i = i, pivot_j = i;
+        lld pivot = std::abs(A.matrix[i][i]);
+        for (ull j = i; j < n; j++) {
+            for (ull k = i; k < n; k++) {
                 if (std::abs(A.matrix[j][k]) > std::abs(pivot)) {
                     pivot = A.matrix[j][k];
                     pivot_i = j;
@@ -27,13 +27,13 @@ void LU_FP_Factorization_InPlace(Matrix &A, Matrix *P, Matrix *Q) {
         }
         // swap rows
         if (pivot_i != i) {
-            for (int j = 0; j < n; j++) {
+            for (ull j = 0; j < n; j++) {
                 std::swap(A.matrix[i][j], A.matrix[pivot_i][j]);
             }
         }
         // swap columns
         if (pivot_j != i) {
-            for (int j = 0; j < n; j++) {
+            for (ull j = 0; j < n; j++) {
                 std::swap(A.matrix[j][i], A.matrix[j][pivot_j]);
             }
         }
@@ -47,9 +47,9 @@ void LU_FP_Factorization_InPlace(Matrix &A, Matrix *P, Matrix *Q) {
         }
 
         // do the elimination
-        for (int j = i + 1; j < n; j++) {
+        for (ull j = i + 1; j < n; j++) {
             A.matrix[j][i] /= A.matrix[i][i];
-            for (int k = i + 1; k < n; k++) {
+            for (ull k = i + 1; k < n; k++) {
                 A.matrix[j][k] -= A.matrix[j][i] * A.matrix[i][k];
             }
         }
@@ -57,27 +57,34 @@ void LU_FP_Factorization_InPlace(Matrix &A, Matrix *P, Matrix *Q) {
 }
 
 void LU_FP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P, Matrix *Q) {
+    ull n = A.rows;
+    *L = Matrix(n,n);
     *U = Matrix(A);
     LU_FP_Factorization_InPlace(*U, P, Q);
-    *L = Matrix(A.rows, A.cols);
 
-    for (int i = 0; i < A.rows; i++) {
+    for (ull i = 0; i < n; i++) {
         L->matrix[i][i] = 1;
     }
-    for (int i = 0; i < A.rows; i++) {
-        for (int j = 0; j < i; j++) {
+    for (ull i = 0; i < n; i++) {
+        for (ull j = 0; j < i; j++) {
             L->matrix[i][j] = U->matrix[i][j];
             U->matrix[i][j] = 0;
         }
     }
 }
 
-Vector LU_FP_Solve(const Matrix &A, const Vector &b) {
-    Matrix L, U, P, Q;
-    LU_FP_Factorization(A, &L, &U, &P, &Q);
+void LU_FP_Solve_InPlace(Matrix &A, Vector &b) {
+    Matrix P, Q;
+    LU_FP_Factorization_InPlace(A, &P, &Q);
     Vector Pb = P * b;
-    Vector UQix = LowerTriangleMatrixSolve(L, Pb);
-    Vector Qix = UpperTriangleMatrixSolve(U, UQix);
-    Vector x = Q * Qix;
-    return x;
+    Vector UQix = LowerTriangleMatrixSolve(A, Pb, true);
+    Vector Qix = UpperTriangleMatrixSolve(A, UQix);
+    b = Q * Qix;
+}
+
+Vector LU_FP_Solve(const Matrix &A, const Vector &b) {
+    Matrix A_copy = Matrix(A);
+    Vector b_copy = Vector(b);
+    LU_FP_Solve_InPlace(A_copy, b_copy);
+    return b_copy;
 }
