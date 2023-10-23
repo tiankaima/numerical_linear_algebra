@@ -31,12 +31,18 @@ void UpperTriangleMatrix_Solve_InPlace(const Matrix &U, Vector &b, bool isDiagon
 }
 
 Vector LowerTriangleMatrix_Solve(const Matrix &L, const Vector &b, bool isDiagonalUnit) {
+    CHECK_SQUARE_MATRIX_REF(L)
+    CHECK_EQUAL_SIZE_REF(L, b)
+
     auto x = Vector(b);
     LowerTriangleMatrix_Solve_InPlace(L, x, isDiagonalUnit);
     return x;
 }
 
 Vector UpperTriangleMatrix_Solve(const Matrix &U, const Vector &b, bool isDiagonalUnit) {
+    CHECK_SQUARE_MATRIX_REF(U)
+    CHECK_EQUAL_SIZE_REF(U, b)
+
     auto x = Vector(b);
     UpperTriangleMatrix_Solve_InPlace(U, x, isDiagonalUnit);
     return x;

@@ -6,9 +6,8 @@
 
 void LU_FP_Factorization_InPlace(Matrix &A, Matrix *P, Matrix *Q) {
     CHECK_SQUARE_MATRIX_REF(A)
-    ull n = A.rows;
 
-    // init P and Q
+    ull n = A.rows;
     *P = Matrix::identity(n);
     *Q = Matrix::identity(n);
 
@@ -57,6 +56,8 @@ void LU_FP_Factorization_InPlace(Matrix &A, Matrix *P, Matrix *Q) {
 }
 
 void LU_FP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P, Matrix *Q) {
+    CHECK_SQUARE_MATRIX_REF(A)
+
     ull n = A.rows;
     *L = Matrix(n, n);
     *U = Matrix(A);
@@ -74,6 +75,9 @@ void LU_FP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P, Matri
 }
 
 void LU_FP_Solve_InPlace(Matrix &A, Vector &b) {
+    CHECK_SQUARE_MATRIX_REF(A)
+    CHECK_EQUAL_SIZE_REF(A, b)
+
     Matrix P, Q;
     LU_FP_Factorization_InPlace(A, &P, &Q);
     Vector Pb = P * b;
@@ -83,6 +87,9 @@ void LU_FP_Solve_InPlace(Matrix &A, Vector &b) {
 }
 
 Vector LU_FP_Solve(const Matrix &A, const Vector &b) {
+    CHECK_SQUARE_MATRIX_REF(A)
+    CHECK_EQUAL_SIZE_REF(A, b)
+
     Matrix A_copy = Matrix(A);
     Vector b_copy = Vector(b);
     LU_FP_Solve_InPlace(A_copy, b_copy);

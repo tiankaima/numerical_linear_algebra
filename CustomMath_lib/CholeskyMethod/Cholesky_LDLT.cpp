@@ -6,6 +6,7 @@
 
 void Cholesky_LDLT_Factorization_InPlace(Matrix &A) {
     CHECK_SQUARE_MATRIX_REF(A)
+
     ull n = A.rows;
     Vector tmp = Vector(n);
 
