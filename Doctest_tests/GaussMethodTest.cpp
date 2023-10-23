@@ -2,13 +2,9 @@
 // Created by tiankaima on 23-10-5.
 //
 
-#include "iostream"
 #include "Matrix/Matrix.h"
 #include "Vector/Vector.h"
-#include "GaussMethod/TriangleMatrix.h"
-#include "GaussMethod/LU.h"
-#include "GaussMethod/LU_FP.h"
-#include "GaussMethod/LU_PP.h"
+#include "GaussMethod/GaussMethod.h"
 #include "doctest.h"
 
 TEST_CASE("GaussMethod::LowerTriangleMatrix_Solve()") {
