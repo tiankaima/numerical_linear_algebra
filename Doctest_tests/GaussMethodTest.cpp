@@ -11,7 +11,7 @@
 #include "GaussMethod/LU_PP.h"
 #include "doctest.h"
 
-TEST_CASE("GaussMethod::LowerTriangleMatrixSolve()") {
+TEST_CASE("GaussMethod::LowerTriangleMatrix_Solve()") {
     Matrix A;
     Vector b, x, expected_x;
 
@@ -19,11 +19,11 @@ TEST_CASE("GaussMethod::LowerTriangleMatrixSolve()") {
     b = Vector("[8 8 8]");
     expected_x = Vector("[8 4 -48]");
 
-    x = LowerTriangleMatrixSolve(A, b);
+    x = LowerTriangleMatrix_Solve(A, b);
     CHECK_EQ(x, expected_x);
 }
 
-TEST_CASE("GaussMethod::UpperTriangleMatrixSolve()") {
+TEST_CASE("GaussMethod::UpperTriangleMatrix_Solve()") {
     Matrix A;
     Vector b, x, expected_x;
 
@@ -31,7 +31,7 @@ TEST_CASE("GaussMethod::UpperTriangleMatrixSolve()") {
     b = Vector("[2 -8 6]");
     expected_x = Vector("[6 7 2]");
 
-    x = UpperTriangleMatrixSolve(A, b);
+    x = UpperTriangleMatrix_Solve(A, b);
     CHECK_EQ(x, expected_x);
 }
 

@@ -66,8 +66,8 @@ void LU_PP_Solve_InPlace(Matrix &A, Vector &b) {
     Matrix P;
     LU_PP_Factorization_InPlace(A, &P);
     Vector Pb = P * b;
-    Vector y = LowerTriangleMatrixSolve(A, Pb, true);
-    b = UpperTriangleMatrixSolve(A, y);
+    Vector y = LowerTriangleMatrix_Solve(A, Pb, true);
+    b = UpperTriangleMatrix_Solve(A, y);
 }
 
 Vector LU_PP_Solve(const Matrix &A, const Vector &b) {

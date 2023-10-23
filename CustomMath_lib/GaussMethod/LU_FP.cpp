@@ -58,7 +58,7 @@ void LU_FP_Factorization_InPlace(Matrix &A, Matrix *P, Matrix *Q) {
 
 void LU_FP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P, Matrix *Q) {
     ull n = A.rows;
-    *L = Matrix(n,n);
+    *L = Matrix(n, n);
     *U = Matrix(A);
     LU_FP_Factorization_InPlace(*U, P, Q);
 
@@ -77,8 +77,8 @@ void LU_FP_Solve_InPlace(Matrix &A, Vector &b) {
     Matrix P, Q;
     LU_FP_Factorization_InPlace(A, &P, &Q);
     Vector Pb = P * b;
-    Vector UQix = LowerTriangleMatrixSolve(A, Pb, true);
-    Vector Qix = UpperTriangleMatrixSolve(A, UQix);
+    Vector UQix = LowerTriangleMatrix_Solve(A, Pb, true);
+    Vector Qix = UpperTriangleMatrix_Solve(A, UQix);
     b = Q * Qix;
 }
 

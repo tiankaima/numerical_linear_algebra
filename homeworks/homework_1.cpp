@@ -105,7 +105,7 @@ void homework_1_par_2_1() {
 
     {// 1.3.1
         TEST_START
-        x = CholeskySolve(A, b);
+        x = Cholesky_Solve(A, b);
         TEST_END
         x.print();
     }
@@ -134,7 +134,7 @@ void homework_1_par_2_2() {
 
     {// 1.3.1
         TEST_START
-        x = CholeskySolve(A, b);
+        x = Cholesky_Solve(A, b);
         TEST_END
         x.print();
     }
@@ -183,7 +183,7 @@ void homework_1_par_3_1() {
 
     {
         TEST_START
-        x = CholeskySolve(A, b);
+        x = Cholesky_Solve(A, b);
         TEST_END
         x.print();
     }
@@ -232,7 +232,7 @@ void homework_1_par_3_2() {
 
     {
         TEST_START
-        x = CholeskySolve(A, b);
+        x = Cholesky_Solve(A, b);
         TEST_END
         x.print();
     }

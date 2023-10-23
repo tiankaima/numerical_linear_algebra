@@ -4,7 +4,7 @@
 
 #include "TriangleMatrix.h"
 
-void LowerTriangleMatrixSolve_InPlace(const Matrix &L, Vector &b, bool isDiagonalUnit) {
+void LowerTriangleMatrix_Solve_InPlace(const Matrix &L, Vector &b, bool isDiagonalUnit) {
     CHECK_SQUARE_MATRIX_REF(L)
     CHECK_EQUAL_SIZE_REF(L, b)
 
@@ -17,7 +17,7 @@ void LowerTriangleMatrixSolve_InPlace(const Matrix &L, Vector &b, bool isDiagona
     }
 }
 
-void UpperTriangleMatrixSolve_InPlace(const Matrix &U, Vector &b, bool isDiagonalUnit) {
+void UpperTriangleMatrix_Solve_InPlace(const Matrix &U, Vector &b, bool isDiagonalUnit) {
     CHECK_SQUARE_MATRIX_REF(U)
     CHECK_EQUAL_SIZE_REF(U, b)
 
@@ -30,14 +30,14 @@ void UpperTriangleMatrixSolve_InPlace(const Matrix &U, Vector &b, bool isDiagona
     }
 }
 
-Vector LowerTriangleMatrixSolve(const Matrix &L, const Vector &b, bool isDiagonalUnit) {
+Vector LowerTriangleMatrix_Solve(const Matrix &L, const Vector &b, bool isDiagonalUnit) {
     auto x = Vector(b);
-    LowerTriangleMatrixSolve_InPlace(L, x, isDiagonalUnit);
+    LowerTriangleMatrix_Solve_InPlace(L, x, isDiagonalUnit);
     return x;
 }
 
-Vector UpperTriangleMatrixSolve(const Matrix &U, const Vector &b, bool isDiagonalUnit) {
+Vector UpperTriangleMatrix_Solve(const Matrix &U, const Vector &b, bool isDiagonalUnit) {
     auto x = Vector(b);
-    UpperTriangleMatrixSolve_InPlace(U, x, isDiagonalUnit);
+    UpperTriangleMatrix_Solve_InPlace(U, x, isDiagonalUnit);
     return x;
 }

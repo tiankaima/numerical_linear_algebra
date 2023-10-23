@@ -12,18 +12,22 @@
 #include "cmath"
 #include "GaussMethod/TriangleMatrix.h"
 
-// 1.3.1
-Vector CholeskySolve(const Matrix &A, const Vector &b);
 
 void CholeskyFactorization(const Matrix &A, Matrix *L);
 
-void CholeskyFactorization_T(Matrix *A);
+void CholeskyFactorization_InPlace(Matrix &A);
 
-// 1.3.2
-Vector Cholesky_LDLT_Solve(const Matrix &A, const Vector &b);
+Vector Cholesky_Solve(const Matrix &A, const Vector &b);
+
+void Cholesky_Solve_InPlace(Matrix &A, Vector &b);
+
 
 void Cholesky_LDLT_Factorization(const Matrix &A, Matrix *L, Matrix *D);
 
-void Cholesky_LDLT_Factorization_T(Matrix *A);
+void Cholesky_LDLT_Factorization_InPlace(Matrix &A);
+
+Vector Cholesky_LDLT_Solve(const Matrix &A, const Vector &b);
+
+void Cholesky_LDLT_Solve_InPlace(Matrix &A, Vector &b);
 
 #endif //NUMERICAL_ALGEBRA_CHOLESKYMETHOD_H

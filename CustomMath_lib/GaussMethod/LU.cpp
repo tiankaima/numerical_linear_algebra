@@ -39,8 +39,8 @@ void LU_Factorization(const Matrix &A, Matrix *L, Matrix *U) {
 
 void LU_Solve_InPlace(Matrix &A, Vector &b) {
     LU_Factorization_InPlace(A);
-    LowerTriangleMatrixSolve_InPlace(A, b, true);
-    UpperTriangleMatrixSolve_InPlace(A, b);
+    LowerTriangleMatrix_Solve_InPlace(A, b, true);
+    UpperTriangleMatrix_Solve_InPlace(A, b);
 }
 
 Vector LU_Solve(const Matrix &A, const Vector &b) {
