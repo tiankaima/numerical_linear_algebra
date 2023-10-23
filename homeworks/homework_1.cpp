@@ -50,18 +50,18 @@ void homework_1_par_1() {
     std::cout << "------ Q 1.1 ------" << std::endl;
 
     Matrix A;
-    Array b, x, x_base;
+    Vector b, x, x_base;
 
     A = m_1_1();
 
-    b = Array(84);
+    b = Vector(84);
     for (int i = 1; i < 84 - 1; i++) {
         b.array[i] = 15;
     }
     b.array[0] = 7;
     b.array[84 - 1] = 14;
 
-    x_base = Array(84);
+    x_base = Vector(84);
     for (int i = 0; i < 84; i++) {
         x_base.array[i] = 1;
     }
@@ -95,10 +95,10 @@ void homework_1_par_2_1() {
     std::cout << "------ Q 1.2(1) ------" << std::endl;
 
     Matrix A;
-    Array b, x;
+    Vector b, x;
 
     A = m_1_2_1();
-    b = Array(100);
+    b = Vector(100);
     for (int i = 0; i < 100; i++) {
         b.array[i] = 1;
     }
@@ -122,10 +122,10 @@ void homework_1_par_2_2() {
     std::cout << "------ Q 1.2(2) ------" << std::endl;
 
     Matrix A;
-    Array b, x;
+    Vector b, x;
 
     A = m_1_2_2();
-    b = Array(40);
+    b = Vector(40);
     for (int i = 0; i < 40; i++) {
         for (int j = 0; j < 40; j++) {
             b.array[i] += A.matrix[i][j];
@@ -151,11 +151,11 @@ void homework_1_par_3_1() {
     std::cout << "------ Q 1.3: 1.2(1) ------" << std::endl;
 
     Matrix A;
-    Array b, x;
+    Vector b, x;
 
     A = m_1_2_1();
 
-    b = Array(100);
+    b = Vector(100);
     for (int i = 0; i < 100; i++) {
         b.array[i] = 1;
     }
@@ -199,11 +199,11 @@ void homework_1_par_3_1() {
 void homework_1_par_3_2() {
     std::cout << "------ Q 1.3: 1.2(2) ------" << std::endl;
     Matrix A;
-    Array b, x;
+    Vector b, x;
 
     A = m_1_2_2();
 
-    b = Array(40);
+    b = Vector(40);
     for (int i = 0; i < 40; i++) {
         for (int j = 0; j < 40; j++)
             b.array[i] += A.matrix[i][j];

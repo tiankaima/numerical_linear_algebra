@@ -3,32 +3,32 @@
 //
 
 #include "iostream"
-#include "Matrix.h"
-#include "Array.h"
-#include "GaussMethod.h"
+#include "Matrix/Matrix.h"
+#include "Vector/Vector.h"
+#include "GaussMethod/GaussMethod.h"
 #include "doctest.h"
 
-TEST_CASE("GaussMethod::LowerGaussSolve()") {
+TEST_CASE("GaussMethod::LowerTriangleMatrixSolve()") {
     Matrix A;
-    Array b, x, expected_x;
+    Vector b, x, expected_x;
 
     A = Matrix("[1 0 0; 5 -8 0; -2 -6 -1]");
-    b = Array("[8 8 8]");
-    expected_x = Array("[8 4 -48]");
+    b = Vector("[8 8 8]");
+    expected_x = Vector("[8 4 -48]");
 
-    x = LowerGaussSolve(A, b);
+    x = LowerTriangleMatrixSolve(A, b);
     CHECK_EQ(x, expected_x);
 }
 
-TEST_CASE("GaussMethod::UpperGaussSolve()") {
+TEST_CASE("GaussMethod::UpperTriangleMatrixSolve()") {
     Matrix A;
-    Array b, x, expected_x;
+    Vector b, x, expected_x;
 
     A = Matrix("[9 -8 2; 0 -4 10; 0 0 3]");
-    b = Array("[2 -8 6]");
-    expected_x = Array("[6 7 2]");
+    b = Vector("[2 -8 6]");
+    expected_x = Vector("[6 7 2]");
 
-    x = UpperGaussSolve(A, b);
+    x = UpperTriangleMatrixSolve(A, b);
     CHECK_EQ(x, expected_x);
 }
 

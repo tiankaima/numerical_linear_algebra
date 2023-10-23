@@ -155,11 +155,11 @@ Matrix Matrix::operator/(double scalar) {
     return result;
 }
 
-Array Matrix::operator*(const Array &other) {
+Vector Matrix::operator*(const Vector &other) {
     if (this->cols != other.size) {
         throw std::invalid_argument("Matrix dimensions must agree.");
     }
-    auto result = Array(this->rows);
+    auto result = Vector(this->rows);
     for (int i = 0; i < this->rows; i++) {
         for (int j = 0; j < other.size; j++) {
             result.array[i] += this->matrix[i][j] * other.array[j];
@@ -168,11 +168,11 @@ Array Matrix::operator*(const Array &other) {
     return result;
 }
 
-Array Array::operator*(const Matrix &other) {
+Vector Vector::operator*(const Matrix &other) {
     if (this->size != other.rows) {
         throw std::invalid_argument("Matrix dimensions must agree.");
     }
-    auto result = Array(other.cols);
+    auto result = Vector(other.cols);
     for (int i = 0; i < other.cols; i++) {
         for (int j = 0; j < this->size; j++) {
             result.array[i] += this->array[j] * other.matrix[j][i];
@@ -203,13 +203,7 @@ bool Matrix::isSquare() const {
     return this->rows == this->cols;
 }
 
-void Matrix::requireSquare() const {
-    if (!this->isSquare()) {
-        throw std::invalid_argument("Matrix is not square.");
-    }
-}
-
-Matrix Matrix::product(const Array &array1, const Array &array2) {
+Matrix Matrix::product(const Vector &array1, const Vector &array2) {
     auto result = Matrix(array1.size, array2.size);
     for (int i = 0; i < array1.size; i++) {
         for (int j = 0; j < array2.size; j++) {

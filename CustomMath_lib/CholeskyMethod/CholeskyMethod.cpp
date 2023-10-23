@@ -4,16 +4,16 @@
 
 #include "CholeskyMethod.h"
 
-Array CholeskySolve(const Matrix &A, const Array &b) {
+Vector CholeskySolve(const Matrix &A, const Vector &b) {
     Matrix L;
     CholeskyFactorization(A, &L);
-    Array y = LowerGaussSolve(L, b);
-    Array x = UpperGaussSolve(L.transpose(), y);
+    Vector y = LowerTriangleMatrixSolve(L, b);
+    Vector x = UpperTriangleMatrixSolve(L.transpose(), y);
     return x;
 }
 
 void CholeskyFactorization_T(Matrix *A) {
-    A->requireSquare();
+    CHECK_SQUARE_MATRIX(A)
 
     for (int k = 0; k < A->rows; k++) {
         if (A->matrix[k][k] <= 0) {
@@ -34,7 +34,8 @@ void CholeskyFactorization_T(Matrix *A) {
 }
 
 void CholeskyFactorization(const Matrix &A, Matrix *L) {
-    A.requireSquare();
+    CHECK_SQUARE_MATRIX_REF(A)
+
     *L = Matrix(A);
     CholeskyFactorization_T(L);
 
@@ -45,21 +46,21 @@ void CholeskyFactorization(const Matrix &A, Matrix *L) {
     }
 }
 
-Array Cholesky_LDLT_Solve(const Matrix &A, const Array &b) {
+Vector Cholesky_LDLT_Solve(const Matrix &A, const Vector &b) {
     Matrix L, D;
     Cholesky_LDLT_Factorization(A, &L, &D);
-    Array y = LowerGaussSolve(L, b);
+    Vector y = LowerTriangleMatrixSolve(L, b);
     for (int i = 0; i < A.rows; i++) {
         y.array[i] /= D.matrix[i][i];
     }
-    Array x = UpperGaussSolve(L.transpose(), y);
+    Vector x = UpperTriangleMatrixSolve(L.transpose(), y);
     return x;
 }
 
 void Cholesky_LDLT_Factorization_T(Matrix *A) {
-    A->requireSquare();
+    CHECK_SQUARE_MATRIX(A)
 
-    Array tmp = Array(A->rows);
+    Vector tmp = Vector(A->rows);
 
     for (int j = 0; j < A->rows; j++) {
         for (int i = 0; i < j; i++) {
@@ -79,7 +80,8 @@ void Cholesky_LDLT_Factorization_T(Matrix *A) {
 
 
 void Cholesky_LDLT_Factorization(const Matrix &A, Matrix *L, Matrix *D) {
-    A.requireSquare();
+    CHECK_SQUARE_MATRIX_REF(A)
+
     *L = Matrix(A);
     Cholesky_LDLT_Factorization_T(L);
 

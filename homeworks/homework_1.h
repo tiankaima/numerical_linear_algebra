@@ -8,10 +8,12 @@
 #include "iostream"
 #include "vector"
 #include "string"
-#include "GaussMethod.h"
-#include "CholeskyMethod.h"
-#include "Matrix.h"
-#include "Array.h"
+#include "GaussMethod/LU.h"
+#include "GaussMethod/LU_FP.h"
+#include "GaussMethod/LU_PP.h"
+#include "CholeskyMethod/CholeskyMethod.h"
+#include "Matrix/Matrix.h"
+#include "Vector/Vector.h"
 #include "chrono"
 
 int homework_1();

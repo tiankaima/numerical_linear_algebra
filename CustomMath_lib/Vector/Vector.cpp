@@ -2,24 +2,24 @@
 // Created by Tiankai Ma on 2023/10/5.
 //
 
-#include "Array.h"
+#include "Vector.h"
 
-Array::Array() {
+Vector::Vector() {
     this->size = 0;
     this->array = std::vector<long double>(0, 0);
 }
 
-Array::Array(unsigned int size) {
+Vector::Vector(unsigned int size) {
     this->size = size;
     this->array = std::vector<long double>(size, 0);
 }
 
-Array::Array(const std::vector<long double> &array) {
+Vector::Vector(const std::vector<long double> &array) {
     this->size = array.size();
     this->array = array;
 }
 
-Array::Array(std::string matlab_array) {
+Vector::Vector(std::string matlab_array) {
     // Testing purpose only, can ignore speed or memory efficiency
     std::vector<long double> result;
     for (int i = 0; i < matlab_array.size(); i++) {
@@ -41,7 +41,7 @@ Array::Array(std::string matlab_array) {
     this->array = result;
 }
 
-void Array::print() {
+void Vector::print() {
     std::cout << "[";
     for (int i = 0; i < this->size; i++) {
         std::cout << this->array[i];
@@ -52,47 +52,47 @@ void Array::print() {
     std::cout << "]" << std::endl;
 }
 
-Array Array::operator+(const Array &other) {
+Vector Vector::operator+(const Vector &other) {
     if (this->size != other.size) {
-        throw std::invalid_argument("Array dimensions must agree.");
+        throw std::invalid_argument("Vector dimensions must agree.");
     }
-    auto result = Array(this->size);
+    auto result = Vector(this->size);
     for (int i = 0; i < this->size; i++) {
         result.array[i] = this->array[i] + other.array[i];
     }
     return result;
 }
 
-Array Array::operator-(const Array &other) {
+Vector Vector::operator-(const Vector &other) {
     if (this->size != other.size) {
-        throw std::invalid_argument("Array dimensions must agree.");
+        throw std::invalid_argument("Vector dimensions must agree.");
     }
-    auto result = Array(this->size);
+    auto result = Vector(this->size);
     for (int i = 0; i < this->size; i++) {
         result.array[i] = this->array[i] - other.array[i];
     }
     return result;
 }
 
-Array Array::operator*(long double scalar) {
-    auto result = Array(this->size);
+Vector Vector::operator*(long double scalar) {
+    auto result = Vector(this->size);
     for (int i = 0; i < this->size; i++) {
         result.array[i] = this->array[i] * scalar;
     }
     return result;
 }
 
-Array Array::operator/(long double scalar) {
-    auto result = Array(this->size);
+Vector Vector::operator/(long double scalar) {
+    auto result = Vector(this->size);
     for (int i = 0; i < this->size; i++) {
         result.array[i] = this->array[i] / scalar;
     }
     return result;
 }
 
-long double Array::operator*(const Array &other) {
+long double Vector::operator*(const Vector &other) {
     if (this->size != other.size) {
-        throw std::invalid_argument("Array dimensions must agree.");
+        throw std::invalid_argument("Vector dimensions must agree.");
     }
     long double result = 0;
     for (int i = 0; i < this->size; i++) {
@@ -101,7 +101,7 @@ long double Array::operator*(const Array &other) {
     return result;
 }
 
-bool Array::operator==(const Array &other) const {
+bool Vector::operator==(const Vector &other) const {
     if (this->size != other.size) {
         return false;
     }
@@ -113,7 +113,7 @@ bool Array::operator==(const Array &other) const {
     return true;
 }
 
-long double Array::norm() const {
+long double Vector::norm() const {
     long double result = 0;
     for (int i = 0; i < this->size; i++) {
         result += this->array[i] * this->array[i];
@@ -121,7 +121,7 @@ long double Array::norm() const {
     return std::sqrt(result);
 }
 
-Array::Array(const Array &other) {
+Vector::Vector(const Vector &other) {
     this->size = other.size;
     this->array = other.array;
 }

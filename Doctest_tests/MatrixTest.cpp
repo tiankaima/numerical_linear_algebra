@@ -2,8 +2,8 @@
 
 #include <vector>
 #include <string>
-#include "Matrix.h"
-#include "Array.h"
+#include "Matrix/Matrix.h"
+#include "Vector/Vector.h"
 #include "doctest.h"
 
 TEST_CASE("Matrix::Matrix()") {
@@ -73,21 +73,21 @@ TEST_CASE("Matrix::operators") {
     CHECK_THROWS(m3 = m1 / 0);
 }
 
-TEST_CASE("Matrix * Array") {
+TEST_CASE("Matrix * Vector") {
     Matrix m1;
-    Array a1, a2;
+    Vector a1, a2;
     m1 = Matrix("[1 2 3; 4 5 6; 7 8 9]");
-    a1 = Array("[1 2 3]");
+    a1 = Vector("[1 2 3]");
     a2 = m1 * a1;
     CHECK(a2.array == std::vector<long double>{14, 32, 50});
     a2 = a1 * m1;
     CHECK(a2.array == std::vector<long double>{30, 36, 42});
-    a1 = Array("[1 2 3 4 5 6 7 8 9 10]");
+    a1 = Vector("[1 2 3 4 5 6 7 8 9 10]");
     CHECK_THROWS(a2 = m1 * a1);
     CHECK_THROWS(a2 = a1 * m1);
 
-    a1 = Array("[1 2 3]");
-    a2 = Array("[1 2 3]");
+    a1 = Vector("[1 2 3]");
+    a2 = Vector("[1 2 3]");
     m1 = Matrix::product(a1, a2);
     CHECK(m1.matrix == std::vector<std::vector<long double>>({{1, 2, 3},
                                                               {2, 4, 6},

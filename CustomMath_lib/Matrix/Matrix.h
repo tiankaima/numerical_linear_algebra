@@ -6,11 +6,31 @@
 #define NUMERICAL_ALGEBRA_MATRIX_H
 
 #include "vector"
-#include "Array.h"
+#include "Vector/Vector.h"
 #include "string"
 #include "iostream"
-#include "Array.h"
+#include "Vector/Vector.h"
 #include "cmath"
+
+#define CHECK_SQUARE_MATRIX(matrix) \
+    if (!matrix->isSquare()) { \
+        throw std::invalid_argument("The matrix is not a square matrix."); \
+    }
+
+#define CHECK_SQUARE_MATRIX_REF(matrix) \
+    if (!matrix.isSquare()) { \
+        throw std::invalid_argument("The matrix is not a square matrix."); \
+    }
+
+#define CHECK_EQUAL_SIZE(matrix, vector) \
+    if (matrix->rows != vector->size) { \
+        throw std::invalid_argument("Matrix and vector dimensions must agree."); \
+    }
+
+#define CHECK_EQUAL_SIZE_REF(matrix, vector) \
+    if (matrix.rows != vector.size) { \
+        throw std::invalid_argument("Matrix and vector dimensions must agree."); \
+    }
 
 class Matrix {
 public:
@@ -40,21 +60,17 @@ public:
 
     Matrix transpose();
 
-//    Matrix inverse();
-
     Matrix operator*(double scalar);
 
     Matrix operator/(double scalar);
 
-    Array operator*(const Array &other);
+    Vector operator*(const Vector &other);
 
     bool operator==(const Matrix &other) const;
 
-    static Matrix product(const Array &array1, const Array &array2);
+    static Matrix product(const Vector &array1, const Vector &array2);
 
     [[nodiscard]] bool isSquare() const;
-
-    void requireSquare() const;
 };
 
 
