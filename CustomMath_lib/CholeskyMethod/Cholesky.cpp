@@ -5,7 +5,7 @@
 #include "Cholesky.h"
 
 void CholeskyFactorization_InPlace(Matrix &A) {
-    CHECK_SQUARE_MATRIX_REF(A)
+    CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
 
@@ -28,7 +28,7 @@ void CholeskyFactorization_InPlace(Matrix &A) {
 }
 
 void CholeskyFactorization(const Matrix &A, Matrix *L) {
-    CHECK_SQUARE_MATRIX_REF(A)
+    CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
     *L = Matrix(A);

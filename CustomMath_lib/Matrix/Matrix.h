@@ -12,25 +12,20 @@
 #include "Vector/Vector.h"
 #include "cmath"
 
+#ifdef DEBUG
 #define CHECK_SQUARE_MATRIX(matrix) \
-    if (!matrix->isSquare()) { \
-        throw std::invalid_argument("The matrix is not a square matrix."); \
-    }
-
-#define CHECK_SQUARE_MATRIX_REF(matrix) \
     if (!matrix.isSquare()) { \
         throw std::invalid_argument("The matrix is not a square matrix."); \
     }
 
 #define CHECK_EQUAL_SIZE(matrix, vector) \
-    if (matrix->rows != vector->size) { \
-        throw std::invalid_argument("Matrix and vector dimensions must agree."); \
-    }
-
-#define CHECK_EQUAL_SIZE_REF(matrix, vector) \
     if (matrix.rows != vector.size) { \
         throw std::invalid_argument("Matrix and vector dimensions must agree."); \
     }
+#else
+#define CHECK_SQUARE_MATRIX(matrix)
+#define CHECK_EQUAL_SIZE(matrix, vector)
+#endif
 
 class Matrix {
 public:

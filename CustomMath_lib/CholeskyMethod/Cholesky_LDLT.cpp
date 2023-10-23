@@ -5,7 +5,7 @@
 #include "Cholesky_LDLT.h"
 
 void Cholesky_LDLT_Factorization_InPlace(Matrix &A) {
-    CHECK_SQUARE_MATRIX_REF(A)
+    CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
     Vector tmp = Vector(n);
@@ -28,7 +28,7 @@ void Cholesky_LDLT_Factorization_InPlace(Matrix &A) {
 
 
 void Cholesky_LDLT_Factorization(const Matrix &A, Matrix *L, Matrix *D) {
-    CHECK_SQUARE_MATRIX_REF(A)
+    CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
     *L = Matrix(A);

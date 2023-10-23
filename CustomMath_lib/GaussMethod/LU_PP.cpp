@@ -5,7 +5,7 @@
 #include "LU_PP.h"
 
 void LU_PP_Factorization_InPlace(Matrix &A, Matrix *P) {
-    CHECK_SQUARE_MATRIX_REF(A)
+    CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
     *P = Matrix::identity(n);
@@ -45,7 +45,7 @@ void LU_PP_Factorization_InPlace(Matrix &A, Matrix *P) {
 }
 
 void LU_PP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P) {
-    CHECK_SQUARE_MATRIX_REF(A)
+    CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
     *L = Matrix(n, n);
@@ -64,8 +64,8 @@ void LU_PP_Factorization(const Matrix &A, Matrix *L, Matrix *U, Matrix *P) {
 }
 
 void LU_PP_Solve_InPlace(Matrix &A, Vector &b) {
-    CHECK_SQUARE_MATRIX_REF(A)
-    CHECK_EQUAL_SIZE_REF(A, b)
+    CHECK_SQUARE_MATRIX(A)
+    CHECK_EQUAL_SIZE(A, b)
 
     Matrix P;
     LU_PP_Factorization_InPlace(A, &P);
@@ -75,8 +75,8 @@ void LU_PP_Solve_InPlace(Matrix &A, Vector &b) {
 }
 
 Vector LU_PP_Solve(const Matrix &A, const Vector &b) {
-    CHECK_SQUARE_MATRIX_REF(A)
-    CHECK_EQUAL_SIZE_REF(A, b)
+    CHECK_SQUARE_MATRIX(A)
+    CHECK_EQUAL_SIZE(A, b)
 
     Matrix A_copy = Matrix(A);
     Vector b_copy = Vector(b);

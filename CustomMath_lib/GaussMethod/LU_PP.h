@@ -11,11 +11,6 @@
 #include "Matrix/Matrix.h"
 #include "GaussMethod/TriangleMatrix.h"
 
-
-
-
-// Section: LU factorization with partial pivoting
-
 /*
  * LU factorization with partial pivoting
  * TIME: O(n^3)

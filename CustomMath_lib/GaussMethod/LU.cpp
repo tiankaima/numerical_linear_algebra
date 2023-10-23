@@ -5,7 +5,7 @@
 #include "LU.h"
 
 void LU_Factorization_InPlace(Matrix &A) {
-    CHECK_SQUARE_MATRIX_REF(A)
+    CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
 
@@ -21,7 +21,7 @@ void LU_Factorization_InPlace(Matrix &A) {
 }
 
 void LU_Factorization(const Matrix &A, Matrix *L, Matrix *U) {
-    CHECK_SQUARE_MATRIX_REF(A)
+    CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
     *L = Matrix(n, n);
@@ -41,8 +41,8 @@ void LU_Factorization(const Matrix &A, Matrix *L, Matrix *U) {
 }
 
 void LU_Solve_InPlace(Matrix &A, Vector &b) {
-    CHECK_SQUARE_MATRIX_REF(A)
-    CHECK_EQUAL_SIZE_REF(A, b)
+    CHECK_SQUARE_MATRIX(A)
+    CHECK_EQUAL_SIZE(A, b)
 
     LU_Factorization_InPlace(A);
     LowerTriangleMatrix_Solve_InPlace(A, b, true);
@@ -50,8 +50,8 @@ void LU_Solve_InPlace(Matrix &A, Vector &b) {
 }
 
 Vector LU_Solve(const Matrix &A, const Vector &b) {
-    CHECK_SQUARE_MATRIX_REF(A)
-    CHECK_EQUAL_SIZE_REF(A, b)
+    CHECK_SQUARE_MATRIX(A)
+    CHECK_EQUAL_SIZE(A, b)
 
     Matrix A_copy = Matrix(A);
     Vector b_copy = Vector(b);
