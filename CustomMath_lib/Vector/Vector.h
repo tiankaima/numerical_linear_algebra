@@ -49,4 +49,6 @@ public:
     [[nodiscard]] lld norm() const;
 };
 
+Vector sign(const Vector &vector);
+
 #endif //NUMERICAL_ALGEBRA_VECTOR_H

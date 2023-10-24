@@ -125,3 +125,17 @@ Vector::Vector(const Vector &other) {
     this->size = other.size;
     this->array = other.array;
 }
+
+Vector sign(const Vector &vector) {
+    Vector result = Vector(vector.size);
+    for (int i = 0; i < vector.size; i++) {
+        if (vector.array[i] > 0) {
+            result.array[i] = 1;
+        } else if (vector.array[i] < 0) {
+            result.array[i] = -1;
+        } else {
+            result.array[i] = 0;
+        }
+    }
+    return result;
+}
