@@ -10,12 +10,12 @@
 #include "GaussMethod/GaussMethod.h"
 #include "CholeskyMethod/CholeskyMethod.h"
 
-lld InfinityNorm(const Matrix &A);
+lld MatrixNorm_Infinity(const Matrix &A);
 
-lld InfinityNorm(const Vector &x);
+lld VectorNorm_Infinity(const Vector &x);
 
 Vector sign(const Vector &vector);
 
-lld InfinityNormApprox(const Matrix &A);
+lld MatrixNorm_1(const Matrix &A);
 
 #endif //NUMERICAL_ALGEBRA_INFINITYNORM_H

@@ -4,7 +4,7 @@
 
 #include "InfinityNorm.h"
 
-lld InfinityNorm(const Matrix &A) {
+lld MatrixNorm_Infinity(const Matrix &A) {
     lld max = 0;
     for (int i = 0; i < A.rows; i++) {
         lld sum = 0;
@@ -18,7 +18,7 @@ lld InfinityNorm(const Matrix &A) {
     return max;
 }
 
-lld InfinityNorm(const Vector &x) {
+lld VectorNorm_Infinity(const Vector &x) {
     lld max = 0;
     for (int i = 0; i < x.size; i++) {
         if (std::abs(x.array[i]) > max) {
@@ -42,7 +42,7 @@ Vector sign(const Vector &vector) {
     return result;
 }
 
-lld InfinityNormApprox(const Matrix &A) {
+lld MatrixNorm_1(const Matrix &A) {
     Vector x = Vector(A.cols);
     for (int i = 0; i < A.cols; i++) {
         x.array[i] = 1;

@@ -6,10 +6,10 @@
 
 int homework_2() {
     Matrix m = Matrix(3, 3, 0, 1);
-    lld max = InfinityNorm(m);
+    lld max = MatrixNorm_Infinity(m);
     std::cout << max << std::endl;
 
-    lld max_approx = InfinityNormApprox(m.transpose());
+    lld max_approx = MatrixNorm_1(m.transpose());
     std::cout << max_approx << std::endl;
     return 0;
 }
