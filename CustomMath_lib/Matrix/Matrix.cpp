@@ -17,6 +17,27 @@ Matrix::Matrix(ull rows, ull cols) {
     this->matrix = std::vector<std::vector<lld>>(rows, std::vector<lld>(cols, 0));
 }
 
+Matrix::Matrix(ull rows, ull cols, lld default_value) {
+    this->rows = rows;
+    this->cols = cols;
+    this->matrix = std::vector<std::vector<lld>>(rows, std::vector<lld>(cols, default_value));
+}
+
+Matrix::Matrix(ull rows, ull cols, lld lower_bound, lld upper_bound) {
+    // generate a matrix with random values in range [lower_bound, upper_bound]
+    this->rows = rows;
+    this->cols = cols;
+    this->matrix = std::vector<std::vector<lld>>(rows, std::vector<lld>(cols, 0));
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(lower_bound, upper_bound);
+    for (ull i = 0; i < rows; i++) {
+        for (ull j = 0; j < cols; j++) {
+            this->matrix[i][j] = dis(gen);
+        }
+    }
+}
+
 Matrix::Matrix(std::vector<std::vector<lld>> matrix) {
     this->rows = matrix.size();
     this->cols = matrix[0].size();
@@ -78,7 +99,7 @@ void Matrix::print() {
     std::cout << "]" << std::endl;
 }
 
-Matrix Matrix::operator+(const Matrix &other) {
+Matrix Matrix::operator+(const Matrix &other) const {
     if (this->rows != other.rows || this->cols != other.cols) {
         throw std::invalid_argument("Matrix dimensions must agree.");
     }
@@ -91,7 +112,7 @@ Matrix Matrix::operator+(const Matrix &other) {
     return result;
 }
 
-Matrix Matrix::operator-(const Matrix &other) {
+Matrix Matrix::operator-(const Matrix &other) const {
     if (this->rows != other.rows || this->cols != other.cols) {
         throw std::invalid_argument("Matrix dimensions must agree.");
     }
@@ -104,7 +125,7 @@ Matrix Matrix::operator-(const Matrix &other) {
     return result;
 }
 
-Matrix Matrix::operator*(const Matrix &other) {
+Matrix Matrix::operator*(const Matrix &other) const {
     if (this->cols != other.rows) {
         throw std::invalid_argument("Matrix dimensions must agree.");
     }
@@ -119,7 +140,7 @@ Matrix Matrix::operator*(const Matrix &other) {
     return result;
 }
 
-Matrix Matrix::transpose() {
+Matrix Matrix::transpose() const {
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ArgumentSelectionDefects"
     auto result = Matrix(this->cols, this->rows);
@@ -132,7 +153,7 @@ Matrix Matrix::transpose() {
     return result;
 }
 
-Matrix Matrix::operator*(double scalar) {
+Matrix Matrix::operator*(double scalar) const {
     auto result = Matrix(this->rows, this->cols);
     for (ull i = 0; i < this->rows; i++) {
         for (ull j = 0; j < this->cols; j++) {
@@ -142,7 +163,7 @@ Matrix Matrix::operator*(double scalar) {
     return result;
 }
 
-Matrix Matrix::operator/(double scalar) {
+Matrix Matrix::operator/(double scalar) const {
     if (scalar == 0) {
         throw std::invalid_argument("Cannot divide by zero.");
     }
@@ -155,7 +176,7 @@ Matrix Matrix::operator/(double scalar) {
     return result;
 }
 
-Vector Matrix::operator*(const Vector &other) {
+Vector Matrix::operator*(const Vector &other) const {
     if (this->cols != other.size) {
         throw std::invalid_argument("Matrix dimensions must agree.");
     }
@@ -163,6 +184,32 @@ Vector Matrix::operator*(const Vector &other) {
     for (ull i = 0; i < this->rows; i++) {
         for (ull j = 0; j < other.size; j++) {
             result.array[i] += this->matrix[i][j] * other.array[j];
+        }
+    }
+    return result;
+}
+
+Vector operator*(const Vector &vector, const Matrix &matrix) {
+    if (matrix.rows != vector.size) {
+        throw std::invalid_argument("Matrix dimensions must agree.");
+    }
+    auto result = Vector(matrix.cols);
+    for (ull i = 0; i < matrix.cols; i++) {
+        for (ull j = 0; j < vector.size; j++) {
+            result.array[i] += vector.array[j] * matrix.matrix[j][i];
+        }
+    }
+    return result;
+}
+
+Vector operator*(const Matrix &matrix, const Vector &vector) {
+    if (matrix.cols != vector.size) {
+        throw std::invalid_argument("Matrix dimensions must agree.");
+    }
+    auto result = Vector(matrix.rows);
+    for (ull i = 0; i < matrix.rows; i++) {
+        for (ull j = 0; j < vector.size; j++) {
+            result.array[i] += matrix.matrix[i][j] * vector.array[j];
         }
     }
     return result;
@@ -203,7 +250,7 @@ bool Matrix::isSquare() const {
     return this->rows == this->cols;
 }
 
-Matrix Matrix::product(const Vector &array1, const Vector &array2) {
+Matrix product(const Vector &array1, const Vector &array2) {
     auto result = Matrix(array1.size, array2.size);
     for (ull i = 0; i < array1.size; i++) {
         for (ull j = 0; j < array2.size; j++) {

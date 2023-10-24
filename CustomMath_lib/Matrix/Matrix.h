@@ -6,6 +6,7 @@
 #define NUMERICAL_ALGEBRA_MATRIX_H
 
 #include "vector"
+#include "random"
 #include "Vector/Vector.h"
 #include "string"
 #include "iostream"
@@ -37,6 +38,13 @@ public:
 
     Matrix(ull rows, ull cols);
 
+    Matrix(ull rows, ull cols, lld default_value);
+
+    /*
+     * Generate a matrix with random values in range [lower_bound, upper_bound]
+     */
+    Matrix(ull rows, ull cols, lld lower_bound, lld upper_bound);
+
     Matrix(const Matrix &other);
 
     explicit Matrix(std::vector<std::vector<lld>> matrix);
@@ -47,26 +55,25 @@ public:
 
     void print();
 
-    Matrix operator+(const Matrix &other);
+    Matrix operator+(const Matrix &other) const;
 
-    Matrix operator-(const Matrix &other);
+    Matrix operator-(const Matrix &other) const;
 
-    Matrix operator*(const Matrix &other);
+    Matrix operator*(const Matrix &other) const;
 
-    Matrix transpose();
+    Matrix transpose() const;
 
-    Matrix operator*(double scalar);
+    Matrix operator*(double scalar) const;
 
-    Matrix operator/(double scalar);
+    Matrix operator/(double scalar) const;
 
-    Vector operator*(const Vector &other);
+    Vector operator*(const Vector &other) const;
 
     bool operator==(const Matrix &other) const;
 
-    static Matrix product(const Vector &array1, const Vector &array2);
-
-    [[nodiscard]] bool isSquare() const;
+    bool isSquare() const;
 };
 
+Matrix product(const Vector &array1, const Vector &array2);
 
 #endif //NUMERICAL_ALGEBRA_MATRIX_H
