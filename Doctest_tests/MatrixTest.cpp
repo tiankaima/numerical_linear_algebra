@@ -87,7 +87,7 @@ TEST_CASE("Matrix * Vector") {
 
     a1 = Vector("[1 2 3]");
     a2 = Vector("[1 2 3]");
-    m1 = Matrix::product(a1, a2);
+    m1 = product(a1, a2);
     CHECK_EQ(m1.matrix, std::vector<std::vector<lld>>({{1, 2, 3},
                                                        {2, 4, 6},
                                                        {3, 6, 9}}));
