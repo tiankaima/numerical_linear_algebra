@@ -9,6 +9,9 @@ set(HEADER_FILES
         GaussMethod/LU_PP.h
         CholeskyMethod/CholeskyMethod.h
         GaussMethod/GaussMethod.h
+        CholeskyMethod/Cholesky.h
+        CholeskyMethod/Cholesky_LDLT.h
+        InfinityNorm/InfinityNorm.h
 )
 
 set(SOURCE_FILES
@@ -19,11 +22,8 @@ set(SOURCE_FILES
         GaussMethod/LU_FP.cpp
         GaussMethod/LU_PP.cpp
         CholeskyMethod/Cholesky.cpp
-        CholeskyMethod/Cholesky.h
         CholeskyMethod/Cholesky_LDLT.cpp
-        CholeskyMethod/Cholesky_LDLT.h
         InfinityNorm/InfinityNorm.cpp
-        InfinityNorm/InfinityNorm.h
 )
 
 add_library(CustomMath_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})
