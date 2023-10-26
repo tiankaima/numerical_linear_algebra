@@ -6,6 +6,7 @@
 #define NUMERICAL_ALGEBRA_HOMEWORK_2_H
 
 #include "iostream"
+#include "iomanip"
 #include "vector"
 #include "string"
 #include "GaussMethod/GaussMethod.h"
