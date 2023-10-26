@@ -1,26 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\main.cpp">
+    <ClCompile Include="$(SolutionDir)\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\homeworks\homework_1.cpp">
+    <ClCompile Include="$(SolutionDir)\homeworks\homework_1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\homeworks\homework_2.cpp">
+    <ClCompile Include="$(SolutionDir)\homeworks\homework_2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\homeworks\homework_1.h">
+    <ClInclude Include="$(SolutionDir)\homeworks\homework_1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\homeworks\homework_2.h">
+    <ClInclude Include="$(SolutionDir)\homeworks\homework_2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Z:\tiankaima\numerical_algebra\CMakeLists.txt" />
+    <CustomBuild Include="$(SolutionDir)\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

@@ -59,26 +59,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Z:\tiankaima\numerical_algebra\CustomMath_lib\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\CustomMath_lib\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CustomMath_lib.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CustomMath_lib</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Z:\tiankaima\numerical_algebra\CustomMath_lib\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\CustomMath_lib\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CustomMath_lib.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CustomMath_lib</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Z:\tiankaima\numerical_algebra\CustomMath_lib\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(SolutionDir)\CustomMath_lib\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CustomMath_lib.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CustomMath_lib</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Z:\tiankaima\numerical_algebra\CustomMath_lib\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(SolutionDir)\CustomMath_lib\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CustomMath_lib.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CustomMath_lib</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>Z:\tiankaima\numerical_algebra\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -94,10 +94,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Z:\tiankaima\numerical_algebra\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>Z:\tiankaima\numerical_algebra\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -110,7 +110,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>Z:\tiankaima\numerical_algebra\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -126,10 +126,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Z:\tiankaima\numerical_algebra\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>Z:\tiankaima\numerical_algebra\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -142,7 +142,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>Z:\tiankaima\numerical_algebra\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -158,10 +158,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Z:\tiankaima\numerical_algebra\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>Z:\tiankaima\numerical_algebra\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -174,7 +174,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>Z:\tiankaima\numerical_algebra\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -189,10 +189,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Z:\tiankaima\numerical_algebra\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>Z:\tiankaima\numerical_algebra\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CustomMath_lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -204,11 +204,11 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\CMakeLists.txt">
+    <CustomBuild Include="$(SolutionDir)\CustomMath_lib\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule Z:/tiankaima/numerical_algebra/CustomMath_lib/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule $(SolutionDir)/CustomMath_lib/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SZ:/tiankaima/numerical_algebra -BZ:/tiankaima/numerical_algebra --check-stamp-file Z:/tiankaima/numerical_algebra/CustomMath_lib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -S$(SolutionDir) -B$(SolutionDir) --check-stamp-file $(SolutionDir)/CustomMath_lib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -217,11 +217,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Z:\tiankaima\numerical_algebra\CustomMath_lib\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\CustomMath_lib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule Z:/tiankaima/numerical_algebra/CustomMath_lib/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule $(SolutionDir)/CustomMath_lib/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SZ:/tiankaima/numerical_algebra -BZ:/tiankaima/numerical_algebra --check-stamp-file Z:/tiankaima/numerical_algebra/CustomMath_lib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -S$(SolutionDir) -B$(SolutionDir) --check-stamp-file $(SolutionDir)/CustomMath_lib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -230,11 +230,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Z:\tiankaima\numerical_algebra\CustomMath_lib\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\CustomMath_lib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule Z:/tiankaima/numerical_algebra/CustomMath_lib/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule $(SolutionDir)/CustomMath_lib/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SZ:/tiankaima/numerical_algebra -BZ:/tiankaima/numerical_algebra --check-stamp-file Z:/tiankaima/numerical_algebra/CustomMath_lib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -S$(SolutionDir) -B$(SolutionDir) --check-stamp-file $(SolutionDir)/CustomMath_lib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -243,11 +243,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Z:\tiankaima\numerical_algebra\CustomMath_lib\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(SolutionDir)\CustomMath_lib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule Z:/tiankaima/numerical_algebra/CustomMath_lib/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule $(SolutionDir)/CustomMath_lib/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SZ:/tiankaima/numerical_algebra -BZ:/tiankaima/numerical_algebra --check-stamp-file Z:/tiankaima/numerical_algebra/CustomMath_lib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -S$(SolutionDir) -B$(SolutionDir) --check-stamp-file $(SolutionDir)/CustomMath_lib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -256,34 +256,34 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Z:\tiankaima\numerical_algebra\CustomMath_lib\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(SolutionDir)\CustomMath_lib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\Matrix\Matrix.cpp" />
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\Vector\Vector.cpp" />
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\GaussMethod\TriangleMatrix.cpp" />
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\GaussMethod\LU.cpp" />
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\GaussMethod\LU_FP.cpp" />
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\GaussMethod\LU_PP.cpp" />
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\CholeskyMethod\Cholesky.cpp" />
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\CholeskyMethod\Cholesky_LDLT.cpp" />
-    <ClCompile Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\InfinityNorm\InfinityNorm.cpp" />
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\Matrix\Matrix.h" />
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\Vector\Vector.h" />
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\GaussMethod\TriangleMatrix.h" />
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\GaussMethod\LU.h" />
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\GaussMethod\LU_FP.h" />
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\GaussMethod\LU_PP.h" />
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\CholeskyMethod\CholeskyMethod.h" />
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\GaussMethod\GaussMethod.h" />
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\CholeskyMethod\Cholesky.h" />
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\CholeskyMethod\Cholesky_LDLT.h" />
-    <ClInclude Include="Z:\tiankaima\numerical_algebra\CustomMath_lib\InfinityNorm\InfinityNorm.h" />
+    <ClCompile Include="$(SolutionDir)\CustomMath_lib\Matrix\Matrix.cpp" />
+    <ClCompile Include="$(SolutionDir)\CustomMath_lib\Vector\Vector.cpp" />
+    <ClCompile Include="$(SolutionDir)\CustomMath_lib\GaussMethod\TriangleMatrix.cpp" />
+    <ClCompile Include="$(SolutionDir)\CustomMath_lib\GaussMethod\LU.cpp" />
+    <ClCompile Include="$(SolutionDir)\CustomMath_lib\GaussMethod\LU_FP.cpp" />
+    <ClCompile Include="$(SolutionDir)\CustomMath_lib\GaussMethod\LU_PP.cpp" />
+    <ClCompile Include="$(SolutionDir)\CustomMath_lib\CholeskyMethod\Cholesky.cpp" />
+    <ClCompile Include="$(SolutionDir)\CustomMath_lib\CholeskyMethod\Cholesky_LDLT.cpp" />
+    <ClCompile Include="$(SolutionDir)\CustomMath_lib\InfinityNorm\InfinityNorm.cpp" />
+    <ClInclude Include="$(SolutionDir)\CustomMath_lib\Matrix\Matrix.h" />
+    <ClInclude Include="$(SolutionDir)\CustomMath_lib\Vector\Vector.h" />
+    <ClInclude Include="$(SolutionDir)\CustomMath_lib\GaussMethod\TriangleMatrix.h" />
+    <ClInclude Include="$(SolutionDir)\CustomMath_lib\GaussMethod\LU.h" />
+    <ClInclude Include="$(SolutionDir)\CustomMath_lib\GaussMethod\LU_FP.h" />
+    <ClInclude Include="$(SolutionDir)\CustomMath_lib\GaussMethod\LU_PP.h" />
+    <ClInclude Include="$(SolutionDir)\CustomMath_lib\CholeskyMethod\CholeskyMethod.h" />
+    <ClInclude Include="$(SolutionDir)\CustomMath_lib\GaussMethod\GaussMethod.h" />
+    <ClInclude Include="$(SolutionDir)\CustomMath_lib\CholeskyMethod\Cholesky.h" />
+    <ClInclude Include="$(SolutionDir)\CustomMath_lib\CholeskyMethod\Cholesky_LDLT.h" />
+    <ClInclude Include="$(SolutionDir)\CustomMath_lib\InfinityNorm\InfinityNorm.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Z:\tiankaima\numerical_algebra\ZERO_CHECK.vcxproj">
+    <ProjectReference Include="$(SolutionDir)\ZERO_CHECK.vcxproj">
       <Project>{AB5B3C21-03BD-355A-83CF-2A90ACCE0AD4}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>

@@ -4,7 +4,7 @@
 * [ ] Commit, message: 
   `chore: cmake -G "Visual Studio 17 2022" -A x64`
 * Manually replace 
-  `Z:\tiankaima\numerical_algebra\` 
+  `$(SolutionDir)\` 
   with
   `$(SolutionDir)`
 * [ ] Commit, message:
