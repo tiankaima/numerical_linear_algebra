@@ -29,23 +29,10 @@ clip: true,
 https://github.com/tiankaima/numerical_algebra
 ```
 
-=== 实验平台
-```txt
-> uname -a
-Linux tiankai-omenlaptop15en1002ax 6.1.53-1-MANJARO #1 SMP PREEMPT_DYNAMIC Wed Sep 13 14:10:57 UTC 2023 x86_64 GNU/Linux
-> cmake --version
-cmake version 3.27.6
-> clang --version
-clang version 16.0.6
-Target: x86_64-pc-linux-gnu
-Thread model: posix
-```
-
 === 目录结构
 - `CustomMath_lib`存放了具体的算法实现
 - `Doctest_tests`存放了单元测试
 - `homeworks`存放了作业的源代码，并且在`main.cpp`对每次作业进行了调用
-- `main.cpp`是主程序
 - `Mathematica`存放了`.nb`文件，用于生成测试数据
 - `writeups`存放了实验报告的源代码，比如本文
 
@@ -62,8 +49,10 @@ Thread model: posix
 ./numerical_algebra
 ```
 
-=== Windows 平台编译
-使用 Visual Studio 打开`numerical_algebra.sln`
+=== Windows 平台编译 & 运行
+- 使用 Visual Studio 打开`numerical_algebra.sln`
+- 在“解决方案资源管理器”中右键`numerical_algebra`，选择“设为启动项目”
+- 点击“本地Windows调试器”的右侧三角形按钮运行
 ]
 
 #pagebreak()
