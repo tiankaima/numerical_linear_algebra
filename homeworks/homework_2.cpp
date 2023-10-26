@@ -15,14 +15,14 @@ void homework_2_par_1() {
         Matrix m = Matrix::hilbert(i);
         // this is unnecessary since hilbert matrix is symmetric
         // m = m.transpose();
-        lld norm = MatrixNorm_1(m);
+        lld condition_number = MatrixNorm_1(m) * MatrixNorm_A_Inv_T_1(m);
         std::cout << std::setprecision(std::numeric_limits<lld>::digits10 + 1);
 
 #ifdef DEBUG
-        // print as pairs of (n, norm) for plotting
-        std::cout << "(" << i << ", " << norm << ")," << std::endl;
+        // print as pairs of (n, condition_number) for plotting
+        std::cout << "(" << i << ", " << condition_number << ")," << std::endl;
 #else
-        std::cout << "n = " << i << ", norm = " << norm << std::endl;
+        std::cout << "n = " << i << ", condition_number = " << condition_number << std::endl;
 #endif
 
     }
