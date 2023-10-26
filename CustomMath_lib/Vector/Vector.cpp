@@ -9,9 +9,27 @@ Vector::Vector() {
     this->array = std::vector<long double>(0, 0);
 }
 
-Vector::Vector(unsigned int size) {
+Vector::Vector(ull size) {
     this->size = size;
     this->array = std::vector<long double>(size, 0);
+}
+
+
+Vector::Vector(ull size, lld default_value) {
+    this->size = size;
+    this->array = std::vector<long double>(size, default_value);
+}
+
+Vector::Vector(ull size, lld lower_bound, lld upper_bound){
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(lower_bound, upper_bound);
+    std::vector<long double> result;
+    for (int i = 0; i < size; i++) {
+        result.push_back(dis(gen));
+    }
+    this->size = size;
+    this->array = result;
 }
 
 Vector::Vector(const std::vector<long double> &array) {

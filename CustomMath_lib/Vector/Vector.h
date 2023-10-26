@@ -7,6 +7,7 @@
 
 #include "vector"
 #include "string"
+#include "random"
 #include "iostream"
 #include "cmath"
 
@@ -24,7 +25,11 @@ public:
 
     Vector(const Vector &other);
 
-    explicit Vector(unsigned int size);
+    explicit Vector(ull size);
+
+    Vector(ull size, lld default_value);
+
+    Vector(ull size, lld lower_bound, lld upper_bound);
 
     explicit Vector(const std::vector<lld> &array);
 

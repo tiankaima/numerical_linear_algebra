@@ -250,6 +250,44 @@ bool Matrix::isSquare() const {
     return this->rows == this->cols;
 }
 
+Matrix Matrix::hilbert(ull n) {
+    auto result = Matrix(n, n);
+    for (ull i = 0; i < n; i++) {
+        for (ull j = 0; j < n; j++) {
+            result.matrix[i][j] = 1.0 / (lld) (i + j + 1);
+        }
+    }
+    return result;
+}
+
+Matrix Matrix::UpperTriangular(ull n, lld default_value) {
+    auto result = Matrix(n, n);
+    for (ull i = 0; i < n; i++) {
+        for (ull j = i; j < n; j++) {
+            result.matrix[i][j] = default_value;
+        }
+    }
+    return result;
+}
+
+Matrix Matrix::LowerTriangular(ull n, lld default_value) {
+    auto result = Matrix(n, n);
+    for (ull i = 0; i < n; i++) {
+        for (ull j = 0; j <= i; j++) {
+            result.matrix[i][j] = default_value;
+        }
+    }
+    return result;
+}
+
+Matrix Matrix::Diagonal(ull n, lld default_value) {
+    auto result = Matrix(n, n);
+    for (ull i = 0; i < n; i++) {
+        result.matrix[i][i] = default_value;
+    }
+    return result;
+}
+
 Matrix product(const Vector &array1, const Vector &array2) {
     auto result = Matrix(array1.size, array2.size);
     for (ull i = 0; i < array1.size; i++) {

@@ -72,6 +72,14 @@ public:
     bool operator==(const Matrix &other) const;
 
     bool isSquare() const;
+
+    static Matrix hilbert(ull n);
+
+    static Matrix UpperTriangular(ull n, lld default_value);
+
+    static Matrix LowerTriangular(ull n, lld default_value);
+
+    static Matrix Diagonal(ull n, lld default_value);
 };
 
 Matrix product(const Vector &array1, const Vector &array2);
