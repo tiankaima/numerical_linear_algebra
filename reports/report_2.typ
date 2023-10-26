@@ -52,7 +52,7 @@ https://github.com/tiankaima/numerical_algebra
 === Windows 平台编译 & 运行
 - 使用 Visual Studio 打开`numerical_algebra.sln`
 - 在“解决方案资源管理器”中右键`numerical_algebra`，选择“设为启动项目”
-- 点击”本地Windows调试器“的右侧三角形按钮运行
+- 点击“本地Windows调试器”的右侧三角形按钮运行
 ]
 
 #pagebreak()
