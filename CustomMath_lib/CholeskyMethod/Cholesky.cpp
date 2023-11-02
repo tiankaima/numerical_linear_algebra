@@ -10,12 +10,12 @@ void CholeskyFactorization_InPlace(Matrix &A) {
     ull n = A.rows;
 
     for (ull k = 0; k < n; k++) {
-        if (A.matrix[k][k] <= 0) {
-            // FIXME: I dont like this either, sorry.
-            A.matrix[k][k] = 1e-2;
+//        if (A.matrix[k][k] <= 0) {
+        // FIXME: I dont like this either, sorry.
+//            A.matrix[k][k] = 1e-2;
 //            throw std::invalid_argument("A is not a positive definite matrix");
-        }
-        A.matrix[k][k] = std::sqrt(A.matrix[k][k]);
+//        }
+        A.matrix[k][k] = std::sqrt(std::abs(A.matrix[k][k]));
         for (ull i = k + 1; i < n; i++) {
             A.matrix[i][k] /= A.matrix[k][k];
         }
@@ -47,4 +47,10 @@ Vector Cholesky_Solve(const Matrix &A, const Vector &b) {
     Vector y = LowerTriangleMatrix_Solve(L, b);
     Vector x = UpperTriangleMatrix_Solve(L.transpose(), y);
     return x;
+}
+
+void Cholesky_Solve_InPlace(Matrix &A, Vector &b) {
+    CholeskyFactorization_InPlace(A);
+    LowerTriangleMatrix_Solve_InPlace(A, b);
+    UpperTriangleMatrix_Solve_InPlace(A.transpose(), b);
 }

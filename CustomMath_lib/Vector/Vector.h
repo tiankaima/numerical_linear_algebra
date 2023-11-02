@@ -35,19 +35,23 @@ public:
 
     explicit Vector(std::string matlab_array);
 
+    Vector sub_vector(ull start, ull end) const;
+
+    void set(ull start, ull end, const Vector &other);
+
     void print();
 
-    Vector operator+(const Vector &other);
+    Vector operator+(const Vector &other) const;
 
-    Vector operator-(const Vector &other);
+    Vector operator-(const Vector &other) const;
 
-    lld operator*(const Vector &other);
+    lld operator*(const Vector &other) const;
 
-    Vector operator*(lld scalar);
+    Vector operator*(lld scalar) const;
 
-    Vector operator/(lld scalar);
+    Vector operator/(lld scalar) const;
 
-    Vector operator*(const Matrix &other);
+    Vector operator*(const Matrix &other) const;
 
     bool operator==(const Vector &other) const;
 

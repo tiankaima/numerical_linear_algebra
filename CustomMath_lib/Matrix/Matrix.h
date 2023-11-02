@@ -53,6 +53,10 @@ public:
 
     static Matrix identity(ull n); // Identity matrix
 
+    Matrix sub_matrix(ull start_row, ull end_row, ull start_col, ull end_col) const;
+
+    void set(ull start_row, ull end_row, ull start_col, ull end_col, const Matrix &other);
+
     void print();
 
     Matrix operator+(const Matrix &other) const;
@@ -63,9 +67,9 @@ public:
 
     Matrix transpose() const;
 
-    Matrix operator*(double scalar) const;
+    Matrix operator*(lld scalar) const;
 
-    Matrix operator/(double scalar) const;
+    Matrix operator/(lld scalar) const;
 
     Vector operator*(const Vector &other) const;
 

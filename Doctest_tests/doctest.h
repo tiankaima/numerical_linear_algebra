@@ -1125,7 +1125,7 @@ namespace doctest {
         void filloss(std::ostream *stream, const T (&in)[N]) { // NOLINT(*-avoid-c-arrays)
             // T[N], T(&)[N], T(&&)[N] have same behaviour.
             // Hence remove reference.
-            filloss < typename types::remove_reference<decltype(in)>::type > (stream, in);
+            filloss<typename types::remove_reference<decltype(in)>::type>(stream, in);
         }
 
         template<typename T>

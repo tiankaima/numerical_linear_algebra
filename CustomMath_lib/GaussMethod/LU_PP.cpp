@@ -69,7 +69,7 @@ void LU_PP_Solve_InPlace(Matrix &A, Vector &b) {
 
     Matrix P;
     LU_PP_Factorization_InPlace(A, &P);
-    Vector Pb = P * b;
+    Vector Pb = P * b; // fixme: this can be optimized since P only contains pivots
     Vector y = LowerTriangleMatrix_Solve(A, Pb, true);
     b = UpperTriangleMatrix_Solve(A, y);
 }

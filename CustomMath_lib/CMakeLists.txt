@@ -12,6 +12,7 @@ set(HEADER_FILES
         CholeskyMethod/Cholesky.h
         CholeskyMethod/Cholesky_LDLT.h
         InfinityNorm/InfinityNorm.h
+        HouseholderMethod/HouseholderMethod.h
 )
 
 set(SOURCE_FILES
@@ -24,6 +25,7 @@ set(SOURCE_FILES
         CholeskyMethod/Cholesky.cpp
         CholeskyMethod/Cholesky_LDLT.cpp
         InfinityNorm/InfinityNorm.cpp
+        HouseholderMethod/HouseholderMethod.cpp
 )
 
 add_library(CustomMath_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})

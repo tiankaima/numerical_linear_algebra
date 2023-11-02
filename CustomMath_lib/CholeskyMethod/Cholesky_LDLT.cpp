@@ -34,13 +34,13 @@ void Cholesky_LDLT_Factorization(const Matrix &A, Matrix *L, Matrix *D) {
     *L = Matrix(A);
     Cholesky_LDLT_Factorization_InPlace(*L);
 
-    *D = Matrix(n, A.cols);
+    *D = Matrix(n, n);
     for (ull i = 0; i < n; i++) {
         D->matrix[i][i] = L->matrix[i][i];
         L->matrix[i][i] = 1;
     }
     for (ull i = 0; i < n; i++) {
-        for (ull j = i + 1; j < A.cols; j++) {
+        for (ull j = i + 1; j < n; j++) {
             D->matrix[i][i] *= L->matrix[j][j];
             L->matrix[i][j] = 0;
         }
@@ -56,4 +56,13 @@ Vector Cholesky_LDLT_Solve(const Matrix &A, const Vector &b) {
     }
     Vector x = UpperTriangleMatrix_Solve(L.transpose(), y);
     return x;
+}
+
+void Cholesky_LDLT_Solve_InPlace(Matrix &A, Vector &b) {
+    Cholesky_LDLT_Factorization_InPlace(A);
+    LowerTriangleMatrix_Solve_InPlace(A, b, true);
+    for (ull i = 0; i < A.rows; i++) {
+        b.array[i] /= A.matrix[i][i];
+    }
+    UpperTriangleMatrix_Solve_InPlace(A.transpose(), b, true);
 }

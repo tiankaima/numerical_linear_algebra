@@ -20,7 +20,7 @@ Vector::Vector(ull size, lld default_value) {
     this->array = std::vector<long double>(size, default_value);
 }
 
-Vector::Vector(ull size, lld lower_bound, lld upper_bound){
+Vector::Vector(ull size, lld lower_bound, lld upper_bound) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(lower_bound, upper_bound);
@@ -59,6 +59,35 @@ Vector::Vector(std::string matlab_array) {
     this->array = result;
 }
 
+Vector Vector::sub_vector(ull start, ull end) const {
+#ifdef DEBUG
+    if (end > this->size || start > end) {
+        throw std::invalid_argument("Invalid sub_vector range.");
+    }
+#endif
+
+    std::vector<long double> result;
+    for (ull i = start; i < end; i++) {
+        result.push_back(this->array[i]);
+    }
+    return Vector(result);
+}
+
+void Vector::set(ull start, ull end, const Vector &other) {
+#ifdef DEBUG
+    if (end > this->size || start > end) {
+        throw std::invalid_argument("Invalid sub_vector range.");
+    }
+    if (other.size != end - start) {
+        throw std::invalid_argument("Invalid sub_vector size.");
+    }
+#endif
+
+    for (ull i = start; i < end; i++) {
+        this->array[i] = other.array[i - start];
+    }
+}
+
 void Vector::print() {
     std::cout << "[";
     for (int i = 0; i < this->size; i++) {
@@ -70,10 +99,13 @@ void Vector::print() {
     std::cout << "]" << std::endl;
 }
 
-Vector Vector::operator+(const Vector &other) {
+Vector Vector::operator+(const Vector &other) const {
+#ifdef DEBUG
     if (this->size != other.size) {
         throw std::invalid_argument("Vector dimensions must agree.");
     }
+#endif
+
     auto result = Vector(this->size);
     for (int i = 0; i < this->size; i++) {
         result.array[i] = this->array[i] + other.array[i];
@@ -81,10 +113,13 @@ Vector Vector::operator+(const Vector &other) {
     return result;
 }
 
-Vector Vector::operator-(const Vector &other) {
+Vector Vector::operator-(const Vector &other) const {
+#ifdef DEBUG
     if (this->size != other.size) {
         throw std::invalid_argument("Vector dimensions must agree.");
     }
+#endif
+
     auto result = Vector(this->size);
     for (int i = 0; i < this->size; i++) {
         result.array[i] = this->array[i] - other.array[i];
@@ -92,7 +127,7 @@ Vector Vector::operator-(const Vector &other) {
     return result;
 }
 
-Vector Vector::operator*(long double scalar) {
+Vector Vector::operator*(long double scalar) const {
     auto result = Vector(this->size);
     for (int i = 0; i < this->size; i++) {
         result.array[i] = this->array[i] * scalar;
@@ -100,7 +135,7 @@ Vector Vector::operator*(long double scalar) {
     return result;
 }
 
-Vector Vector::operator/(long double scalar) {
+Vector Vector::operator/(long double scalar) const {
     auto result = Vector(this->size);
     for (int i = 0; i < this->size; i++) {
         result.array[i] = this->array[i] / scalar;
@@ -108,10 +143,13 @@ Vector Vector::operator/(long double scalar) {
     return result;
 }
 
-long double Vector::operator*(const Vector &other) {
+long double Vector::operator*(const Vector &other) const {
+#ifdef DEBUG
     if (this->size != other.size) {
         throw std::invalid_argument("Vector dimensions must agree.");
     }
+#endif
+
     long double result = 0;
     for (int i = 0; i < this->size; i++) {
         result += this->array[i] * other.array[i];
