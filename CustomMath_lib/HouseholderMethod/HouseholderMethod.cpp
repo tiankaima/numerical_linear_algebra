@@ -59,7 +59,7 @@ void QRFactorization_InPlace(Matrix &A, Vector &d) {
 void QRFactorization(const Matrix &A, Matrix &Q, Matrix &R) {
     ull m = A.rows;
     ull n = A.cols;
-    Q = Matrix(n, m);
+//    Q = Matrix(n, m);
     R = Matrix(n, n);
 
     auto B = Matrix(A);
@@ -82,14 +82,15 @@ void QRFactorization(const Matrix &A, Matrix &Q, Matrix &R) {
         auto v = Vector(m);
         v.array[0] = 1;
         for (ull j = i + 1; j < m; j++) {
-            v.array[j - i] = B.matrix[j][i];
+            v.array[j] = B.matrix[j][i];
         }
         auto w = (_Q.transpose() * v) * d.array[i];
         _Q = _Q - product(v, w);
     }
+    _Q.print();
 
     // stripping _Q to n x m -> Q:
-    Q.set(0, n, 0, m, _Q.sub_matrix(0, n, 0, m));
+    Q = _Q.sub_matrix(0, n, 0, m);
 }
 
 void QR_Solve_InPlace(Matrix &A, Vector &b) {
@@ -105,12 +106,12 @@ void QR_Solve_InPlace(Matrix &A, Vector &b) {
         }
         b = b - v * (v * b) * d.array[i];
     }
-    UpperTriangleMatrix_Solve_InPlace(A, b);
+    UpperTriangleMatrix_Solve_InPlace(A.sub_matrix(0, A.cols, 0, A.cols), b);
 }
 
 Vector QR_Solve(const Matrix &A, const Vector &b) {
-    Matrix A_copy = Matrix(A);
-    Vector b_copy = Vector(b);
+    auto A_copy = Matrix(A);
+    auto b_copy = Vector(b);
     QR_Solve_InPlace(A_copy, b_copy);
-    return b_copy;
+    return b_copy.sub_vector(0, A.cols);
 }

@@ -21,7 +21,7 @@ void UpperTriangleMatrix_Solve_InPlace(const Matrix &U, Vector &b, bool isDiagon
     CHECK_SQUARE_MATRIX(U)
     CHECK_EQUAL_SIZE(U, b)
 
-    for (ull i = b.size - 1; i != -1; i--) {
+    for (ull i = U.cols - 1; i != -1; i--) {
         if (!isDiagonalUnit) b.array[i] = b.array[i] / U.matrix[i][i];
 
         for (ull j = i - 1; j != -1; j--) {

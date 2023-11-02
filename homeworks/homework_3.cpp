@@ -41,12 +41,39 @@ TEST_END(function) \
     TEST_FUNCTION(A_func, b_func, x_base_func, QR_Solve_InPlace)
 
 void part_1() {
-    RUN_EVERY_TEST(Q1, A_1, b_1, x_1)
-    RUN_EVERY_TEST(Q2, A_2, b_2, x_2)
-    RUN_EVERY_TEST(Q3, A_3, b_3, x_3)
+    RUN_EVERY_TEST(Q1_1, A_1, b_1, x_1)
+    RUN_EVERY_TEST(Q1_2, A_2, b_2, x_2)
+    RUN_EVERY_TEST(Q1_3, A_3, b_3, x_3)
+}
+
+void part_2() {
+    std::cout << std::endl << "######  Q2  ######" << std::endl;
+    auto t = t_22();
+
+    auto A = Matrix(t.size, 3);
+    for(ull i=0;i<t.size;i++) {
+        A.matrix[i][0] = t.array[i] * t.array[i];
+        A.matrix[i][1] = t.array[i];
+        A.matrix[i][2] = 1;
+    }
+
+    auto y = y_22();
+    auto x = QR_Solve(A, y);
+    x.print();
+}
+
+void part_3() {
+    std::cout << std::endl << "######  Q3  ######" << std::endl;
+    auto y = b_33();
+    auto A = A_33();
+
+    auto x = QR_Solve(A, y);
+    x.print();
 }
 
 int homework_3() {
     part_1();
+    part_2();
+    part_3();
     return 0;
 }
