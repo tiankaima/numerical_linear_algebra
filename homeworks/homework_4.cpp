@@ -12,6 +12,19 @@
 #define PRINT_RESULT(x)
 #endif
 
+#define ENABLE_ITERATION_METHOD_TIMING
+
+#ifdef ENABLE_ITERATION_METHOD_TIMING
+#define ITERATION_METHOD_TIMING_START auto start = std::chrono::high_resolution_clock::now();
+#define ITERATION_METHOD_TIMING_END auto end = std::chrono::high_resolution_clock::now(); \
+                  auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+#define ITERATION_METHOD_RETURN_DURATION duration
+#else
+#define ITERATION_METHOD_TIMING_START
+#define ITERATION_METHOD_TIMING_END
+#define ITERATION_METHOD_RETURN_DURATION std::chrono::microseconds(0)
+#endif
+
 Matrix A_1(double eps, [[maybe_unused]] double a, int n, double h) {
     auto A = Matrix(n - 1, n - 1);
     for (ull i = 0; i < n - 1; i++) {
@@ -46,7 +59,6 @@ Vector x_default_1([[maybe_unused]] double eps, [[maybe_unused]] double a, int n
 }
 
 lld calc(double eps, double a, double x) {
-    // y = (1 - a)/(1 - exp(-1/eps)) * (1 - exp(-x/eps)) + a * x
     return (1 - a) / (1 - std::exp(-1 / eps)) * (1 - std::exp(-x / eps)) + a * x;
 }
 
@@ -134,8 +146,168 @@ void par_1() {
     par_1_try(0.0001);
 }
 
+lld f(lld x, lld y) {
+    return x + y;
+}
+
+lld g(lld x, lld y) {
+    return std::exp(x * y);
+}
+
+lld mGet(const Matrix &m, int i, int j) { // terrible naming, but fuck it.
+    if (i == -1 || i >= m.rows || j == -1 || j >= m.cols) return 1;
+    return m.matrix[i][j];
+}
+
+Matrix JacobiIter(const Matrix &old) {
+    auto h = 1.0 / old.rows;
+    auto newMatrix = Matrix(old.rows, old.cols);
+    for (int i = 0; i < old.rows; i++) {
+        for (int j = 0; j < old.cols; j++) {
+            newMatrix.matrix[i][j] =
+                    (mGet(old, i, j - 1) + mGet(old, i - 1, j) +
+                     mGet(old, i, j + 1) + mGet(old, i + 1, j) +
+                     h * h * f(i * h, j * h)) /
+                    (4 + h * h * g(i * h, j * h));
+        }
+    }
+    return newMatrix;
+}
+
+Matrix GSIter(const Matrix &old) {
+    auto h = 1.0 / old.rows;
+    auto newMatrix = Matrix(old.rows, old.cols);
+    for (int i = 0; i < old.rows; i++) {
+        for (int j = 0; j < old.cols; j++) {
+            newMatrix.matrix[i][j] =
+                    (mGet(newMatrix, i, j - 1) + mGet(newMatrix, i - 1, j) +
+                     mGet(old, i, j + 1) + mGet(old, i + 1, j) +
+                     h * h * f(i * h, j * h)) /
+                    (4 + h * h * g(i * h, j * h));
+        }
+    }
+    return newMatrix;
+}
+
+Matrix SORIter(const Matrix &old, lld omega) {
+    auto h = 1.0 / old.rows;
+    auto newMatrix = Matrix(old.rows, old.cols);
+    for (int i = 0; i < old.rows; i++) {
+        for (int j = 0; j < old.cols; j++) {
+            auto tmp = (mGet(newMatrix, i, j - 1) + mGet(newMatrix, i - 1, j) +
+                        mGet(old, i, j + 1) + mGet(old, i + 1, j) +
+                        h * h * f(i * h, j * h)) /
+                       (4 + h * h * g(i * h, j * h));
+            newMatrix.matrix[i][j] = old.matrix[i][j] * (1 - omega) + tmp * omega;
+        }
+    }
+    return newMatrix;
+}
+
+typedef struct {
+    Matrix m;
+    int iteration_count;
+    std::chrono::microseconds time_cost;
+} MatrixIterationMethodOutput;
+
+MatrixIterationMethodOutput MatrixJacobiIteration(int N = 20) {
+    auto m = Matrix(N, N, 0);
+    auto precision = 1e-7;
+
+    ITERATION_METHOD_TIMING_START
+
+    for (int i = 0; i < ITERATION_METHOD_MAX_ITERATION; i++) {
+        auto new_m = JacobiIter(m);
+        if ((new_m - m).norm() <= precision) {
+            ITERATION_METHOD_TIMING_END
+
+            return {
+                    new_m,
+                    i,
+                    ITERATION_METHOD_RETURN_DURATION
+            };
+        }
+        m = new_m;
+    }
+}
+
+MatrixIterationMethodOutput MatrixGSIteration(int N = 20) {
+    auto m = Matrix(N, N, 0);
+    auto precision = 1e-7;
+
+    ITERATION_METHOD_TIMING_START
+
+    for (int i = 0; i < ITERATION_METHOD_MAX_ITERATION; i++) {
+        auto new_m = GSIter(m);
+        if ((new_m - m).norm() <= precision) {
+            ITERATION_METHOD_TIMING_END
+
+            return {
+                    new_m,
+                    i,
+                    ITERATION_METHOD_RETURN_DURATION
+            };
+        }
+        m = new_m;
+    }
+}
+
+MatrixIterationMethodOutput MatrixSORIteration(int N = 20, lld omega = 1.8) {
+    auto m = Matrix(N, N, 0);
+    auto precision = 1e-7;
+
+    ITERATION_METHOD_TIMING_START
+
+    for (int i = 0; i < ITERATION_METHOD_MAX_ITERATION; i++) {
+        auto new_m = SORIter(m, omega);
+        if ((new_m - m).norm() <= precision) {
+            ITERATION_METHOD_TIMING_END
+
+            return {
+                    new_m,
+                    i,
+                    ITERATION_METHOD_RETURN_DURATION
+            };
+        }
+        m = new_m;
+    }
+}
+
+void par_2_try(int N = 20) {
+    std::cout << std::endl << "N = " << N << std::endl;
+
+    auto m = MatrixJacobiIteration(N);
+    std::cout << std::endl << "Jacobi Iteration:" << std::endl;
+    std::cout << m.iteration_count << " iterations" << std::endl;
+    std::cout << m.time_cost.count() << " μs" << std::endl;
+    std::cout << m.m.min() << std::endl;
+
+    m = MatrixGSIteration(N);
+    std::cout << std::endl << "Gauss-Seidel Iteration:" << std::endl;
+    std::cout << m.iteration_count << " iterations" << std::endl;
+    std::cout << m.time_cost.count() << " μs" << std::endl;
+    std::cout << m.m.min() << std::endl;
+
+    auto omega = 1.8;
+    if (N == 40) omega = 1.9;
+    if (N == 60) omega = 1.9;
+
+    m = MatrixSORIteration(N, omega);
+    std::cout << std::endl << "SOR Iteration (omega=" << omega << "):" << std::endl;
+    std::cout << m.iteration_count << " iterations" << std::endl;
+    std::cout << m.time_cost.count() << " μs" << std::endl;
+    std::cout << m.m.min() << std::endl;
+}
+
+void par_2() {
+    std::cout << "------ Q 4.2 ------" << std::endl;
+    par_2_try(20);
+    par_2_try(40);
+    par_2_try(60);
+}
+
 int homework_4() {
-//    best_omega_try();
     par_1();
+    par_2();
     return 0;
 }

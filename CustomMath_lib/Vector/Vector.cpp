@@ -24,9 +24,9 @@ Vector::Vector(ull size, double lower_bound, double upper_bound) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(lower_bound, upper_bound);
-    std::vector<lld> result;
+    std::vector<lld> result = std::vector<lld>(size);
     for (int i = 0; i < size; i++) {
-        result.push_back(dis(gen));
+        result[i] = dis(gen);
     }
     this->size = size;
     this->array = result;

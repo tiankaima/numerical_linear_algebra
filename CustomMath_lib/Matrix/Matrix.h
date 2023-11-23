@@ -93,6 +93,12 @@ public:
 
     [[nodiscard]] bool isSquare() const;
 
+    [[nodiscard]] lld norm() const;
+
+    [[nodiscard]] lld min() const;
+
+    [[nodiscard]] lld max() const;
+
     static Matrix identity(ull n); // Identity matrix
 
     static Matrix hilbert(ull n);

@@ -362,6 +362,36 @@ bool Matrix::isSquare() const {
     return this->rows == this->cols;
 }
 
+lld Matrix::norm() const {
+    lld result = 0;
+    for (ull i = 0; i < this->rows; i++) {
+        for (ull j = 0; j < this->cols; j++) {
+            result += this->matrix[i][j] * this->matrix[i][j];
+        }
+    }
+    return std::sqrt(result);
+}
+
+lld Matrix::min() const {
+    lld result = this->matrix[0][0];
+    for (ull i = 0; i < this->rows; i++) {
+        for (ull j = 0; j < this->cols; j++) {
+            result = std::min(result, this->matrix[i][j]);
+        }
+    }
+    return result;
+}
+
+lld Matrix::max() const {
+    lld result = this->matrix[0][0];
+    for (ull i = 0; i < this->rows; i++) {
+        for (ull j = 0; j < this->cols; j++) {
+            result = std::max(result, this->matrix[i][j]);
+        }
+    }
+    return result;
+}
+
 Matrix Matrix::hilbert(ull n) {
     auto result = Matrix(n, n);
     for (ull i = 0; i < n; i++) {
