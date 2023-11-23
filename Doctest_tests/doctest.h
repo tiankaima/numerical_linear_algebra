@@ -498,7 +498,9 @@ DOCTEST_GCC_SUPPRESS_WARNING_POP
 // https://github.com/doctest/doctest/issues/126
 // https://github.com/doctest/doctest/issues/356
 #if DOCTEST_CLANG
+
 #include <ciso646>
+
 #endif // clang
 
 #ifdef _LIBCPP_VERSION
@@ -515,6 +517,7 @@ DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_BEGIN
 #include <cstddef>
 #include <ostream>
 #include <istream>
+
 DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_END
 #else // DOCTEST_CONFIG_USE_STD_HEADERS
 
@@ -558,7 +561,9 @@ DOCTEST_MSVC_SUPPRESS_WARNING_POP
 #endif // DOCTEST_CONFIG_USE_STD_HEADERS
 
 #ifdef DOCTEST_CONFIG_INCLUDE_TYPE_TRAITS
+
 #include <type_traits>
+
 #endif // DOCTEST_CONFIG_INCLUDE_TYPE_TRAITS
 
 namespace doctest {
@@ -1125,7 +1130,7 @@ namespace doctest {
         void filloss(std::ostream *stream, const T (&in)[N]) { // NOLINT(*-avoid-c-arrays)
             // T[N], T(&)[N], T(&&)[N] have same behaviour.
             // Hence remove reference.
-            filloss<typename types::remove_reference<decltype(in)>::type>(stream, in);
+            filloss < typename types::remove_reference<decltype(in)>::type > (stream, in);
         }
 
         template<typename T>
@@ -1294,34 +1299,40 @@ DOCTEST_INTERFACE String toString(const std::string& in);
         Approx operator()(double value) const;
 
 #ifdef DOCTEST_CONFIG_INCLUDE_TYPE_TRAITS
-        template <typename T>
-        explicit Approx(const T& value,
-                        typename detail::types::enable_if<std::is_constructible<double, T>::value>::type* =
-                        static_cast<T*>(nullptr)) {
+
+        template<typename T>
+        explicit Approx(const T &value,
+                        typename detail::types::enable_if<std::is_constructible<double, T>::value>::type * =
+                        static_cast<T *>(nullptr)) {
             *this = static_cast<double>(value);
         }
+
 #endif // DOCTEST_CONFIG_INCLUDE_TYPE_TRAITS
 
         Approx &epsilon(double newEpsilon);
 
 #ifdef DOCTEST_CONFIG_INCLUDE_TYPE_TRAITS
-        template <typename T>
-        typename std::enable_if<std::is_constructible<double, T>::value, Approx&>::type epsilon(
-                const T& newEpsilon) {
+
+        template<typename T>
+        typename std::enable_if<std::is_constructible<double, T>::value, Approx &>::type epsilon(
+                const T &newEpsilon) {
             m_epsilon = static_cast<double>(newEpsilon);
             return *this;
         }
+
 #endif //  DOCTEST_CONFIG_INCLUDE_TYPE_TRAITS
 
         Approx &scale(double newScale);
 
 #ifdef DOCTEST_CONFIG_INCLUDE_TYPE_TRAITS
-        template <typename T>
-        typename std::enable_if<std::is_constructible<double, T>::value, Approx&>::type scale(
-                const T& newScale) {
+
+        template<typename T>
+        typename std::enable_if<std::is_constructible<double, T>::value, Approx &>::type scale(
+                const T &newScale) {
             m_scale = static_cast<double>(newScale);
             return *this;
         }
+
 #endif // DOCTEST_CONFIG_INCLUDE_TYPE_TRAITS
 
         // clang-format off
@@ -1353,18 +1364,48 @@ DOCTEST_INTERFACE String toString(const std::string& in);
 #define DOCTEST_APPROX_PREFIX \
     template <typename T> friend typename std::enable_if<std::is_constructible<double, T>::value, bool>::type
 
-        DOCTEST_APPROX_PREFIX operator==(const T& lhs, const Approx& rhs) { return operator==(static_cast<double>(lhs), rhs); }
-        DOCTEST_APPROX_PREFIX operator==(const Approx& lhs, const T& rhs) { return operator==(rhs, lhs); }
-        DOCTEST_APPROX_PREFIX operator!=(const T& lhs, const Approx& rhs) { return !operator==(lhs, rhs); }
-        DOCTEST_APPROX_PREFIX operator!=(const Approx& lhs, const T& rhs) { return !operator==(rhs, lhs); }
-        DOCTEST_APPROX_PREFIX operator<=(const T& lhs, const Approx& rhs) { return static_cast<double>(lhs) < rhs.m_value || lhs == rhs; }
-        DOCTEST_APPROX_PREFIX operator<=(const Approx& lhs, const T& rhs) { return lhs.m_value < static_cast<double>(rhs) || lhs == rhs; }
-        DOCTEST_APPROX_PREFIX operator>=(const T& lhs, const Approx& rhs) { return static_cast<double>(lhs) > rhs.m_value || lhs == rhs; }
-        DOCTEST_APPROX_PREFIX operator>=(const Approx& lhs, const T& rhs) { return lhs.m_value > static_cast<double>(rhs) || lhs == rhs; }
-        DOCTEST_APPROX_PREFIX operator< (const T& lhs, const Approx& rhs) { return static_cast<double>(lhs) < rhs.m_value && lhs != rhs; }
-        DOCTEST_APPROX_PREFIX operator< (const Approx& lhs, const T& rhs) { return lhs.m_value < static_cast<double>(rhs) && lhs != rhs; }
-        DOCTEST_APPROX_PREFIX operator> (const T& lhs, const Approx& rhs) { return static_cast<double>(lhs) > rhs.m_value && lhs != rhs; }
-        DOCTEST_APPROX_PREFIX operator> (const Approx& lhs, const T& rhs) { return lhs.m_value > static_cast<double>(rhs) && lhs != rhs; }
+        DOCTEST_APPROX_PREFIX operator==(const T &lhs, const Approx &rhs) {
+            return operator==(static_cast<double>(lhs), rhs);
+        }
+
+        DOCTEST_APPROX_PREFIX operator==(const Approx &lhs, const T &rhs) { return operator==(rhs, lhs); }
+
+        DOCTEST_APPROX_PREFIX operator!=(const T &lhs, const Approx &rhs) { return !operator==(lhs, rhs); }
+
+        DOCTEST_APPROX_PREFIX operator!=(const Approx &lhs, const T &rhs) { return !operator==(rhs, lhs); }
+
+        DOCTEST_APPROX_PREFIX operator<=(const T &lhs, const Approx &rhs) {
+            return static_cast<double>(lhs) < rhs.m_value || lhs == rhs;
+        }
+
+        DOCTEST_APPROX_PREFIX operator<=(const Approx &lhs, const T &rhs) {
+            return lhs.m_value < static_cast<double>(rhs) || lhs == rhs;
+        }
+
+        DOCTEST_APPROX_PREFIX operator>=(const T &lhs, const Approx &rhs) {
+            return static_cast<double>(lhs) > rhs.m_value || lhs == rhs;
+        }
+
+        DOCTEST_APPROX_PREFIX operator>=(const Approx &lhs, const T &rhs) {
+            return lhs.m_value > static_cast<double>(rhs) || lhs == rhs;
+        }
+
+        DOCTEST_APPROX_PREFIX operator<(const T &lhs, const Approx &rhs) {
+            return static_cast<double>(lhs) < rhs.m_value && lhs != rhs;
+        }
+
+        DOCTEST_APPROX_PREFIX operator<(const Approx &lhs, const T &rhs) {
+            return lhs.m_value < static_cast<double>(rhs) && lhs != rhs;
+        }
+
+        DOCTEST_APPROX_PREFIX operator>(const T &lhs, const Approx &rhs) {
+            return static_cast<double>(lhs) > rhs.m_value && lhs != rhs;
+        }
+
+        DOCTEST_APPROX_PREFIX operator>(const Approx &lhs, const T &rhs) {
+            return lhs.m_value > static_cast<double>(rhs) && lhs != rhs;
+        }
+
 #undef DOCTEST_APPROX_PREFIX
 #endif // DOCTEST_CONFIG_INCLUDE_TYPE_TRAITS
 

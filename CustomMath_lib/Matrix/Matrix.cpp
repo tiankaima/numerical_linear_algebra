@@ -23,7 +23,7 @@ Matrix::Matrix(ull rows, ull cols, lld default_value) {
     this->matrix = std::vector<std::vector<lld>>(rows, std::vector<lld>(cols, default_value));
 }
 
-Matrix::Matrix(ull rows, ull cols, lld lower_bound, lld upper_bound) {
+Matrix::Matrix(ull rows, ull cols, double lower_bound, double upper_bound) {
     // generate a matrix with random values in range [lower_bound, upper_bound]
     this->rows = rows;
     this->cols = cols;
@@ -82,10 +82,62 @@ Matrix Matrix::identity(ull n) {
 }
 
 Matrix Matrix::sub_matrix(ull start_row, ull end_row, ull start_col, ull end_col) const {
+#ifdef DEBUG
+    if (end_row < start_row || end_col < start_col) {
+        throw std::invalid_argument("Invalid sub_matrix size.");
+    }
+#endif
+
     auto result = Matrix(end_row - start_row, end_col - start_col);
     for (ull i = start_row; i < end_row; i++) {
         for (ull j = start_col; j < end_col; j++) {
             result.matrix[i - start_row][j - start_col] = this->matrix[i][j];
+        }
+    }
+    return result;
+}
+
+Matrix Matrix::sub_diagonal() const {
+#ifdef DEBUG
+    if (!this->isSquare()) {
+        throw std::invalid_argument("Matrix must be square.");
+    }
+#endif
+
+    auto result = Matrix(this->rows, this->cols);
+    for (ull i = 0; i < this->rows; i++) {
+        result.matrix[i][i] = this->matrix[i][i];
+    }
+    return result;
+}
+
+Matrix Matrix::sub_upperTriangle() const {
+#ifdef DEBUG
+    if (!this->isSquare()) {
+        throw std::invalid_argument("Matrix must be square.");
+    }
+#endif
+
+    auto result = Matrix(this->rows, this->cols);
+    for (ull i = 0; i < this->rows; i++) {
+        for (ull j = i + 1; j < this->cols; j++) {
+            result.matrix[i][j] = this->matrix[i][j];
+        }
+    }
+    return result;
+}
+
+Matrix Matrix::sub_lowerTriangle() const {
+#ifdef DEBUG
+    if (!this->isSquare()) {
+        throw std::invalid_argument("Matrix must be square.");
+    }
+#endif
+
+    auto result = Matrix(this->rows, this->cols);
+    for (ull i = 1; i < this->rows; i++) {
+        for (ull j = 0; j < i; j++) {
+            result.matrix[i][j] = this->matrix[i][j];
         }
     }
     return result;
@@ -183,6 +235,20 @@ Matrix Matrix::transpose() const {
         for (ull j = 0; j < this->rows; j++) {
             result.matrix[i][j] = this->matrix[j][i];
         }
+    }
+    return result;
+}
+
+Matrix Matrix::diagonal_inverse() const {
+#ifdef DEBUG
+    if (!this->isSquare()) {
+        throw std::invalid_argument("Matrix must be square.");
+    }
+#endif
+
+    auto result = Matrix(this->rows, this->cols);
+    for (ull i = 0; i < this->rows; i++) {
+        result.matrix[i][i] = 1.0 / this->matrix[i][i];
     }
     return result;
 }

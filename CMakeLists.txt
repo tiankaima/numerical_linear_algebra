@@ -27,7 +27,9 @@ set(SOURCE_FILES main.cpp
         homeworks/homework_3.cpp
         homeworks/homework_3.h
         homeworks/homework_3_data.cpp
-        homeworks/homework_3_data.h)
+        homeworks/homework_3_data.h
+        homeworks/homework_4.cpp
+        homeworks/homework_4.h)
 add_executable(numerical_algebra ${SOURCE_FILES})
 include_directories(CustomMath_lib)
 target_link_libraries(numerical_algebra CustomMath_lib)

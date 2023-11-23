@@ -43,17 +43,28 @@ public:
     /*
      * Generate a matrix with random values in range [lower_bound, upper_bound]
      */
-    Matrix(ull rows, ull cols, lld lower_bound, lld upper_bound);
+    Matrix(ull rows, ull cols, double lower_bound, double upper_bound);
 
+    // Copy constructor
     Matrix(const Matrix &other);
 
     explicit Matrix(std::vector<std::vector<lld>> matrix);
 
+    /*
+     * Construct a matrix from a string in MATLAB format.
+     */
     explicit Matrix(std::string matlab_matrix);
 
-    static Matrix identity(ull n); // Identity matrix
+    /*
+     * extract a sub-matrix from the matrix
+     */
+    [[nodiscard]] Matrix sub_matrix(ull start_row, ull end_row, ull start_col, ull end_col) const;
 
-    Matrix sub_matrix(ull start_row, ull end_row, ull start_col, ull end_col) const;
+    [[nodiscard]] Matrix sub_diagonal() const;
+
+    [[nodiscard]] Matrix sub_upperTriangle() const;
+
+    [[nodiscard]] Matrix sub_lowerTriangle() const;
 
     void set(ull start_row, ull end_row, ull start_col, ull end_col, const Matrix &other);
 
@@ -65,7 +76,12 @@ public:
 
     Matrix operator*(const Matrix &other) const;
 
-    Matrix transpose() const;
+    [[nodiscard]] Matrix transpose() const;
+
+    /*
+     * Return the inverse of the matrix(supposing it is a diagonal matrix)
+     */
+    [[nodiscard]] Matrix diagonal_inverse() const;
 
     Matrix operator*(lld scalar) const;
 
@@ -75,7 +91,9 @@ public:
 
     bool operator==(const Matrix &other) const;
 
-    bool isSquare() const;
+    [[nodiscard]] bool isSquare() const;
+
+    static Matrix identity(ull n); // Identity matrix
 
     static Matrix hilbert(ull n);
 

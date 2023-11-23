@@ -51,7 +51,7 @@ void part_2() {
     auto t = t_22();
 
     auto A = Matrix(t.size, 3);
-    for(ull i=0;i<t.size;i++) {
+    for (ull i = 0; i < t.size; i++) {
         A.matrix[i][0] = t.array[i] * t.array[i];
         A.matrix[i][1] = t.array[i];
         A.matrix[i][2] = 1;

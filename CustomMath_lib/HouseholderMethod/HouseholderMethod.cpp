@@ -73,8 +73,8 @@ void QRFactorization(const Matrix &A, Matrix &Q, Matrix &R) {
         }
     }
 
-    // now _Q.
-    auto _Q = Matrix::identity(m);
+    // now tmp_Q.
+    auto tmp_Q = Matrix::identity(m);
 
     // fixme: I'll admit the following way is terrible:
     auto v_list = std::vector<Vector>(n);
@@ -84,13 +84,13 @@ void QRFactorization(const Matrix &A, Matrix &Q, Matrix &R) {
         for (ull j = i + 1; j < m; j++) {
             v.array[j] = B.matrix[j][i];
         }
-        auto w = (_Q.transpose() * v) * d.array[i];
-        _Q = _Q - product(v, w);
+        auto w = (tmp_Q.transpose() * v) * d.array[i];
+        tmp_Q = tmp_Q - product(v, w);
     }
-    _Q.print();
+    tmp_Q.print();
 
-    // stripping _Q to n x m -> Q:
-    Q = _Q.sub_matrix(0, n, 0, m);
+    // stripping tmp_Q to n x m -> Q:
+    Q = tmp_Q.sub_matrix(0, n, 0, m);
 }
 
 void QR_Solve_InPlace(Matrix &A, Vector &b) {

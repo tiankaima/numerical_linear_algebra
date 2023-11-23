@@ -6,25 +6,25 @@
 
 Vector::Vector() {
     this->size = 0;
-    this->array = std::vector<long double>(0, 0);
+    this->array = std::vector<lld>(0, 0);
 }
 
 Vector::Vector(ull size) {
     this->size = size;
-    this->array = std::vector<long double>(size, 0);
+    this->array = std::vector<lld>(size, 0);
 }
 
 
 Vector::Vector(ull size, lld default_value) {
     this->size = size;
-    this->array = std::vector<long double>(size, default_value);
+    this->array = std::vector<lld>(size, default_value);
 }
 
-Vector::Vector(ull size, lld lower_bound, lld upper_bound) {
+Vector::Vector(ull size, double lower_bound, double upper_bound) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(lower_bound, upper_bound);
-    std::vector<long double> result;
+    std::vector<lld> result;
     for (int i = 0; i < size; i++) {
         result.push_back(dis(gen));
     }
@@ -32,14 +32,14 @@ Vector::Vector(ull size, lld lower_bound, lld upper_bound) {
     this->array = result;
 }
 
-Vector::Vector(const std::vector<long double> &array) {
+Vector::Vector(const std::vector<lld> &array) {
     this->size = array.size();
     this->array = array;
 }
 
 Vector::Vector(std::string matlab_array) {
     // Testing purpose only, can ignore speed or memory efficiency
-    std::vector<long double> result;
+    std::vector<lld> result;
     for (int i = 0; i < matlab_array.size(); i++) {
         if (matlab_array[i] == '[' || matlab_array[i] == ' ') {
             continue;
@@ -66,7 +66,7 @@ Vector Vector::sub_vector(ull start, ull end) const {
     }
 #endif
 
-    std::vector<long double> result;
+    std::vector<lld> result;
     for (ull i = start; i < end; i++) {
         result.push_back(this->array[i]);
     }
@@ -127,7 +127,7 @@ Vector Vector::operator-(const Vector &other) const {
     return result;
 }
 
-Vector Vector::operator*(long double scalar) const {
+Vector Vector::operator*(lld scalar) const {
     auto result = Vector(this->size);
     for (int i = 0; i < this->size; i++) {
         result.array[i] = this->array[i] * scalar;
@@ -135,7 +135,7 @@ Vector Vector::operator*(long double scalar) const {
     return result;
 }
 
-Vector Vector::operator/(long double scalar) const {
+Vector Vector::operator/(lld scalar) const {
     auto result = Vector(this->size);
     for (int i = 0; i < this->size; i++) {
         result.array[i] = this->array[i] / scalar;
@@ -143,14 +143,14 @@ Vector Vector::operator/(long double scalar) const {
     return result;
 }
 
-long double Vector::operator*(const Vector &other) const {
+lld Vector::operator*(const Vector &other) const {
 #ifdef DEBUG
     if (this->size != other.size) {
         throw std::invalid_argument("Vector dimensions must agree.");
     }
 #endif
 
-    long double result = 0;
+    lld result = 0;
     for (int i = 0; i < this->size; i++) {
         result += this->array[i] * other.array[i];
     }
@@ -169,8 +169,8 @@ bool Vector::operator==(const Vector &other) const {
     return true;
 }
 
-long double Vector::norm() const {
-    long double result = 0;
+lld Vector::norm() const {
+    lld result = 0;
     for (int i = 0; i < this->size; i++) {
         result += this->array[i] * this->array[i];
     }

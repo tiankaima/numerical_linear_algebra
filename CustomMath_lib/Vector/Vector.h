@@ -29,13 +29,13 @@ public:
 
     Vector(ull size, lld default_value);
 
-    Vector(ull size, lld lower_bound, lld upper_bound);
+    Vector(ull size, double lower_bound, double upper_bound);
 
     explicit Vector(const std::vector<lld> &array);
 
     explicit Vector(std::string matlab_array);
 
-    Vector sub_vector(ull start, ull end) const;
+    [[nodiscard]] Vector sub_vector(ull start, ull end) const;
 
     void set(ull start, ull end, const Vector &other);
 
