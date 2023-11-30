@@ -5,7 +5,6 @@
 #include "homework_5.h"
 
 #define ENABLE_RESULT_PRINTING
-#define ENABLE_ITERATION_METHOD_TIMING
 
 #ifdef ENABLE_RESULT_PRINTING
 #define PRINT_RESULT(x) x.print();
@@ -13,35 +12,66 @@
 #define PRINT_RESULT(x)
 #endif
 
-#ifdef ENABLE_ITERATION_METHOD_TIMING
-#define ITERATION_METHOD_TIMING_START auto start = std::chrono::high_resolution_clock::now();
-#define ITERATION_METHOD_TIMING_END auto end = std::chrono::high_resolution_clock::now(); \
-                  auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-#define ITERATION_METHOD_RETURN_DURATION duration
-#else
-#define ITERATION_METHOD_TIMING_START
-#define ITERATION_METHOD_TIMING_END
-#define ITERATION_METHOD_RETURN_DURATION std::chrono::microseconds(0)
-#endif
+lld f(lld x, lld y) {
+    return std::sin(x * y);
+}
+
+lld phi(lld x, lld y) {
+    return x * x + y * y;
+}
+
+void par_1() {
+    auto n = 20;
+    auto h = 1.0 / n;
+    auto A = Matrix(n * n, n * n);
+    auto b = Vector(n * n);
+
+    for (ull i = 0; i < n * n; i++) {
+        for (ull j = 0; j < n * n; j++) {
+            if (i == j) {
+                A.matrix[i][j] = 1 + h * h / 4;
+            } else if ((i == j + n || i == j - n) || (i == j + 1 && i % n != 0) || (i == j - 1 && j % n != 0)) {
+                A.matrix[i][j] = -1.0 / 4;
+            }
+        }
+
+        b.array[i] = (h * h / 4) * f((lld) (i / n + 1) * h, (lld) (i % n + 1) * h); // NOLINT(*-integer-division)
+    }
+
+    for (ull i = 0; i < n; i++) {
+        b.array[i] += phi(0, (lld) (i + 1) * h) / 4;
+        b.array[n * n - n + i] += phi(1, (lld) (i + 1) * h) / 4;
+    }
+
+    for (ull i = 0; i < n; i++) {
+        b.array[i * n] += phi((lld) (i + 1) * h, 0) / 4;
+        b.array[i * n + n - 1] += phi((lld) (i + 1) * h, 1) / 4;
+    }
+
+//    A.print();
+//    b.print();
+
+    auto x_default = Vector(n * n, 1);
+    auto input = IterationMethodInput{A, b, x_default, 1e-7,};
+    auto output = ConjugateGradientMethod(input);
+    std::cout << output.iteration_count << " iterations" << std::endl;
+    std::cout << output.time_cost.count() << " μs" << std::endl;
+    PRINT_RESULT(output.x)
+}
 
 void par_2_tries(ull n) {
     auto A = Matrix::hilbert(n);
     auto b = Vector(n);
     for (ull i = 0; i < n; i++) {
-        for (ull j = 0; j<n; j++) {
+        for (ull j = 0; j < n; j++) {
             b.array[i] += A.matrix[i][j];
         }
-        b.array[i]/=3;
+        b.array[i] /= 3;
     }
 
     auto x_default = Vector(n, 1);
 
-    auto input = IterationMethodInput {
-        A,
-        b,
-        x_default,
-        1e-10,
-    };
+    auto input = IterationMethodInput{A, b, x_default, 1e-10,};
 
     std::cout << std::endl << "n = " << n << std::endl;
     auto output = ConjugateGradientMethod(input);
@@ -67,12 +97,7 @@ void par_3() {
     auto b = Vector("[12 -27 14 -17 12]");
     auto x_default = Vector("[1 1 1 1 1]");
 
-    auto input = IterationMethodInput {
-        A,
-        b,
-        x_default,
-        1e-10,
-    };
+    auto input = IterationMethodInput{A, b, x_default, 1e-10,};
 
     std::cout << std::endl << "Jacobi Iteration:" << std::endl;
     auto output = JacobiIteration(input);
@@ -94,6 +119,7 @@ void par_3() {
 }
 
 int homework_5() {
+    par_1();
     par_2();
     par_3();
 
