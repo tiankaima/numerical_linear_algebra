@@ -229,6 +229,8 @@ MatrixIterationMethodOutput MatrixJacobiIteration(int N = 20) {
         }
         m = new_m;
     }
+
+    throw std::invalid_argument("MatrixJacobiIteration: iteration count exceeds ITERATION_METHOD_MAX_ITERATION");
 }
 
 MatrixIterationMethodOutput MatrixGSIteration(int N = 20) {
@@ -250,6 +252,8 @@ MatrixIterationMethodOutput MatrixGSIteration(int N = 20) {
         }
         m = new_m;
     }
+
+    throw std::invalid_argument("MatrixGSIteration: iteration count exceeds ITERATION_METHOD_MAX_ITERATION");
 }
 
 MatrixIterationMethodOutput MatrixSORIteration(int N = 20, lld omega = 1.8) {
@@ -271,6 +275,8 @@ MatrixIterationMethodOutput MatrixSORIteration(int N = 20, lld omega = 1.8) {
         }
         m = new_m;
     }
+
+    throw std::invalid_argument("MatrixSORIteration: iteration count exceeds ITERATION_METHOD_MAX_ITERATION");
 }
 
 void par_2_try(int N = 20) {

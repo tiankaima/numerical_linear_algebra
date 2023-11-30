@@ -106,3 +106,40 @@ IterationMethodOutput SORIteration(const IterationMethodInput &input, lld omega)
 
     throw std::invalid_argument("SORIteration: iteration count exceeds ITERATION_METHOD_MAX_ITERATION");
 }
+
+IterationMethodOutput ConjugateGradientMethod(const IterationMethodInput &input) {
+    auto A = input.A;
+    auto x = input.x_default;
+    auto r = input.b - A * x;
+    auto p = r;
+    auto rho = std::pow(r.norm(),2);
+    lld rho_bar;
+
+    ITERATION_METHOD_TIMING_START
+
+    for (int i = 0; i < ITERATION_METHOD_MAX_ITERATION; i++) {
+        if (i!=0) {
+            p = r + p * (rho / rho_bar);
+        }
+
+        auto w = A * p;
+        auto alpha = rho / (p * w);
+        x = x + p * alpha;
+        r = r - w * alpha;
+
+        rho_bar = rho;
+        rho = std::pow(r.norm(),2);
+
+        if (std::sqrt(rho) <= input.precision_requirement * input.b.norm()) {
+            ITERATION_METHOD_TIMING_END
+
+            return {
+                x,
+                i,
+                ITERATION_METHOD_RETURN_DURATION
+            };
+        }
+    }
+
+    throw std::invalid_argument("ConjugateGradientMethod: iteration count exceeds ITERATION_METHOD_MAX_ITERATION");
+}

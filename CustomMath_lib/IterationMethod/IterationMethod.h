@@ -31,4 +31,6 @@ IterationMethodOutput GaussSeidelIteration(const IterationMethodInput &input);
 
 IterationMethodOutput SORIteration(const IterationMethodInput &input, lld omega);
 
+IterationMethodOutput ConjugateGradientMethod(const IterationMethodInput &input);
+
 #endif //NUMERICAL_ALGEBRA_ITERATIONMETHOD_H
