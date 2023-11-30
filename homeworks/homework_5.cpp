@@ -21,6 +21,8 @@ lld phi(lld x, lld y) {
 }
 
 void par_1() {
+    std::cout << "------ Q 5.1 ------" << std::endl;
+
     auto n = 20;
     auto h = 1.0 / n;
     auto A = Matrix(n * n, n * n);
