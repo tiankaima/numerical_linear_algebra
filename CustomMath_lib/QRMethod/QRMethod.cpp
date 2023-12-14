@@ -19,7 +19,7 @@ Matrix QRMethod(const Matrix &matrix) {
                 H.matrix[i + 1][i] = 0;
             }
         }
-        H.print();
+//        H.print();
 
         ull m = 0;
         ull k = 0;
@@ -75,4 +75,67 @@ Matrix QRMethod(const Matrix &matrix) {
     } while (true);
 
     return H.clean();
+}
+
+Vector AllRootsForPolynomial(const Vector &coefficients) {
+    auto n = coefficients.size;
+    auto A = Matrix(n, n);
+
+    for (ull i = 0; i < n; i++) {
+        A.matrix[i][0] = -coefficients.array[i];
+    }
+
+    for (ull i = 1; i < n; i++) {
+        A.matrix[i - 1][i] = 1;
+    }
+
+    auto r = QRMethod(A); // assuming r is a diagonal matrix, which means all eigenvalues are real
+
+    auto result = Vector(n);
+    for (ull i = 0; i < n; i++) {
+        result.array[i] = r.matrix[i][i];
+    }
+
+    return result;
+}
+
+std::vector<llc> AllEigenValues(const Matrix &R) {
+    auto n = R.rows;
+    auto result = std::vector<llc>(n);
+
+    for (ull i = 0; i <n; i++) {
+        if(i==n-1 || R.matrix[i+1][i] == 0) {
+            result[i].real = R.matrix[i][i];
+            result[i].complex = 0;
+            continue;
+        }
+
+        auto a = R.matrix[i][i];
+        auto b = R.matrix[i][i + 1];
+        auto c = R.matrix[i + 1][i];
+        auto d = R.matrix[i + 1][i + 1];
+
+        auto delta = (a + d) * (a + d) - 4 * (a * d - b * c);
+        if (delta >= 0) {
+            result[i].real = (a + d + std::sqrt(delta)) / 2;
+            result[i].complex = 0;
+            result[i + 1].real = (a + d - std::sqrt(delta)) / 2;
+            result[i + 1].complex = 0;
+        } else {
+            result[i].real = (a + d) / 2;
+            result[i].complex = std::sqrt(-delta) / 2;
+            result[i + 1].real = (a + d) / 2;
+            result[i + 1].complex = -std::sqrt(-delta) / 2;
+        }
+
+        i++;
+    }
+
+    return result;
+}
+
+void print_llc(const std::vector<llc> vec) {
+    for (auto i: vec) {
+        std::cout << i.real << " + " << i.complex << "i" << std::endl;
+    }
 }
