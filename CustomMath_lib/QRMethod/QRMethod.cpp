@@ -4,15 +4,31 @@
 
 #include "QRMethod.h"
 
-Matrix QRMethod(const Matrix &matrix) {
+#define MAX_ITERATION 100000
+#define ENABLE_TIMING
+
+#ifdef ENABLE_TIMING
+#define ITERATION_METHOD_TIMING_START auto start = std::chrono::high_resolution_clock::now();
+#define ITERATION_METHOD_TIMING_END auto end = std::chrono::high_resolution_clock::now(); \
+                  auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+#define ITERATION_METHOD_RETURN_DURATION duration
+#else
+#define ITERATION_METHOD_TIMING_START
+#define ITERATION_METHOD_TIMING_END
+#define ITERATION_METHOD_RETURN_DURATION std::chrono::microseconds(0)
+#endif
+
+QRMethodOutput<Matrix> QRMethod(const Matrix &matrix) {
     Matrix H = matrix;
     Matrix Q;
     auto P = Matrix::identity(H.rows);
     auto n = H.rows;
 
+    ITERATION_METHOD_TIMING_START
+
     HessenbergMethod_Inplace(H, Q);
 
-    do {
+    for (int count = 0; count < MAX_ITERATION; count++) {
         // set all abs(h_{i,i-1}) < 1e-10 to 0
         for (ull i = 0; i < H.rows - 1; i++) {
             if (std::abs(H.matrix[i + 1][i]) < 1e-6) {
@@ -54,7 +70,13 @@ Matrix QRMethod(const Matrix &matrix) {
         l = n - m - k;
 
         if (m == n || n - m - l <= 2) {
-            break;
+            ITERATION_METHOD_TIMING_END
+
+            return { //
+                    H.clean(), //
+                    count, //
+                    ITERATION_METHOD_RETURN_DURATION //
+            };
         }
 
         auto H22 = H.sub_matrix(l, n - m, l, n - m);
@@ -72,12 +94,10 @@ Matrix QRMethod(const Matrix &matrix) {
         H.set(0, l, l, n - m, H12);
         H.set(l, n - m, n - m, n, H23);
 
-    } while (true);
-
-    return H.clean();
+    }
 }
 
-Vector AllRootsForPolynomial(const Vector &coefficients) {
+QRMethodOutput<Vector> AllRootsForPolynomial(const Vector &coefficients) {
     auto n = coefficients.size;
     auto A = Matrix(n, n);
 
@@ -93,18 +113,22 @@ Vector AllRootsForPolynomial(const Vector &coefficients) {
 
     auto result = Vector(n);
     for (ull i = 0; i < n; i++) {
-        result.array[i] = r.matrix[i][i];
+        result.array[i] = r.result.matrix[i][i];
     }
 
-    return result;
+    return { //
+            result, //
+            r.iteration_times, //
+            r.time_cost //
+    };
 }
 
 std::vector<llc> AllEigenValues(const Matrix &R) {
     auto n = R.rows;
     auto result = std::vector<llc>(n);
 
-    for (ull i = 0; i <n; i++) {
-        if(i==n-1 || R.matrix[i+1][i] == 0) {
+    for (ull i = 0; i < n; i++) {
+        if (i == n - 1 || R.matrix[i + 1][i] == 0) {
             result[i].real = R.matrix[i][i];
             result[i].complex = 0;
             continue;

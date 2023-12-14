@@ -9,7 +9,9 @@ void par_1_each(Vector &a) {
 
     std::cout << "Polynomial is ";
     a.print();
-    std::cout << "Max root for polynomial is " << std::setprecision(10) << max_root << std::endl;
+    std::cout << "Max root for polynomial is " << std::setprecision(10) << max_root.x << std::endl;
+    std::cout<< "Iteration times is " << max_root.iteration_times << std::endl;
+    std::cout << "Time cost is " << max_root.time_cost.count() << " microseconds" << std::endl;
 }
 
 
@@ -53,7 +55,9 @@ void par_2_2() {
 
     auto result = AllRootsForPolynomial(coefficients);
     std::cout << "Roots for polynomial are:" << std::endl;
-    result.print();
+    result.result.print();
+    std::cout << "Iteration times is " << result.iteration_times << std::endl;
+    std::cout << "Time cost is " << result.time_cost.count() << " microseconds" << std::endl;
 }
 
 void par_2_3() {
@@ -81,9 +85,11 @@ void par_2_3() {
                                                       {6.1, 4.9, 3.5, 6.2}});
 
         auto h = QRMethod(m);
-        auto k = AllEigenValues(h);
+        auto k = AllEigenValues(h.result);
         std::cout << "Eigen values are:" << std::endl;
         print_llc(k);
+        std::cout << "Iteration times is " << h.iteration_times << std::endl;
+        std::cout << "Time cost is " << h.time_cost.count() << " microseconds" << std::endl;
 
         std::cout << std::endl;
     }
