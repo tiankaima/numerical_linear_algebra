@@ -1,5 +1,5 @@
-#include "homeworks/homework_5.h"
+#include "homeworks/homework_6.h"
 
 int main() {
-    return homework_5();
+    return homework_6();
 }

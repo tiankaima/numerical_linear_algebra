@@ -28,6 +28,14 @@ set(SOURCE_FILES
         HouseholderMethod/HouseholderMethod.cpp
         IterationMethod/IterationMethod.h
         IterationMethod/IterationMethod.cpp
+        IterationMethod/PowerIteration.cpp
+        IterationMethod/PowerIteration.h
+        HouseholderMethod/HessenbergMethod.cpp
+        HouseholderMethod/HessenbergMethod.h
+        QRMethod/DoubleStepQRIteration.cpp
+        QRMethod/DoubleStepQRIteration.h
+        QRMethod/QRMethod.cpp
+        QRMethod/QRMethod.h
 )
 
 add_library(CustomMath_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})

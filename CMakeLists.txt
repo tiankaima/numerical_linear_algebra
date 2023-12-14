@@ -20,8 +20,8 @@ if (DEFINE_DEBUG)
 endif (DEFINE_DEBUG)
 
 set(SOURCE_FILES main.cpp
-        homeworks/homework_5.cpp
-        homeworks/homework_5.h)
+        homeworks/homework_6.cpp
+        homeworks/homework_6.h)
 add_executable(numerical_algebra ${SOURCE_FILES})
 include_directories(CustomMath_lib)
 target_link_libraries(numerical_algebra CustomMath_lib)

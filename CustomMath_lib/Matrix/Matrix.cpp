@@ -176,6 +176,20 @@ void Matrix::print() {
     std::cout << "]" << std::endl;
 }
 
+Matrix Matrix::clean() const {
+    auto result = Matrix(this->rows, this->cols);
+    for (ull i = 0; i < this->rows; i++) {
+        for (ull j = 0; j < this->cols; j++) {
+            if (std::fabs(this->matrix[i][j]) < 1e-10) {
+                result.matrix[i][j] = 0;
+            } else {
+                result.matrix[i][j] = this->matrix[i][j];
+            }
+        }
+    }
+    return result;
+}
+
 Matrix Matrix::operator+(const Matrix &other) const {
 #ifdef DEBUG
     if (this->rows != other.rows || this->cols != other.cols) {

@@ -70,6 +70,11 @@ public:
 
     void print();
 
+    /*
+     * @brief: clean the matrix, set all values smaller than 1e-10 to 0
+     */
+    Matrix clean() const;
+
     Matrix operator+(const Matrix &other) const;
 
     Matrix operator-(const Matrix &other) const;
