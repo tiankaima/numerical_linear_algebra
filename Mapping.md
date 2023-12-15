@@ -38,8 +38,6 @@
 
 [Cholesky_LDLT_Decomposition_InPlace](./CustomMath_lib/CholeskyMethod/Cholesky_Decomposition.cpp)
 
-------
-
 ## 2. 线性方程组的敏度分析与消去法的舍入误差分析
 
 ### 2.5 计算解的精度估计和迭代改进
@@ -48,8 +46,6 @@
 
 - 矩阵的 $1$ 范数估计：[MatrixNorm_1](./CustomMath_lib/InfinityNorm/InfinityNorm.h)
 - 矩阵 $A$ 对应的 $A^{-T}$ 的 $1$ 范数估计：[MatrixNorm_A_Inv_T_1](./CustomMath_lib/InfinityNorm/InfinityNorm.h)
-
-------
 
 ## 3. 最小二乘问题的解法
 
@@ -64,8 +60,6 @@
 #### 3.3.1 计算 QR 分解：Householder 方法
 
 [QR_Decomposition](./CustomMath_lib/HouseholderMethod/HouseholderMethod.cpp)
-
-------
 
 ## 4. 线性方程组的古典迭代法
 
@@ -83,8 +77,6 @@
 
 [SORIteration](./CustomMath_lib/IterationMethod/IterationMethod.cpp)
 
-------
-
 ## 5. 共轭梯度法
 
 ### 5.3 实用共轭梯度法及其收敛性
@@ -92,8 +84,6 @@
 #### 5.3.1 解对称正定线性方程组：实用共轭梯度法
 
 [ConjugateGradientMethod](./CustomMath_lib/IterationMethod/IterationMethod.cpp)
-
-------
 
 ## 6. 非对称特征值问题的计算方法
 
