@@ -19,9 +19,7 @@ if (DEFINE_DEBUG)
     add_definitions(-DDEBUG)
 endif (DEFINE_DEBUG)
 
-set(SOURCE_FILES main.cpp
-        Homeworks/homework_6.cpp
-        Homeworks/homework_6.h)
+set(SOURCE_FILES main.cpp)
 add_executable(numerical_algebra ${SOURCE_FILES})
 include_directories(CustomMath_lib)
 target_link_libraries(numerical_algebra CustomMath_lib)

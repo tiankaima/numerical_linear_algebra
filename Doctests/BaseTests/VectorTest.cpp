@@ -3,7 +3,7 @@
 //
 
 #include "CustomMath_lib.h"
-#include "doctest.h"
+#include "../doctest.h"
 
 TEST_CASE("Vector/Vector") {
     Vector vector;

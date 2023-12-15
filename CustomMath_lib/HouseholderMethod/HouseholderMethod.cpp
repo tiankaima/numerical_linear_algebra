@@ -110,7 +110,6 @@ void QR_Solve_InPlace(Matrix &A, Vector &b) {
     Vector d;
     auto v = Vector(A.rows);
     QR_Decomposition_InPlace(A, d);
-//    for (ull i = A.cols - 1; i != -1; i--) {
     for (ull i = 0; i < A.cols; i++) {
         v = Vector(A.rows, 0);
         v.array[i] = 1;
@@ -119,6 +118,7 @@ void QR_Solve_InPlace(Matrix &A, Vector &b) {
         }
         b = b - v * (v * b) * d.array[i];
     }
+    b = b.sub_vector(0, A.cols);
     UpperTriangleMatrix_Solve_InPlace(A.sub_matrix(0, A.cols, 0, A.cols), b);
 }
 

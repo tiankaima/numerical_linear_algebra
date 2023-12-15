@@ -3,7 +3,7 @@
 //
 
 #include "CustomMath_lib.h"
-#include "doctest.h"
+#include "../doctest.h"
 
 TEST_CASE("GaussMethod::LowerTriangleMatrix_Solve()") {
     Matrix A;

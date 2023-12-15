@@ -1,7 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
 #include "CustomMath_lib.h"
-#include "doctest.h"
+#include "../doctest.h"
 
 TEST_CASE("Matrix/MatrixGenerations)") {
     Matrix matrix;
@@ -206,7 +206,6 @@ TEST_CASE("Matrix/MatrixSubOperations") {
 
     m2 = Matrix("[1 2 3; 4 5 6; 7 8 9]");
     m2.set(0, 2, 1, 3, Matrix("[1 2; 3 4]"));
-    m2.print();
     CHECK_EQ(m2.matrix, std::vector<std::vector<lld>>({{1, 1, 2},
                                                        {4, 3, 4},
                                                        {7, 8, 9}}));
