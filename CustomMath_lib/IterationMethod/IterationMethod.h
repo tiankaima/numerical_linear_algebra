@@ -22,12 +22,16 @@ typedef struct {
     std::chrono::microseconds time_cost;
 } IterationMethodOutput;
 
+/// Solve Ax = b using Jacobi iteration method
 IterationMethodOutput JacobiIteration(const IterationMethodInput &input);
 
+/// Solve Ax = b using Gauss-Seidel iteration method
 IterationMethodOutput GaussSeidelIteration(const IterationMethodInput &input);
 
+/// Solve Ax = b using SOR iteration method
 IterationMethodOutput SORIteration(const IterationMethodInput &input, lld omega);
 
+/// Solve Ax = b using Conjugate Gradient iteration method
 IterationMethodOutput ConjugateGradientMethod(const IterationMethodInput &input);
 
 #endif //NUMERICAL_ALGEBRA_ITERATIONMETHOD_H

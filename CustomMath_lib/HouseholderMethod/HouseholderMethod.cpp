@@ -28,7 +28,14 @@ void HouseHolderMethod(const Vector &x, Vector &v, lld &beta) {
     }
 }
 
-void QRFactorization_InPlace(Matrix &A, Vector &d) {
+HouseHolder_Result HouseHolderMethod(const Vector &x) {
+    Vector v;
+    lld beta;
+    HouseHolderMethod(x, v, beta);
+    return {v, beta};
+}
+
+void QR_Decomposition_InPlace(Matrix &A, Vector &d) {
     ull m = A.rows;
     ull n = A.cols;
     ull k = std::min(m, n);
@@ -56,7 +63,7 @@ void QRFactorization_InPlace(Matrix &A, Vector &d) {
     }
 }
 
-void QRFactorization(const Matrix &A, Matrix &Q, Matrix &R) {
+void QR_Decomposition(const Matrix &A, Matrix &Q, Matrix &R) {
     ull m = A.rows;
     ull n = A.cols;
 //    Q = Matrix(n, m);
@@ -64,7 +71,7 @@ void QRFactorization(const Matrix &A, Matrix &Q, Matrix &R) {
 
     auto B = Matrix(A);
     Vector d;
-    QRFactorization_InPlace(B, d);
+    QR_Decomposition_InPlace(B, d);
 
     // save r as upper triangular matrix
     for (ull i = 0; i < n; i++) {
@@ -93,10 +100,16 @@ void QRFactorization(const Matrix &A, Matrix &Q, Matrix &R) {
     Q = tmp_Q.sub_matrix(0, n, 0, m);
 }
 
+QR_Decomposition_Result QR_Decomposition(const Matrix &A) {
+    Matrix Q, R;
+    QR_Decomposition(A, Q, R);
+    return {Q, R};
+}
+
 void QR_Solve_InPlace(Matrix &A, Vector &b) {
     Vector d;
     auto v = Vector(A.rows);
-    QRFactorization_InPlace(A, d);
+    QR_Decomposition_InPlace(A, d);
 //    for (ull i = A.cols - 1; i != -1; i--) {
     for (ull i = 0; i < A.cols; i++) {
         v = Vector(A.rows, 0);

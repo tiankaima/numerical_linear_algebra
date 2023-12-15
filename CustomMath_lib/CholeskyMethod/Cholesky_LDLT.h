@@ -7,8 +7,13 @@
 
 #include "CustomMath_lib.h"
 
+typedef struct {
+    Matrix L;
+    Matrix D;
+} Cholesky_LDLT_Result;
+
 /// Decomposition A = LDL^T, L is lower triangular, det(L) == 1, D is diagonal
-void Cholesky_LDLT_Decomposition(const Matrix &A, Matrix *L, Matrix *D);
+Cholesky_LDLT_Result Cholesky_LDLT_Decomposition(const Matrix &A);
 
 /// Solve Ax = b using Cholesky decomposition
 Vector Cholesky_LDLT_Solve(const Matrix &A, const Vector &b);

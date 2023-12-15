@@ -7,12 +7,22 @@
 
 #include "CustomMath_lib.h"
 
+typedef struct {
+    Matrix H;
+    Matrix P;
+} HessenbergMethod_Result;
+
+/// P^T A P = H, returns H, P
+HessenbergMethod_Result HessenbergMethod(const Matrix &A);
+
+/// P^T A P = H, returns H, P
+Matrix HessenbergMethod(const Matrix &A, Matrix &P);
+
+/// P^T A P = H, inplace returns H only
 void HessenbergMethod_Inplace(Matrix &A);
 
-Matrix HessenbergMethod(const Matrix &A);
+/// P^T A P = H, inplace returns H only, P passed in
+void HessenbergMethod_Inplace(Matrix &A, Matrix &P);
 
-void HessenbergMethod_Inplace(Matrix &A, Matrix &U);
-
-Matrix HessenbergMethod(const Matrix &A, Matrix &U);
 
 #endif //NUMERICAL_ALGEBRA_HESSENBERGMETHOD_H

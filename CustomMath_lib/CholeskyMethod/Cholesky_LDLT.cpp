@@ -27,29 +27,35 @@ void Cholesky_LDLT_Decomposition_InPlace(Matrix &A) {
 }
 
 
-void Cholesky_LDLT_Decomposition(const Matrix &A, Matrix *L, Matrix *D) {
+Cholesky_LDLT_Result Cholesky_LDLT_Decomposition(const Matrix &A) {
     CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
-    *L = Matrix(A);
-    Cholesky_LDLT_Decomposition_InPlace(*L);
+    auto L = Matrix(A);
+    Cholesky_LDLT_Decomposition_InPlace(L);
 
-    *D = Matrix(n, n);
+    auto D = Matrix(n, n);
     for (ull i = 0; i < n; i++) {
-        D->matrix[i][i] = L->matrix[i][i];
-        L->matrix[i][i] = 1;
+        D.matrix[i][i] = L.matrix[i][i];
+        L.matrix[i][i] = 1;
     }
     for (ull i = 0; i < n; i++) {
         for (ull j = i + 1; j < n; j++) {
-            D->matrix[i][i] *= L->matrix[j][j];
-            L->matrix[i][j] = 0;
+            D.matrix[i][i] *= L.matrix[j][j];
+            L.matrix[i][j] = 0;
         }
     }
+
+    return {L, D};
 }
 
 Vector Cholesky_LDLT_Solve(const Matrix &A, const Vector &b) {
-    Matrix L, D;
-    Cholesky_LDLT_Decomposition(A, &L, &D);
+    CHECK_SQUARE_MATRIX(A)
+
+    auto tmp = Cholesky_LDLT_Decomposition(A);
+    auto L = tmp.L;
+    auto D = tmp.D;
+
     Vector y = LowerTriangleMatrix_Solve(L, b);
     for (ull i = 0; i < A.rows; i++) {
         y.array[i] /= D.matrix[i][i];
@@ -59,6 +65,9 @@ Vector Cholesky_LDLT_Solve(const Matrix &A, const Vector &b) {
 }
 
 void Cholesky_LDLT_Solve_InPlace(Matrix &A, Vector &b) {
+    CHECK_SQUARE_MATRIX(A)
+    CHECK_EQUAL_SIZE(A, b)
+
     Cholesky_LDLT_Decomposition_InPlace(A);
     LowerTriangleMatrix_Solve_InPlace(A, b, true);
     for (ull i = 0; i < A.rows; i++) {

@@ -28,9 +28,9 @@ void HessenbergMethod_Inplace(Matrix &A) {
     }
 }
 
-void HessenbergMethod_Inplace(Matrix &A, Matrix &U) {
-    // init U here:
-    U = Matrix::identity(A.rows);
+void HessenbergMethod_Inplace(Matrix &A, Matrix &P) {
+    // init P here:
+    P = Matrix::identity(A.rows);
 
     auto n = A.rows;
     Vector v;
@@ -53,20 +53,21 @@ void HessenbergMethod_Inplace(Matrix &A, Matrix &U) {
         A_sub = A_sub - A_sub * w;
         A.set(0, n, k + 1, n, A_sub);
 
-        auto U_sub = U.sub_matrix(k + 1, n, 0, n);
+        auto U_sub = P.sub_matrix(k + 1, n, 0, n);
         U_sub = U_sub - w * U_sub;
-        U.set(k + 1, n, 0, n, U_sub);
+        P.set(k + 1, n, 0, n, U_sub);
     }
 }
 
-Matrix HessenbergMethod(const Matrix &A) {
+HessenbergMethod_Result HessenbergMethod(const Matrix &A) {
     auto result = A;
-    HessenbergMethod_Inplace(result);
-    return result.clean(); // clean the matrix
+    Matrix P;
+    HessenbergMethod_Inplace(result, P);
+    return {result.clean(), P.clean()}; // clean the matrix
 }
 
-Matrix HessenbergMethod(const Matrix &A, Matrix &U) {
+Matrix HessenbergMethod(const Matrix &A, Matrix &P) {
     auto result = A;
-    HessenbergMethod_Inplace(result, U);
+    HessenbergMethod_Inplace(result, P);
     return result.clean(); // clean the matrix
 }

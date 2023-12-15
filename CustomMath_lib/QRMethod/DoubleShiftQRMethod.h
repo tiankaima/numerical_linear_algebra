@@ -7,8 +7,10 @@
 
 #include "CustomMath_lib.h"
 
+/// P^T A P = H, returns H, P
 Matrix DoubleShiftQRMethod(const Matrix &matrix);
 
+/// P^T A P = H, returns H, P
 Matrix DoubleStepQRIteration(Matrix &matrix, Matrix &P);
 
 #endif //NUMERICAL_ALGEBRA_DOUBLESHIFTQRMETHOD_H

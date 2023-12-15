@@ -4,11 +4,8 @@
 
 #include "DoubleShiftQRMethod.h"
 
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
-#define MIN(a, b) ((a) < (b) ? (a) : (b))
-
 Matrix DoubleShiftQRMethod(const Matrix &matrix) {
-    auto H = HessenbergMethod(matrix);
+    auto H = HessenbergMethod(matrix).H;
 
     auto n = matrix.rows;
     auto m = n - 1;
@@ -61,7 +58,7 @@ Matrix DoubleStepQRIteration(Matrix &matrix, Matrix &P) {
     // init P:
     P = Matrix::identity(matrix.rows);
 
-    auto H = HessenbergMethod(matrix);
+    auto H = HessenbergMethod(matrix).H;
 
     auto n = matrix.rows;
     auto m = n - 1;

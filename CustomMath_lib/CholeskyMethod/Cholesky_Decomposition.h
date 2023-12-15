@@ -8,7 +8,7 @@
 #include "CustomMath_lib.h"
 
 /// Decomposition A = LL^T, L is lower triangular
-void Cholesky_Decomposition(const Matrix &A, Matrix &L);
+Matrix Cholesky_Decomposition(const Matrix &A);
 
 /// Solve Ax = b using Cholesky decomposition
 Vector Cholesky_Solve(const Matrix &A, const Vector &b);

@@ -19,14 +19,12 @@ typedef struct {
     std::chrono::microseconds time_cost;
 } PowerIterationOutput;
 
+/// \brief: Find the max eigenvalue for a matrix using power iteration method
 PowerIterationOutput PowerIteration(const PowerIterationInput &input);
 
-/*
- * @brief: Find the max root for a polynomial
- *
- * @param: coefficients: The coefficients of the polynomial, x^n + a_{1}x^{n-1} + ... + a_{n-1}x + a_{n} is assumed
- * @return: The max root for the polynomial
- */
+/// \brief: Find the max root for a polynomial using power iteration method
+/// \param: coefficients: The coefficients of the polynomial, x^n + a_{1}x^{n-1} + ... + a_{n-1}x + a_{n} is assumed
+/// \return: The max root for the polynomial
 PowerIterationOutput MaxRootForPolynomial(const Vector &coefficients);
 
 #endif //NUMERICAL_ALGEBRA_POWERITERATION_H
