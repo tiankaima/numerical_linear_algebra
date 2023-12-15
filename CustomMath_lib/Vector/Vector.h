@@ -7,22 +7,22 @@
 
 #include "base.h"
 
-class Matrix;
-
 class Vector {
 public:
     std::vector<lld> array;
     ull size;
 
+    /// 0
     Vector();
 
+    /// Copy constructor
     Vector(const Vector &other);
 
     explicit Vector(ull size);
 
-    Vector(ull size, lld default_value);
+    explicit Vector(ull size, lld default_value);
 
-    Vector(ull size, double lower_bound, double upper_bound);
+    explicit Vector(ull size, double lower_bound, double upper_bound);
 
     explicit Vector(const std::vector<lld> &array);
 
@@ -34,23 +34,23 @@ public:
 
     void print();
 
-    Vector operator+(const Vector &other) const;
+    [[nodiscard]] Vector operator+(const Vector &other) const;
 
-    Vector operator-(const Vector &other) const;
+    [[nodiscard]] Vector operator-(const Vector &other) const;
 
-    lld operator*(const Vector &other) const;
+    [[nodiscard]] lld operator*(const Vector &other) const;
 
-    Vector operator*(lld scalar) const;
+    [[nodiscard]] Vector operator*(lld scalar) const;
 
-    Vector operator/(lld scalar) const;
+    [[nodiscard]] Vector operator/(lld scalar) const;
 
-    Vector operator*(const Matrix &other) const;
-
-    bool operator==(const Vector &other) const;
+    [[nodiscard]] bool operator==(const Vector &other) const;
 
     [[nodiscard]] lld norm() const;
 };
 
 Vector sign(const Vector &vector);
+
+Vector operator*(lld scalar, const Vector &vector);
 
 #endif //NUMERICAL_ALGEBRA_VECTOR_H

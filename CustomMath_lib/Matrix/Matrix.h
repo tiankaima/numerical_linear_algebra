@@ -29,87 +29,138 @@ public:
     ull rows;
     ull cols;
 
+    /*
+     * MatrixGeneration:
+     */
+
+    /// 0 x 0
     Matrix();
 
-    Matrix(ull rows, ull cols);
-
-    Matrix(ull rows, ull cols, lld default_value);
-
-    /*
-     * Generate a matrix with random values in range [lower_bound, upper_bound]
-     */
-    Matrix(ull rows, ull cols, double lower_bound, double upper_bound);
-
-    // Copy constructor
+    /// Copy constructor
     Matrix(const Matrix &other);
 
+    /// rows x cols, 0
+    explicit Matrix(ull rows, ull cols);
+
+    /// rows x cols, default_value
+    explicit Matrix(ull rows, ull cols, lld default_value);
+
+    /// rows x cols, [lower_bound, upper_bound]
+    explicit Matrix(ull rows, ull cols, double lower_bound, double upper_bound);
+
+    /// 2d vector
     explicit Matrix(std::vector<std::vector<lld>> matrix);
 
-    /*
-     * Construct a matrix from a string in MATLAB format.
-     */
+    /// \warning this constructor is not robust / time-efficient
+    /// \param matlab_matrix matlab matrix string, e.g. "[1 2 3; 4 5 6; 7 8 9]"
     explicit Matrix(std::string matlab_matrix);
 
+    /// I_n
+    [[nodiscard]] static Matrix identity(ull n);
+
+    /// H_n
+    [[nodiscard]] static Matrix hilbert(ull n);
+
+    /// a_{ij} = default_value i <= j
+    [[nodiscard]] static Matrix UpperTriangular(ull n, lld default_value);
+
+    /// a_{ij} = default_value i >= j
+    [[nodiscard]] static Matrix LowerTriangular(ull n, lld default_value);
+
+    /// a_{ii} = default_value
+    [[nodiscard]] static Matrix Diagonal(ull n, lld default_value);
+
     /*
-     * extract a sub-matrix from the matrix
+     * MatrixSubOperations:
      */
+
+    /// Return a sub-matrix of the matrix [start, end) x [start, end), both use index that start from 0
     [[nodiscard]] Matrix sub_matrix(ull start_row, ull end_row, ull start_col, ull end_col) const;
 
+    /// Return only the diagonal elements of the matrix
     [[nodiscard]] Matrix sub_diagonal() const;
 
+    /// Return only the upper triangular elements of the matrix
     [[nodiscard]] Matrix sub_upperTriangle() const;
 
+    /// Return only the lower triangular elements of the matrix
     [[nodiscard]] Matrix sub_lowerTriangle() const;
 
+    /// Set the sub-matrix of the matrix [start, end) x [start, end), both use index that start from 0
+    /// \warning this is often used in conjunction with sub_matrix() to set a sub-matrix to another matrix
     void set(ull start_row, ull end_row, ull start_col, ull end_col, const Matrix &other);
 
+    /*
+     * MatrixProperties:
+     */
+
+    /// Print the matrix
     void print();
 
-    /*
-     * @brief: clean the matrix, set all values smaller than 1e-10 to 0
-     */
-    Matrix clean() const;
+    /// Return a clean matrix, i.e. all elements with absolute value less than 1e-10 are set to 0
+    [[nodiscard]] Matrix clean() const;
 
-    Matrix operator+(const Matrix &other) const;
-
-    Matrix operator-(const Matrix &other) const;
-
-    Matrix operator*(const Matrix &other) const;
-
+    /// A -> A^T
     [[nodiscard]] Matrix transpose() const;
 
-    /*
-     * Return the inverse of the matrix(supposing it is a diagonal matrix)
-     */
+    /// (a_{ii}) -> (1 / a_{ii})
     [[nodiscard]] Matrix diagonal_inverse() const;
 
-    Matrix operator*(lld scalar) const;
+    /// A == B
+    [[nodiscard]] bool operator==(const Matrix &other) const;
 
-    Matrix operator/(lld scalar) const;
-
-    Vector operator*(const Vector &other) const;
-
-    bool operator==(const Matrix &other) const;
-
+    /// A.rows == A.cols
     [[nodiscard]] bool isSquare() const;
 
+    /// (a_{ij}^2)^(1/2)
     [[nodiscard]] lld norm() const;
 
+    /// min{a_{ij}}
     [[nodiscard]] lld min() const;
 
+    /// max{a_{ij}}
     [[nodiscard]] lld max() const;
 
-    static Matrix identity(ull n); // Identity matrix
+    /*
+    * MatrixOperations:
+    */
 
-    static Matrix hilbert(ull n);
+    /// Add
+    /// \warning in DEBUG mode, function would check if two matrices have the same size.
+    /// \warning in RELEASE mode, it would just use this.rows and this.cols
+    [[nodiscard]] Matrix operator+(const Matrix &other) const;
 
-    static Matrix UpperTriangular(ull n, lld default_value);
+    /// Subtract
+    /// \warning in DEBUG mode, function would check if two matrices have the same size.
+    /// \warning in RELEASE mode, it would just use this.rows and this.cols
+    [[nodiscard]] Matrix operator-(const Matrix &other) const;
 
-    static Matrix LowerTriangular(ull n, lld default_value);
+    /// Multiply
+    /// \warning in DEBUG mode, function would check if two matrices can be multiplied.
+    /// \warning in RELEASE mode, it would just use this.rows and other.cols
+    [[nodiscard]] Matrix operator*(const Matrix &other) const;
 
-    static Matrix Diagonal(ull n, lld default_value);
+    /// A * lambda
+    [[nodiscard]] Matrix operator*(lld scalar) const;
+
+    /// A / lambda
+    [[nodiscard]] Matrix operator/(lld scalar) const;
+
+    /// A * x
+    [[nodiscard]] Vector operator*(const Vector &other) const;
 };
 
+/*
+ * MatrixOperations:
+ */
+
+/// v * w^T
 Matrix product(const Vector &array1, const Vector &array2);
+
+/// lambda * A
+Matrix operator*(lld scalar, const Matrix &matrix);
+
+/// v * A
+Vector operator*(const Vector &vector, const Matrix &matrix);
 
 #endif //NUMERICAL_ALGEBRA_MATRIX_H

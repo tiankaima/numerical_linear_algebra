@@ -16,7 +16,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-        Matrix/Matrix.cpp
+        Matrix/MatrixProperties.cpp
         Vector/Vector.cpp
         GaussMethod/TriangleMatrix.cpp
         GaussMethod/LU.cpp
@@ -38,6 +38,9 @@ set(SOURCE_FILES
         QRMethod/QRMethod.h
         CustomMath_lib.h
         base.h
+        Matrix/MatrixGenerations.cpp
+        Matrix/MatrixSubOperations.cpp
+        Matrix/MatrixOperations.cpp
 )
 
 add_library(CustomMath_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})
