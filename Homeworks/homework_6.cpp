@@ -10,7 +10,7 @@ void par_1_each(Vector &a) {
     std::cout << "Polynomial is ";
     a.print();
     std::cout << "Max root for polynomial is " << std::setprecision(10) << max_root.x << std::endl;
-    std::cout<< "Iteration times is " << max_root.iteration_times << std::endl;
+    std::cout << "Iteration times is " << max_root.iteration_times << std::endl;
     std::cout << "Time cost is " << max_root.time_cost.count() << " microseconds" << std::endl;
 }
 

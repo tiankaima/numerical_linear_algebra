@@ -20,11 +20,11 @@ if (DEFINE_DEBUG)
 endif (DEFINE_DEBUG)
 
 set(SOURCE_FILES main.cpp
-        homeworks/homework_6.cpp
-        homeworks/homework_6.h)
+        Homeworks/homework_6.cpp
+        Homeworks/homework_6.h)
 add_executable(numerical_algebra ${SOURCE_FILES})
 include_directories(CustomMath_lib)
 target_link_libraries(numerical_algebra CustomMath_lib)
 
 add_subdirectory(CustomMath_lib)
-add_subdirectory(Doctest_tests)
+add_subdirectory(Doctests)
