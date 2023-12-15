@@ -4,9 +4,9 @@ set(HEADER_FILES
         Matrix/Matrix.h
         Vector/Vector.h
         GaussMethod/TriangleMatrix.h
-        GaussMethod/LU.h
-        GaussMethod/LU_FP.h
-        GaussMethod/LU_PP.h
+        GaussMethod/LU_Decomposition.h
+        GaussMethod/LU_FP_Decomposition.h
+        GaussMethod/LU_PP_Decomposition.h
         CholeskyMethod/CholeskyMethod.h
         GaussMethod/GaussMethod.h
         CholeskyMethod/Cholesky.h
@@ -19,9 +19,9 @@ set(SOURCE_FILES
         Matrix/MatrixProperties.cpp
         Vector/Vector.cpp
         GaussMethod/TriangleMatrix.cpp
-        GaussMethod/LU.cpp
-        GaussMethod/LU_FP.cpp
-        GaussMethod/LU_PP.cpp
+        GaussMethod/LU_Decomposition.cpp
+        GaussMethod/LU_FP_Decomposition.cpp
+        GaussMethod/LU_PP_Decomposition.cpp
         CholeskyMethod/Cholesky.cpp
         CholeskyMethod/Cholesky_LDLT.cpp
         InfinityNorm/InfinityNorm.cpp

@@ -2,9 +2,9 @@
 // Created by tiankaima on 23-10-23.
 //
 
-#include "LU.h"
+#include "LU_Decomposition.h"
 
-void LU_Factorization_InPlace(Matrix &A) {
+void LU_Decomposition_InPlace(Matrix &A) {
     CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
@@ -20,31 +20,39 @@ void LU_Factorization_InPlace(Matrix &A) {
     }
 }
 
-void LU_Factorization(const Matrix &A, Matrix *L, Matrix *U) {
+void LU_Decomposition(const Matrix &A, Matrix &L, Matrix &U) {
     CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
-    *L = Matrix(n, n);
-    *U = Matrix(A);
-    LU_Factorization_InPlace(*U);
+    L = Matrix(n, n);
+    U = Matrix(A);
+    LU_Decomposition_InPlace(U);
 
     for (ull i = 0; i < n; i++) {
-        L->matrix[i][i] = 1;
+        L.matrix[i][i] = 1;
     }
 
     for (ull i = 0; i < n; i++) {
         for (ull j = 0; j < i; j++) {
-            L->matrix[i][j] = U->matrix[i][j];
-            U->matrix[i][j] = 0;
+            L.matrix[i][j] = U.matrix[i][j];
+            U.matrix[i][j] = 0;
         }
     }
+}
+
+LU_Decomposition_Result LU_Decomposition(const Matrix &A) {
+    CHECK_SQUARE_MATRIX(A)
+
+    Matrix L, U;
+    LU_Decomposition(A, L, U);
+    return {L, U};
 }
 
 void LU_Solve_InPlace(Matrix &A, Vector &b) {
     CHECK_SQUARE_MATRIX(A)
     CHECK_EQUAL_SIZE(A, b)
 
-    LU_Factorization_InPlace(A);
+    LU_Decomposition_InPlace(A);
     LowerTriangleMatrix_Solve_InPlace(A, b, true);
     UpperTriangleMatrix_Solve_InPlace(A, b);
 }

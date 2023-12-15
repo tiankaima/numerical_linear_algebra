@@ -140,8 +140,8 @@ Gauss消去法的实现在 `CustomMath_lib/GaussMethod.cpp` 中，包括:
 
 其中教材上提供的“节省存储空间的方法”不符合正常编写习惯，所以相应函数做了一层封装，例如$L U$分解的实现：
 
-- `void LU_Factorization_InPlace(Matrix *A);` 直接在原矩阵上进行分解
-- `void LU_Factorization(const Matrix &A, Matrix *L, Matrix *U);` 将分解结果存储在两个矩阵中，同时不修改原矩阵
+- `void LU_Decomposition_InPlace(Matrix *A);` 直接在原矩阵上进行分解
+- `void LU_Decomposition(const Matrix &A, Matrix *L, Matrix *U);` 将分解结果存储在两个矩阵中，同时不修改原矩阵
 
 而在实现上后者直接复用了前者的逻辑，因此无需做两次测试。
 
