@@ -47,7 +47,7 @@ TEST_CASE("GaussMethod::LU_FP_Decomposition()") {
     Matrix A, L, U, P, Q;
     A = Matrix("[-2 10 2; 6 0 4; 4 10 8]");
 
-    LU_FP_Decomposition(A, &L, &U, &P, &Q);
+    LU_FP_Decomposition(A, L, U, P, Q);
 
     Matrix PAQ = P * A * Q;
     Matrix LU = L * U;
@@ -60,7 +60,7 @@ TEST_CASE("GaussMethod::LU_PP_Decomposition()") {
     Matrix A, L, U, P;
 
     A = Matrix("[-2 10 2; 6 0 4; 4 10 8]");
-    LU_PP_Decomposition(A, &L, &U, &P);
+    LU_PP_Decomposition(A, L, U, P);
 
     Matrix PA = P * A;
     Matrix LU = L * U;

@@ -1,6 +1,6 @@
 # Mapping
 
-此文档记录了教材《数值线性代数（第2版） 徐树方、高立、张平文》中算法与代码的对应关系。
+此文档记录了教材《数值线性代数（第 2 版） 徐树方、高立、张平文》中算法与代码的对应关系。
 
 ## 1. 线性方程组的直接解法
 
@@ -14,16 +14,48 @@
 
 [UpperTriangleMatrix_Solve_InPlace](./CustomMath_lib/GaussMethod/TriangleMatrix.cpp)
 
-#### 1.1.3 计算三角分解：Gauss消去法
+#### 1.1.3 计算三角分解：Gauss 消去法
 
 [LU_Decomposition_InPlace](./CustomMath_lib/GaussMethod/LU_Decomposition.cpp)
 
 ### 1.2 选主元三角分解
 
-#### 1.2.1 计算全主元三角分解：全主元Gauss消去法
+#### 1.2.1 计算全主元三角分解：全主元 Gauss 消去法
 
 [LU_FP_Decomposition_InPlace](./CustomMath_lib/GaussMethod/LU_FP_Decomposition.cpp)
 
-#### 1.2.2 计算列主元三角分解：列主元Gauss消去法
+#### 1.2.2 计算列主元三角分解：列主元 Gauss 消去法
 
 [LU_PP_Decomposition_InPlace](./CustomMath_lib/GaussMethod/LU_PP_Decomposition.cpp)
+
+### 1.3 平方根法
+
+#### 1.3.1 计算 Cholesky 分解：平方根法
+
+[Cholesky_Decomposition_InPlace](./CustomMath_lib/CholeskyMethod/Cholesky_Decomposition.cpp)
+
+#### 1.3.2 计算 $LDL^T$ 分解：改进的平方根法
+
+[Cholesky_LDLT_Decomposition_InPlace](./CustomMath_lib/CholeskyMethod/Cholesky_Decomposition.cpp)
+
+------
+
+## 2. 线性方程组的敏度分析与消去法的舍入误差分析
+
+### 2.5 计算解的精度估计和迭代改进
+
+#### 2.5.1 估计矩阵的 $1$ 范数：优化法
+
+- 矩阵的 $1$ 范数估计：[MatrixNorm_1](./CustomMath_lib/InfinityNorm/InfinityNorm.h)
+- 矩阵 $A$ 对应的 $A^{-T}$ 的 $1$ 范数估计：[MatrixNorm_A_Inv_T_1](./CustomMath_lib/InfinityNorm/InfinityNorm.h)
+
+
+------
+
+## 3. 最小二乘问题的解法
+
+### 3.2 初等正交变换
+
+#### 3.2.1 计算 Householder 变换
+
+[HouseHolderMethod](./CustomMath_lib/HouseholderMethod/HouseholderMethod.cpp)

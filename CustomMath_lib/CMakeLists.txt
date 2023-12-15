@@ -9,7 +9,7 @@ set(HEADER_FILES
         GaussMethod/LU_PP_Decomposition.h
         CholeskyMethod/CholeskyMethod.h
         GaussMethod/GaussMethod.h
-        CholeskyMethod/Cholesky.h
+        CholeskyMethod/Cholesky_Decomposition.h
         CholeskyMethod/Cholesky_LDLT.h
         InfinityNorm/InfinityNorm.h
         HouseholderMethod/HouseholderMethod.h
@@ -22,7 +22,7 @@ set(SOURCE_FILES
         GaussMethod/LU_Decomposition.cpp
         GaussMethod/LU_FP_Decomposition.cpp
         GaussMethod/LU_PP_Decomposition.cpp
-        CholeskyMethod/Cholesky.cpp
+        CholeskyMethod/Cholesky_Decomposition.cpp
         CholeskyMethod/Cholesky_LDLT.cpp
         InfinityNorm/InfinityNorm.cpp
         HouseholderMethod/HouseholderMethod.cpp

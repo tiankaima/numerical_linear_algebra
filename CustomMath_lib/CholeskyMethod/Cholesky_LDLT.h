@@ -7,12 +7,16 @@
 
 #include "CustomMath_lib.h"
 
-void Cholesky_LDLT_Factorization(const Matrix &A, Matrix *L, Matrix *D);
+/// Decomposition A = LDL^T, L is lower triangular, det(L) == 1, D is diagonal
+void Cholesky_LDLT_Decomposition(const Matrix &A, Matrix *L, Matrix *D);
 
-void Cholesky_LDLT_Factorization_InPlace(Matrix &A);
-
+/// Solve Ax = b using Cholesky decomposition
 Vector Cholesky_LDLT_Solve(const Matrix &A, const Vector &b);
 
+/// Decomposition A = LDL^T, L is lower triangular, D is diagonal, and L and D are directly stored in A
+void Cholesky_LDLT_Decomposition_InPlace(Matrix &A);
+
+/// Solve Ax = b using Cholesky decomposition, b is then replaced by x
 void Cholesky_LDLT_Solve_InPlace(Matrix &A, Vector &b);
 
 #endif //NUMERICAL_ALGEBRA_CHOLESKY_LDLT_H

@@ -68,7 +68,7 @@ LU_PP_Decomposition_Result LU_PP_Decomposition(const Matrix &A) {
 
     Matrix L, U, P;
     LU_PP_Decomposition(A, L, U, P);
-    return LU_PP_Decomposition_Result(L, U, P);
+    return {L, U, P};
 }
 
 void LU_PP_Solve_InPlace(Matrix &A, Vector &b) {

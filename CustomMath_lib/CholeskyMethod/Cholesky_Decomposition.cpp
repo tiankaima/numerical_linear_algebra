@@ -2,9 +2,9 @@
 // Created by tiankaima on 23-10-23.
 //
 
-#include "Cholesky.h"
+#include "Cholesky_Decomposition.h"
 
-void CholeskyFactorization_InPlace(Matrix &A) {
+void Cholesky_Decomposition_InPlace(Matrix &A) {
     CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
@@ -27,30 +27,30 @@ void CholeskyFactorization_InPlace(Matrix &A) {
     }
 }
 
-void CholeskyFactorization(const Matrix &A, Matrix *L) {
+void Cholesky_Decomposition(const Matrix &A, Matrix &L) {
     CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
-    *L = Matrix(A);
-    CholeskyFactorization_InPlace(*L);
+    L = Matrix(A);
+    Cholesky_Decomposition_InPlace(L);
 
     for (ull i = 0; i < n; i++) {
         for (ull j = i + 1; j < n; j++) {
-            L->matrix[i][j] = 0;
+            L.matrix[i][j] = 0;
         }
     }
 }
 
 Vector Cholesky_Solve(const Matrix &A, const Vector &b) {
     Matrix L;
-    CholeskyFactorization(A, &L);
+    Cholesky_Decomposition(A, L);
     Vector y = LowerTriangleMatrix_Solve(L, b);
     Vector x = UpperTriangleMatrix_Solve(L.transpose(), y);
     return x;
 }
 
 void Cholesky_Solve_InPlace(Matrix &A, Vector &b) {
-    CholeskyFactorization_InPlace(A);
+    Cholesky_Decomposition_InPlace(A);
     LowerTriangleMatrix_Solve_InPlace(A, b);
     UpperTriangleMatrix_Solve_InPlace(A.transpose(), b);
 }

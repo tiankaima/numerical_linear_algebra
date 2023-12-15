@@ -4,7 +4,7 @@
 
 #include "Cholesky_LDLT.h"
 
-void Cholesky_LDLT_Factorization_InPlace(Matrix &A) {
+void Cholesky_LDLT_Decomposition_InPlace(Matrix &A) {
     CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
@@ -27,12 +27,12 @@ void Cholesky_LDLT_Factorization_InPlace(Matrix &A) {
 }
 
 
-void Cholesky_LDLT_Factorization(const Matrix &A, Matrix *L, Matrix *D) {
+void Cholesky_LDLT_Decomposition(const Matrix &A, Matrix *L, Matrix *D) {
     CHECK_SQUARE_MATRIX(A)
 
     ull n = A.rows;
     *L = Matrix(A);
-    Cholesky_LDLT_Factorization_InPlace(*L);
+    Cholesky_LDLT_Decomposition_InPlace(*L);
 
     *D = Matrix(n, n);
     for (ull i = 0; i < n; i++) {
@@ -49,7 +49,7 @@ void Cholesky_LDLT_Factorization(const Matrix &A, Matrix *L, Matrix *D) {
 
 Vector Cholesky_LDLT_Solve(const Matrix &A, const Vector &b) {
     Matrix L, D;
-    Cholesky_LDLT_Factorization(A, &L, &D);
+    Cholesky_LDLT_Decomposition(A, &L, &D);
     Vector y = LowerTriangleMatrix_Solve(L, b);
     for (ull i = 0; i < A.rows; i++) {
         y.array[i] /= D.matrix[i][i];
@@ -59,7 +59,7 @@ Vector Cholesky_LDLT_Solve(const Matrix &A, const Vector &b) {
 }
 
 void Cholesky_LDLT_Solve_InPlace(Matrix &A, Vector &b) {
-    Cholesky_LDLT_Factorization_InPlace(A);
+    Cholesky_LDLT_Decomposition_InPlace(A);
     LowerTriangleMatrix_Solve_InPlace(A, b, true);
     for (ull i = 0; i < A.rows; i++) {
         b.array[i] /= A.matrix[i][i];
