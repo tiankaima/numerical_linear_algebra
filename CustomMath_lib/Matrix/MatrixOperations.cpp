@@ -109,22 +109,6 @@ Vector operator*(const Vector &vector, const Matrix &matrix) {
     return result;
 }
 
-Vector operator*(const Matrix &matrix, const Vector &vector) {
-#ifdef DEBUG
-    if (matrix.cols != vector.size) {
-        throw std::invalid_argument("Matrix dimensions must agree.");
-    }
-#endif
-
-    auto result = Vector(matrix.rows);
-    for (ull i = 0; i < matrix.rows; i++) {
-        for (ull j = 0; j < vector.size; j++) {
-            result.array[i] += matrix.matrix[i][j] * vector.array[j];
-        }
-    }
-    return result;
-}
-
 Matrix product(const Vector &array1, const Vector &array2) {
     auto result = Matrix(array1.size, array2.size);
     for (ull i = 0; i < array1.size; i++) {
@@ -133,4 +117,8 @@ Matrix product(const Vector &array1, const Vector &array2) {
         }
     }
     return result;
+}
+
+Matrix operator*(lld scalar, const Matrix &matrix) {
+    return matrix * scalar;
 }

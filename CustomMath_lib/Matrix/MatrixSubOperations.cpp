@@ -9,6 +9,10 @@ Matrix Matrix::sub_matrix(ull start_row, ull end_row, ull start_col, ull end_col
     if (end_row < start_row || end_col < start_col) {
         throw std::invalid_argument("Invalid sub_matrix size.");
     }
+
+    if (end_row > this->rows || end_col > this->cols) {
+        throw std::invalid_argument("Invalid index.");
+    }
 #endif
 
     auto result = Matrix(end_row - start_row, end_col - start_col);
@@ -68,6 +72,14 @@ Matrix Matrix::sub_lowerTriangle() const {
 
 void Matrix::set(ull start_row, ull end_row, ull start_col, ull end_col, const Matrix &other) {
 #ifdef DEBUG
+    if (end_row < start_row || end_col < start_col) {
+        throw std::invalid_argument("Invalid sub_matrix size.");
+    }
+
+    if (end_row > this->rows || end_col > this->cols) {
+        throw std::invalid_argument("Invalid index.");
+    }
+
     if (end_row - start_row != other.rows || end_col - start_col != other.cols) {
         throw std::invalid_argument("Invalid sub_matrix size.");
     }

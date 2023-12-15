@@ -80,10 +80,10 @@ public:
     /// Return only the diagonal elements of the matrix
     [[nodiscard]] Matrix sub_diagonal() const;
 
-    /// Return only the upper triangular elements of the matrix
+    /// Return only the upper triangular elements of the matrix (not including the diagonal elements)
     [[nodiscard]] Matrix sub_upperTriangle() const;
 
-    /// Return only the lower triangular elements of the matrix
+    /// Return only the lower triangular elements of the matrix (not including the diagonal elements)
     [[nodiscard]] Matrix sub_lowerTriangle() const;
 
     /// Set the sub-matrix of the matrix [start, end) x [start, end), both use index that start from 0

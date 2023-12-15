@@ -19,4 +19,6 @@
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
+bool cmp(lld a, lld b);
+
 #endif //NUMERICAL_ALGEBRA_BASE_H
