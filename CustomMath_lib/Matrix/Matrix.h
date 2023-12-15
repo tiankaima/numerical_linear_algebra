@@ -87,7 +87,7 @@ public:
     [[nodiscard]] Matrix sub_lowerTriangle() const;
 
     /// Set the sub-matrix of the matrix [start, end) x [start, end), both use index that start from 0
-    /// \warning this is often used in conjunction with sub_matrix() to set a sub-matrix to another matrix
+    /// \warning this is often used in conjunction with sub_matrix()
     void set(ull start_row, ull end_row, ull start_col, ull end_col, const Matrix &other);
 
     /*
@@ -112,7 +112,7 @@ public:
     /// A.rows == A.cols
     [[nodiscard]] bool isSquare() const;
 
-    /// (a_{ij}^2)^(1/2)
+    /// 2-norm
     [[nodiscard]] lld norm() const;
 
     /// min{a_{ij}}

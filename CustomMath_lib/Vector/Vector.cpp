@@ -157,6 +157,10 @@ lld Vector::operator*(const Vector &other) const {
     return result;
 }
 
+Vector operator*(lld scalar, const Vector &vector) {
+    return vector * scalar;
+}
+
 bool Vector::operator==(const Vector &other) const {
     if (this->size != other.size) {
         return false;
