@@ -95,6 +95,8 @@ QRMethodOutput<Matrix> QRMethod(const Matrix &matrix) {
         H.set(l, n - m, n - m, n, H23);
 
     }
+
+    throw std::runtime_error("QRMethod: iteration times exceed maximum");
 }
 
 QRMethodOutput<Vector> AllRootsForPolynomial(const Vector &coefficients) {

@@ -5,13 +5,8 @@
 #ifndef NUMERICAL_ALGEBRA_MATRIX_H
 #define NUMERICAL_ALGEBRA_MATRIX_H
 
-#include "vector"
-#include "random"
+#include "base.h"
 #include "Vector/Vector.h"
-#include "string"
-#include "iostream"
-#include "Vector/Vector.h"
-#include "cmath"
 
 #ifdef DEBUG
 #define CHECK_SQUARE_MATRIX(matrix) \

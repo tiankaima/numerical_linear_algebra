@@ -5,10 +5,7 @@
 #ifndef NUMERICAL_ALGEBRA_INFINITYNORM_H
 #define NUMERICAL_ALGEBRA_INFINITYNORM_H
 
-#include "Vector/Vector.h"
-#include "Matrix/Matrix.h"
-#include "GaussMethod/GaussMethod.h"
-#include "CholeskyMethod/CholeskyMethod.h"
+#include "CustomMath_lib.h"
 
 lld MatrixNorm_Infinity(const Matrix &A);
 

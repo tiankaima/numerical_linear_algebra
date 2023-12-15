@@ -5,10 +5,7 @@
 #ifndef NUMERICAL_ALGEBRA_TRIANGLEMATRIX_H
 #define NUMERICAL_ALGEBRA_TRIANGLEMATRIX_H
 
-#include "iostream"
-#include "vector"
-#include "Vector/Vector.h"
-#include "Matrix/Matrix.h"
+#include "CustomMath_lib.h"
 
 /*
  * Solve Lx = b

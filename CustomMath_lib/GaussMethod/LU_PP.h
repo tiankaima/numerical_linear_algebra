@@ -5,11 +5,7 @@
 #ifndef NUMERICAL_ALGEBRA_LU_PP_H
 #define NUMERICAL_ALGEBRA_LU_PP_H
 
-#include "iostream"
-#include "vector"
-#include "Vector/Vector.h"
-#include "Matrix/Matrix.h"
-#include "GaussMethod/TriangleMatrix.h"
+#include "CustomMath_lib.h"
 
 /*
  * LU factorization with partial pivoting

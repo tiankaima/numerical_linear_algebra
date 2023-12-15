@@ -5,14 +5,7 @@
 #ifndef NUMERICAL_ALGEBRA_VECTOR_H
 #define NUMERICAL_ALGEBRA_VECTOR_H
 
-#include "vector"
-#include "string"
-#include "random"
-#include "iostream"
-#include "cmath"
-
-#define ull unsigned long long
-#define lld long double
+#include "base.h"
 
 class Matrix;
 

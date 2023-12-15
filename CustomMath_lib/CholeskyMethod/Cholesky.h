@@ -5,12 +5,7 @@
 #ifndef NUMERICAL_ALGEBRA_CHOLESKY_H
 #define NUMERICAL_ALGEBRA_CHOLESKY_H
 
-#include "vector"
-#include "Vector/Vector.h"
-#include "Matrix/Matrix.h"
-#include "iostream"
-#include "cmath"
-#include "GaussMethod/TriangleMatrix.h"
+#include "CustomMath_lib.h"
 
 void CholeskyFactorization(const Matrix &A, Matrix *L);
 

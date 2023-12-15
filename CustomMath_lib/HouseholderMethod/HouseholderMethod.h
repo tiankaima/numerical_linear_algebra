@@ -5,9 +5,7 @@
 #ifndef NUMERICAL_ALGEBRA_HOUSEHOLDERMETHOD_H
 #define NUMERICAL_ALGEBRA_HOUSEHOLDERMETHOD_H
 
-#include "Vector/Vector.h"
-#include "Matrix/Matrix.h"
-#include "InfinityNorm/InfinityNorm.h"
+#include "CustomMath_lib.h"
 
 void HouseHolderMethod(const Vector &x, Vector &v, lld &beta);
 

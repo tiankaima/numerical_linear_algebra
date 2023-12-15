@@ -5,8 +5,7 @@
 #ifndef NUMERICAL_ALGEBRA_HOMEWORK_3_DATA_H
 #define NUMERICAL_ALGEBRA_HOMEWORK_3_DATA_H
 
-#include "Vector/Vector.h"
-#include "Matrix/Matrix.h"
+#include "CustomMath_lib.h"
 
 // Q1:
 

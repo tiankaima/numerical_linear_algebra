@@ -5,9 +5,7 @@
 #ifndef NUMERICAL_ALGEBRA_HESSENBERGMETHOD_H
 #define NUMERICAL_ALGEBRA_HESSENBERGMETHOD_H
 
-#include "Matrix/Matrix.h"
-#include "Vector/Vector.h"
-#include "HouseholderMethod/HouseholderMethod.h"
+#include "CustomMath_lib.h"
 
 void HessenbergMethod_Inplace(Matrix &A);
 

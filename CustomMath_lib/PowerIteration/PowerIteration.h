@@ -5,10 +5,7 @@
 #ifndef NUMERICAL_ALGEBRA_POWERITERATION_H
 #define NUMERICAL_ALGEBRA_POWERITERATION_H
 
-#include "Matrix/Matrix.h"
-#include "Vector/Vector.h"
-#include "chrono"
-#include "InfinityNorm/InfinityNorm.h"
+#include "CustomMath_lib.h"
 
 typedef struct {
     const Matrix &A;

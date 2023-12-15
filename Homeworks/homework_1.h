@@ -5,14 +5,7 @@
 #ifndef NUMERICAL_ALGEBRA_HOMEWORK_1_H
 #define NUMERICAL_ALGEBRA_HOMEWORK_1_H
 
-#include "iostream"
-#include "vector"
-#include "string"
-#include "GaussMethod/GaussMethod.h"
-#include "CholeskyMethod/CholeskyMethod.h"
-#include "Matrix/Matrix.h"
-#include "Vector/Vector.h"
-#include "chrono"
+#include "CustomMath_lib.h"
 
 int homework_1();
 

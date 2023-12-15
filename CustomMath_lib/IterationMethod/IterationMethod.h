@@ -5,10 +5,7 @@
 #ifndef NUMERICAL_ALGEBRA_ITERATIONMETHOD_H
 #define NUMERICAL_ALGEBRA_ITERATIONMETHOD_H
 
-#include "Vector/Vector.h"
-#include "Matrix/Matrix.h"
-#include "chrono"
-#include "GaussMethod/GaussMethod.h"
+#include "CustomMath_lib.h"
 
 #define ITERATION_METHOD_MAX_ITERATION 100000
 

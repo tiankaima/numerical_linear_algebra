@@ -2,12 +2,12 @@
 // Created by TianKai Ma on 2023/12/14.
 //
 
-#include "DoubleStepQRIteration.h"
+#include "DoubleShiftQRMethod.h"
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-Matrix DoubleStepQRIteration(const Matrix &matrix) {
+Matrix DoubleShiftQRMethod(const Matrix &matrix) {
     auto H = HessenbergMethod(matrix);
 
     auto n = matrix.rows;

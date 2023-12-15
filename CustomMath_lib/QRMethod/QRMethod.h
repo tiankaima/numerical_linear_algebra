@@ -5,12 +5,8 @@
 #ifndef NUMERICAL_ALGEBRA_QRMETHOD_H
 #define NUMERICAL_ALGEBRA_QRMETHOD_H
 
-#include "Matrix/Matrix.h"
-#include "Vector/Vector.h"
-#include "chrono"
-#include "HouseholderMethod/HouseholderMethod.h"
-#include "DoubleStepQRIteration.h"
-#include "HouseholderMethod/HessenbergMethod.h"
+#include "DoubleShiftQRMethod.h"
+#include "CustomMath_lib.h"
 
 typedef struct {
     lld real;
