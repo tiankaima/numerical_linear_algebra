@@ -2,6 +2,10 @@
 
 此 Repo 存放着 USTC `2023Fall.001125.01` 数值代数课程的作业。
 
+## Mapping
+
+关于教材中算法与代码的对应关系，请参考 [Mapping.md](./Mapping.md)。
+
 ## License
 
 This work © 2023 by Tiankai Ma is licensed under Attribution-NonCommercial 4.0 International (CC BY-NC 4.0). To view a
