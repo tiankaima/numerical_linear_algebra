@@ -39,7 +39,6 @@ QRMethodOutput<Matrix> QRMethod(const Matrix &matrix) {
 
         ull m = 0;
         ull k = 0;
-        ull l = 0;
 
         for (ull i = H.rows - 1; i != -1; i--) {
             if (i != 0) {
@@ -67,7 +66,7 @@ QRMethodOutput<Matrix> QRMethod(const Matrix &matrix) {
                 }
             }
         }
-        l = n - m - k;
+        auto l = n - m - k;
 
         if (m == n || n - m - l <= 2) {
             ITERATION_METHOD_TIMING_END
@@ -160,7 +159,7 @@ std::vector<llc> AllEigenValues(const Matrix &R) {
     return result;
 }
 
-void print_llc(const std::vector<llc> vec) {
+void print_llc(const std::vector<llc>& vec) {
     for (auto i: vec) {
         std::cout << i.real << " + " << i.complex << "i" << std::endl;
     }
