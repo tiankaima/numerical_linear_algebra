@@ -2,7 +2,7 @@
 // Created by TianKai Ma on 2023/12/14.
 //
 
-#include "homework_6.h"
+#include "CustomMath_lib.h"
 
 void par_1_each(Vector &a) {
     auto max_root = MaxRootForPolynomial(a);

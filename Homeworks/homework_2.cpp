@@ -2,7 +2,7 @@
 // Created by tiankaima on 23-10-24.
 //
 
-#include "homework_2.h"
+#include "CustomMath_lib.h"
 
 void homework_2_par_1() {
 #ifdef DEBUG

@@ -2,7 +2,8 @@
 // Created by tiankaima on 23-11-2.
 //
 
-#include "homework_3.h"
+#include "CustomMath_lib.h"
+#include "homework_3_data.h"
 
 #define TEST_START auto start = std::chrono::high_resolution_clock::now();
 

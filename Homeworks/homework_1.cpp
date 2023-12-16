@@ -2,8 +2,7 @@
 // Created by tiankaima on 23-10-5.
 //
 
-#include <cfloat>
-#include "homework_1.h"
+#include "CustomMath_lib.h"
 
 #define TEST_START auto start = std::chrono::high_resolution_clock::now();
 #define TEST_END auto end = std::chrono::high_resolution_clock::now(); \
