@@ -10,28 +10,24 @@
 #define ITERATION_METHOD_MAX_ITERATION 100000
 
 typedef struct {
-    Matrix A;
-    Vector b;
-    Vector x_default;
+    const Matrix &A;
+    const Vector &b;
+    const Vector &x_default;
     lld precision_requirement;
 } IterationMethodInput;
 
-typedef struct {
-    Vector x;
-    int iteration_count;
-    std::chrono::microseconds time_cost;
-} IterationMethodOutput;
+using VIterationMethodOutput = IterationMethodOutput<Vector>;
 
 /// Solve Ax = b using Jacobi iteration method
-IterationMethodOutput JacobiIteration(const IterationMethodInput &input);
+VIterationMethodOutput JacobiIteration(const IterationMethodInput &input);
 
 /// Solve Ax = b using Gauss-Seidel iteration method
-IterationMethodOutput GaussSeidelIteration(const IterationMethodInput &input);
+VIterationMethodOutput GaussSeidelIteration(const IterationMethodInput &input);
 
 /// Solve Ax = b using SOR iteration method
-IterationMethodOutput SORIteration(const IterationMethodInput &input, lld omega);
+VIterationMethodOutput SORIteration(const IterationMethodInput &input, lld omega);
 
 /// Solve Ax = b using Conjugate Gradient iteration method
-IterationMethodOutput ConjugateGradientMethod(const IterationMethodInput &input);
+VIterationMethodOutput ConjugateGradientMethod(const IterationMethodInput &input);
 
 #endif //NUMERICAL_ALGEBRA_ITERATIONMETHOD_H

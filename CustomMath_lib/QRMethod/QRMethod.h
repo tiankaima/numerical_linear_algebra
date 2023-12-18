@@ -13,17 +13,12 @@ typedef struct {
     lld complex;
 } llc;
 
-template<typename T>
-struct QRMethodOutput {
-    T result;
-    int iteration_times;
-    std::chrono::microseconds time_cost;
-};
+using MIterationMethodOutput = IterationMethodOutput<Matrix>;
+using VIterationMethodOutput = IterationMethodOutput<Vector>;
 
+MIterationMethodOutput QRMethod(const Matrix &matrix);
 
-QRMethodOutput<Matrix> QRMethod(const Matrix &matrix);
-
-QRMethodOutput<Vector> AllRootsForPolynomial(const Vector &coefficients);
+VIterationMethodOutput AllRootsForPolynomial(const Vector &coefficients);
 
 std::vector<llc> AllEigenValues(const Matrix &R);
 

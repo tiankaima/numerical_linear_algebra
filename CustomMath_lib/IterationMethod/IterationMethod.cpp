@@ -17,7 +17,7 @@
 #define ITERATION_METHOD_RETURN_DURATION std::chrono::microseconds(0)
 #endif
 
-IterationMethodOutput JacobiIteration(const IterationMethodInput &input) {
+VIterationMethodOutput JacobiIteration(const IterationMethodInput &input) {
     auto A = input.A;
     auto x = input.x_default;
     auto D = A.sub_diagonal();
@@ -48,7 +48,7 @@ IterationMethodOutput JacobiIteration(const IterationMethodInput &input) {
     throw std::invalid_argument("JacobiIteration: iteration count exceeds ITERATION_METHOD_MAX_ITERATION");
 }
 
-IterationMethodOutput GaussSeidelIteration(const IterationMethodInput &input) {
+VIterationMethodOutput GaussSeidelIteration(const IterationMethodInput &input) {
     auto A = input.A;
     auto x = input.x_default;
     auto D = A.sub_diagonal();
@@ -77,7 +77,7 @@ IterationMethodOutput GaussSeidelIteration(const IterationMethodInput &input) {
     throw std::invalid_argument("GaussSeidelIteration: iteration count exceeds ITERATION_METHOD_MAX_ITERATION");
 }
 
-IterationMethodOutput SORIteration(const IterationMethodInput &input, lld omega) {
+VIterationMethodOutput SORIteration(const IterationMethodInput &input, lld omega) {
     auto A = input.A;
     auto x = input.x_default;
     auto D = A.sub_diagonal();
@@ -107,7 +107,7 @@ IterationMethodOutput SORIteration(const IterationMethodInput &input, lld omega)
     throw std::invalid_argument("SORIteration: iteration count exceeds ITERATION_METHOD_MAX_ITERATION");
 }
 
-IterationMethodOutput ConjugateGradientMethod(const IterationMethodInput &input) {
+VIterationMethodOutput ConjugateGradientMethod(const IterationMethodInput &input) {
     auto A = input.A;
     auto x = input.x_default;
     auto r = input.b - A * x;

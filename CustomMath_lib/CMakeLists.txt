@@ -41,6 +41,8 @@ set(SOURCE_FILES
         Matrix/MatrixGenerations.cpp
         Matrix/MatrixSubOperations.cpp
         Matrix/MatrixOperations.cpp
+        JacobiMethod/JacobiMethod.cpp
+        JacobiMethod/JacobiMethod.h
 )
 
 add_library(CustomMath_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})

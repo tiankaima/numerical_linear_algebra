@@ -5,8 +5,8 @@ void par_1_each(Vector &a) {
 
     std::cout << "Polynomial is ";
     a.print();
-    std::cout << "Max root for polynomial is " << std::setprecision(10) << max_root.x << std::endl;
-    std::cout << "Iteration times is " << max_root.iteration_times << std::endl;
+    std::cout << "Max root for polynomial is " << std::setprecision(10) << max_root.result << std::endl;
+    std::cout << "Iteration times is " << max_root.iteration_count << std::endl;
     std::cout << "Time cost is " << max_root.time_cost.count() << " microseconds" << std::endl;
 }
 
@@ -49,11 +49,11 @@ void par_2_2() {
     coefficients.array[41 - 3 + 1] = 1;
     coefficients.array[41 - 1] = 1;
 
-    auto result = AllRootsForPolynomial(coefficients);
+    auto r = AllRootsForPolynomial(coefficients);
     std::cout << "Roots for polynomial are:" << std::endl;
-    result.result.print();
-    std::cout << "Iteration times is " << result.iteration_times << std::endl;
-    std::cout << "Time cost is " << result.time_cost.count() << " microseconds" << std::endl;
+    r.result.print();
+    std::cout << "Iteration times is " << r.iteration_count << std::endl;
+    std::cout << "Time cost is " << r.time_cost.count() << " microseconds" << std::endl;
 }
 
 void par_2_3() {
@@ -84,7 +84,7 @@ void par_2_3() {
         auto k = AllEigenValues(h.result);
         std::cout << "Eigen values are:" << std::endl;
         print_llc(k);
-        std::cout << "Iteration times is " << h.iteration_times << std::endl;
+        std::cout << "Iteration times is " << h.iteration_count << std::endl;
         std::cout << "Time cost is " << h.time_cost.count() << " microseconds" << std::endl;
 
         std::cout << std::endl;

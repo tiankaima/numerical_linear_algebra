@@ -21,4 +21,11 @@
 
 bool cmp(lld a, lld b);
 
+template<typename T>
+struct IterationMethodOutput {
+    T result;
+    int iteration_count;
+    std::chrono::microseconds time_cost;
+};
+
 #endif //NUMERICAL_ALGEBRA_BASE_H

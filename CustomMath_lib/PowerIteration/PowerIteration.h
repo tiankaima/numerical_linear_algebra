@@ -13,11 +13,7 @@ typedef struct {
     int iteration_times;
 } PowerIterationInput;
 
-typedef struct {
-    lld x;
-    int iteration_times;
-    std::chrono::microseconds time_cost;
-} PowerIterationOutput;
+using PowerIterationOutput = IterationMethodOutput<lld>;
 
 /// \brief: Find the max eigenvalue for a matrix using power iteration method
 PowerIterationOutput PowerIteration(const PowerIterationInput &input);

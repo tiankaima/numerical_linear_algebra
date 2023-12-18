@@ -18,7 +18,7 @@
 #define ITERATION_METHOD_RETURN_DURATION std::chrono::microseconds(0)
 #endif
 
-QRMethodOutput<Matrix> QRMethod(const Matrix &matrix) {
+MIterationMethodOutput QRMethod(const Matrix &matrix) {
     Matrix H = matrix;
     Matrix Q;
     auto P = Matrix::identity(H.rows);
@@ -98,7 +98,7 @@ QRMethodOutput<Matrix> QRMethod(const Matrix &matrix) {
     throw std::runtime_error("QRMethod: iteration times exceed maximum");
 }
 
-QRMethodOutput<Vector> AllRootsForPolynomial(const Vector &coefficients) {
+VIterationMethodOutput AllRootsForPolynomial(const Vector &coefficients) {
     auto n = coefficients.size;
     auto A = Matrix(n, n);
 
@@ -119,7 +119,7 @@ QRMethodOutput<Vector> AllRootsForPolynomial(const Vector &coefficients) {
 
     return { //
             result, //
-            r.iteration_times, //
+            r.iteration_count, //
             r.time_cost //
     };
 }
