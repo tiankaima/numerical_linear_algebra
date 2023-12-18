@@ -4,21 +4,6 @@
 
 #include "PowerIteration.h"
 
-#define ITERATION_METHOD_MAX_ITERATION 100000
-
-#define ENABLE_POWER_ITERATION_METHOD_TIMING
-
-#ifdef ENABLE_POWER_ITERATION_METHOD_TIMING
-#define ITERATION_METHOD_TIMING_START auto start = std::chrono::high_resolution_clock::now();
-#define ITERATION_METHOD_TIMING_END auto end = std::chrono::high_resolution_clock::now(); \
-                  auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-#define ITERATION_METHOD_RETURN_DURATION duration
-#else
-#define ITERATION_METHOD_TIMING_START
-#define ITERATION_METHOD_TIMING_END
-#define ITERATION_METHOD_RETURN_DURATION std::chrono::microseconds(0)
-#endif
-
 PowerIterationOutput PowerIteration(const PowerIterationInput &input) {
     auto A = input.A;
     auto x = input.x_default;

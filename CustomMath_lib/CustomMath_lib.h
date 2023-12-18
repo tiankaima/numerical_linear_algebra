@@ -16,6 +16,7 @@
 #include "HouseholderMethod/HouseholderMethod.h"
 #include "InfinityNorm/InfinityNorm.h"
 #include "IterationMethod/IterationMethod.h"
+#include "JacobiMethod/JacobiMethod.h"
 #include "PowerIteration/PowerIteration.h"
 #include "QRMethod/QRMethod.h"
 

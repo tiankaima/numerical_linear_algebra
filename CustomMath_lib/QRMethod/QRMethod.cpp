@@ -4,20 +4,6 @@
 
 #include "QRMethod.h"
 
-#define MAX_ITERATION 100000
-#define ENABLE_TIMING
-
-#ifdef ENABLE_TIMING
-#define ITERATION_METHOD_TIMING_START auto start = std::chrono::high_resolution_clock::now();
-#define ITERATION_METHOD_TIMING_END auto end = std::chrono::high_resolution_clock::now(); \
-                  auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-#define ITERATION_METHOD_RETURN_DURATION duration
-#else
-#define ITERATION_METHOD_TIMING_START
-#define ITERATION_METHOD_TIMING_END
-#define ITERATION_METHOD_RETURN_DURATION std::chrono::microseconds(0)
-#endif
-
 MIterationMethodOutput QRMethod(const Matrix &matrix) {
     Matrix H = matrix;
     Matrix Q;
@@ -28,7 +14,7 @@ MIterationMethodOutput QRMethod(const Matrix &matrix) {
 
     HessenbergMethod_Inplace(H, Q);
 
-    for (int count = 0; count < MAX_ITERATION; count++) {
+    for (int count = 0; count < ITERATION_METHOD_MAX_ITERATION; count++) {
         // set all abs(h_{i,i-1}) < 1e-10 to 0
         for (ull i = 0; i < H.rows - 1; i++) {
             if (std::abs(H.matrix[i + 1][i]) < 1e-6) {
