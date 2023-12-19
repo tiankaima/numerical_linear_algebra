@@ -6,6 +6,7 @@
 #define NUMERICAL_ALGEBRA_HOUSEHOLDERMETHOD_H
 
 #include "CustomMath_lib.h"
+#include "Bidiagonalization.h"
 
 typedef struct {
     Vector v;

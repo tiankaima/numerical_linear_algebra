@@ -4,6 +4,8 @@
 
 #include "Matrix.h"
 
+#define HIDE_ZERO_IN_MATRIX_PRINT 1
+
 void Matrix::print() {
     std::cout << std::fixed << std::setprecision(6);
 
@@ -11,7 +13,11 @@ void Matrix::print() {
     for (ull i = 0; i < this->rows; i++) {
         std::cout << "[";
         for (ull j = 0; j < this->cols; j++) {
-            std::cout << "\t" << this->matrix[i][j] << "\t";
+            if(std::abs(this->matrix[i][j]) < 1e-10 && HIDE_ZERO_IN_MATRIX_PRINT) {
+                std::cout << "\t" << "        " << "\t";
+            } else {
+                std::cout << "\t" << this->matrix[i][j] << "\t";
+            }
         }
         std::cout << "]";
         if (i != this->rows - 1) {

@@ -1,6 +1,6 @@
 #include "CustomMath_lib.h"
 
-int main() {
+int main_1() {
     auto n = 3;
     auto x = Vector(n, 2);
     auto y = Vector(n - 1, -1);
@@ -33,6 +33,16 @@ int main() {
         k.result.print();
         (B * k.result).print();
     }
+
+    return 0;
+}
+
+int main() {
+    auto m = Matrix(6, 4, 0, 10);
+    auto r = BidiagonalizationMethod(m);
+
+    (r.U.transpose() * m * r.V).print();
+    r.B.print();
 
     return 0;
 }

@@ -45,6 +45,8 @@ set(SOURCE_FILES
         JacobiMethod/JacobiMethod.h
         BisectMethod/BisectMethod.cpp
         BisectMethod/BisectMethod.h
+        HouseholderMethod/Bidiagonalization.cpp
+        HouseholderMethod/Bidiagonalization.h
 )
 
 add_library(CustomMath_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})

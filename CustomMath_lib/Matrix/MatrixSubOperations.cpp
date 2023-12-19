@@ -24,6 +24,42 @@ Matrix Matrix::sub_matrix(ull start_row, ull end_row, ull start_col, ull end_col
     return result;
 }
 
+[[nodiscard]] Vector Matrix::sub_array_r(ull row, ull start_col, ull end_col) const {
+#ifdef DEBUG
+    if (end_col < start_col) {
+        throw std::invalid_argument("Invalid sub_array size.");
+    }
+
+    if (row > this->rows || end_col > this->cols) {
+        throw std::invalid_argument("Invalid index.");
+    }
+#endif
+
+    auto result = Vector(end_col - start_col);
+    for (ull i = start_col; i < end_col; i++) {
+        result.array[i - start_col] = this->matrix[row][i];
+    }
+    return result;
+}
+
+[[nodiscard]] Vector Matrix::sub_array_c(ull start_row, ull end_row, ull col) const {
+#ifdef DEBUG
+    if (end_row < start_row) {
+        throw std::invalid_argument("Invalid sub_array size.");
+    }
+
+    if (end_row > this->rows || col > this->cols) {
+        throw std::invalid_argument("Invalid index.");
+    }
+#endif
+
+    auto result = Vector(end_row - start_row);
+    for (ull i = start_row; i < end_row; i++) {
+        result.array[i - start_row] = this->matrix[i][col];
+    }
+    return result;
+}
+
 Matrix Matrix::sub_diagonal() const {
 #ifdef DEBUG
     if (!this->isSquare()) {
@@ -89,5 +125,45 @@ void Matrix::set(ull start_row, ull end_row, ull start_col, ull end_col, const M
         for (ull j = start_col; j < end_col; j++) {
             this->matrix[i][j] = other.matrix[i - start_row][j - start_col];
         }
+    }
+}
+
+void Matrix::set_r(ull row, ull start_col, ull end_col, const Vector &other) {
+#ifdef DEBUG
+    if (end_col < start_col) {
+        throw std::invalid_argument("Invalid sub_array size.");
+    }
+
+    if (row > this->rows || end_col > this->cols) {
+        throw std::invalid_argument("Invalid index.");
+    }
+
+    if (end_col - start_col != other.size) {
+        throw std::invalid_argument("Invalid sub_array size.");
+    }
+#endif
+
+    for (ull i = start_col; i < end_col; i++) {
+        this->matrix[row][i] = other.array[i - start_col];
+    }
+}
+
+void Matrix::set_c(ull start_row, ull end_row, ull col, const Vector &other) {
+#ifdef DEBUG
+    if (end_row < start_row) {
+        throw std::invalid_argument("Invalid sub_array size.");
+    }
+
+    if (end_row > this->rows || col > this->cols) {
+        throw std::invalid_argument("Invalid index.");
+    }
+
+    if (end_row - start_row != other.size) {
+        throw std::invalid_argument("Invalid sub_array size.");
+    }
+#endif
+
+    for (ull i = start_row; i < end_row; i++) {
+        this->matrix[i][col] = other.array[i - start_row];
     }
 }

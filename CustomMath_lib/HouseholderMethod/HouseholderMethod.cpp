@@ -77,7 +77,6 @@ QR_Decomposition_Result QR_Decomposition(const Matrix &A) {
     auto tmp_Q = Matrix::identity(m);
 
     // fixme: I'll admit the following way is terrible:
-    auto v_list = std::vector<Vector>(n);
     for (ull i = 0; i < n; i++) {
         auto v = Vector(m);
         v.array[0] = 1;

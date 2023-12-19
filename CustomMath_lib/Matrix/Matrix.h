@@ -77,6 +77,10 @@ public:
     /// Return a sub-matrix of the matrix [start, end) x [start, end), both use index that start from 0
     [[nodiscard]] Matrix sub_matrix(ull start_row, ull end_row, ull start_col, ull end_col) const;
 
+    [[nodiscard]] Vector sub_array_r(ull row, ull start_col, ull end_col) const;
+
+    [[nodiscard]] Vector sub_array_c(ull start_row, ull end_row, ull col) const;
+
     /// Return only the diagonal elements of the matrix
     [[nodiscard]] Matrix sub_diagonal() const;
 
@@ -89,6 +93,10 @@ public:
     /// Set the sub-matrix of the matrix [start, end) x [start, end), both use index that start from 0
     /// \warning this is often used in conjunction with sub_matrix()
     void set(ull start_row, ull end_row, ull start_col, ull end_col, const Matrix &other);
+
+    void set_r(ull row, ull start_col, ull end_col, const Vector &other);
+
+    void set_c(ull start_row, ull end_row, ull col, const Vector &other);
 
     /*
      * MatrixProperties:
