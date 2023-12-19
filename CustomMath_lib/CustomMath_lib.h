@@ -10,6 +10,7 @@
 #include "Vector/Vector.h"
 #include "Matrix/Matrix.h"
 
+#include "BisectMethod/BisectMethod.h"
 #include "CholeskyMethod/CholeskyMethod.h"
 #include "GaussMethod/GaussMethod.h"
 #include "HessenbergMethod/HessenbergMethod.h"

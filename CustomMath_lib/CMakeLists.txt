@@ -43,6 +43,8 @@ set(SOURCE_FILES
         Matrix/MatrixOperations.cpp
         JacobiMethod/JacobiMethod.cpp
         JacobiMethod/JacobiMethod.h
+        BisectMethod/BisectMethod.cpp
+        BisectMethod/BisectMethod.h
 )
 
 add_library(CustomMath_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})
