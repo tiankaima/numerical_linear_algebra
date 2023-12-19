@@ -11,8 +11,7 @@ TEST_CASE("PowerIteration::RevPowerIteration") {
     auto lambda = -10.263471;
     auto A = m - I * lambda;
     auto x = Vector("[1 1 1]");
-    auto x_expected = Vector("[0.13173557387983645 -0.010742111583240704 1]");
     auto r = RevPowerIteration(PowerIterationInput{A, x, 1000});
 
-    CHECK(r.result == x_expected);
+    CHECK_LE(VectorNorm_Infinity(A * r.result), 1e-5);
 }
