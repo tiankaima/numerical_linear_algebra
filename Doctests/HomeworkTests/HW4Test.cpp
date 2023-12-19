@@ -55,7 +55,11 @@ void par_1_try(double eps = 0.1) {
     auto n = 100;
     auto h = 1.0 / n;
 
-    auto input = IterationMethodInput{A_1(eps, a, n, h), b_1(eps, a, n, h), x_default_1(eps, a, n, h), 1e-6};
+    auto A = A_1(eps, a, n, h);
+    auto b = b_1(eps, a, n, h);
+    auto x_default = x_default_1(eps, a, n, h);
+
+    auto input = IterationMethodInput{A, b, x_default, 1e-6};
 
     auto x_real_value = x_real_value_1(eps, a, n, h);
 
