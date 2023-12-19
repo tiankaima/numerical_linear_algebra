@@ -4,16 +4,18 @@
 
 #include "HouseholderMethod.h"
 
-void HouseHolderMethod(const Vector &x, Vector &v, lld &beta) {
+HouseHolder_Result HouseHolderMethod(const Vector &x) {
     ull n = x.size;
+    lld beta;
     lld eng = VectorNorm_Infinity(x);
-    Vector y = x / eng;
+    auto y = x / eng;
     lld sigma = y * y - y.array[0] * y.array[0];
-    v = Vector(n);
+    auto v = Vector(n);
     for (ull i = 1; i < n; i++) {
         v.array[i] = y.array[i];
     }
     v.array[0] = 1;
+
     if (sigma != 0) {
         lld alpha = std::sqrt(y.array[0] * y.array[0] + sigma);
         if (y.array[0] <= 0) {
@@ -26,12 +28,7 @@ void HouseHolderMethod(const Vector &x, Vector &v, lld &beta) {
     } else {
         beta = 0;
     }
-}
 
-HouseHolder_Result HouseHolderMethod(const Vector &x) {
-    Vector v;
-    lld beta;
-    HouseHolderMethod(x, v, beta);
     return {v, beta};
 }
 
@@ -42,16 +39,13 @@ void QR_Decomposition_InPlace(Matrix &A, Vector &d) {
     d = Vector(k);
 
     for (ull j = 0; j < k; j++) {
-        Vector v;
-        lld beta;
         auto A_j = Vector(m - j);
         for (ull i = j; i < m; i++) {
             A_j.array[i - j] = A.matrix[i][j];
         }
-        HouseHolderMethod(A_j, v, beta);
+        auto [v, beta] = HouseHolderMethod(A_j);
 
         auto A_sub = A.sub_matrix(j, m, j, n);
-//        A_sub = (Matrix::identity(m - j) - product(v, v) * beta) * A_sub;
         auto w = (A_sub.transpose() * v) * beta;
         A_sub = A_sub - product(v, w);
         A.set(j, m, j, n, A_sub);
@@ -63,11 +57,10 @@ void QR_Decomposition_InPlace(Matrix &A, Vector &d) {
     }
 }
 
-void QR_Decomposition(const Matrix &A, Matrix &Q, Matrix &R) {
+QR_Decomposition_Result QR_Decomposition(const Matrix &A) {
     ull m = A.rows;
     ull n = A.cols;
-//    Q = Matrix(n, m);
-    R = Matrix(n, n);
+    auto R = Matrix(n, n);
 
     auto B = Matrix(A);
     Vector d;
@@ -97,12 +90,8 @@ void QR_Decomposition(const Matrix &A, Matrix &Q, Matrix &R) {
     tmp_Q.print();
 
     // stripping tmp_Q to n x m -> Q:
-    Q = tmp_Q.sub_matrix(0, n, 0, m);
-}
+    auto Q = tmp_Q.sub_matrix(0, n, 0, m);
 
-QR_Decomposition_Result QR_Decomposition(const Matrix &A) {
-    Matrix Q, R;
-    QR_Decomposition(A, Q, R);
     return {Q, R};
 }
 

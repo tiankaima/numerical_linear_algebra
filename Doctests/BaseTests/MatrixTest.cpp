@@ -169,7 +169,7 @@ TEST_CASE("Matrix/MatrixProperties") {
     CHECK_THROWS(m = m2.diagonal_inverse());
 
     m = Matrix("[1 0 0; 4 0 0; 9 0 0]");
-    CHECK_EQ(cmp(m.norm(),std::sqrt(98)), true);
+    CHECK_EQ(cmp(m.norm(), std::sqrt(98)), true);
 
     m = Matrix("[1 2 3; 4 5 6; 7 8 9]");
     CHECK_EQ(m.max(), 9);

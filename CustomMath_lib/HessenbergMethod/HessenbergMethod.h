@@ -15,14 +15,7 @@ typedef struct {
 /// P^T A P = H, returns H, P
 HessenbergMethod_Result HessenbergMethod(const Matrix &A);
 
-/// P^T A P = H, returns H, P
-Matrix HessenbergMethod(const Matrix &A, Matrix &P);
-
-/// P^T A P = H, inplace returns H only
-void HessenbergMethod_Inplace(Matrix &A);
-
 /// P^T A P = H, inplace returns H only, P passed in
 void HessenbergMethod_Inplace(Matrix &A, Matrix &P);
-
 
 #endif //NUMERICAL_ALGEBRA_HESSENBERGMETHOD_H

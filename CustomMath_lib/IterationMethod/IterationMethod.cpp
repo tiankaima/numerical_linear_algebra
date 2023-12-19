@@ -5,7 +5,6 @@
 #include "IterationMethod.h"
 
 
-
 VIterationMethodOutput JacobiIteration(const IterationMethodInput &input) {
     auto A = input.A;
     auto x = input.x_default;

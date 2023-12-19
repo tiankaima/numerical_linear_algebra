@@ -150,4 +150,6 @@ JIterationMethodOutput JacobiMethod(const Matrix &matrix, JacobiMethodType type)
 
         return {A, P, iteration_count, ITERATION_METHOD_RETURN_DURATION};
     }
+
+    throw std::invalid_argument("Invalid JacobiMethodType.");
 }

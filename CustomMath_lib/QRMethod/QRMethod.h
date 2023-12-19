@@ -22,6 +22,6 @@ VIterationMethodOutput AllRootsForPolynomial(const Vector &coefficients);
 
 std::vector<llc> AllEigenValues(const Matrix &R);
 
-void print_llc(const std::vector<llc>& vec);
+void print_llc(const std::vector<llc> &vec);
 
 #endif //NUMERICAL_ALGEBRA_QRMETHOD_H

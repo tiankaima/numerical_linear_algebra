@@ -7,7 +7,7 @@
 void Cholesky_LDLT_Decomposition_InPlace(Matrix &A) {
     CHECK_SQUARE_MATRIX(A)
 
-    ull n = A.rows;
+    auto n = A.rows;
     Vector tmp = Vector(n);
 
     for (ull j = 0; j < n; j++) {
@@ -30,7 +30,7 @@ void Cholesky_LDLT_Decomposition_InPlace(Matrix &A) {
 Cholesky_LDLT_Result Cholesky_LDLT_Decomposition(const Matrix &A) {
     CHECK_SQUARE_MATRIX(A)
 
-    ull n = A.rows;
+    auto n = A.rows;
     auto L = Matrix(A);
     Cholesky_LDLT_Decomposition_InPlace(L);
 
@@ -56,11 +56,11 @@ Vector Cholesky_LDLT_Solve(const Matrix &A, const Vector &b) {
     auto L = tmp.L;
     auto D = tmp.D;
 
-    Vector y = LowerTriangleMatrix_Solve(L, b);
+    auto y = LowerTriangleMatrix_Solve(L, b);
     for (ull i = 0; i < A.rows; i++) {
         y.array[i] /= D.matrix[i][i];
     }
-    Vector x = UpperTriangleMatrix_Solve(L.transpose(), y);
+    auto x = UpperTriangleMatrix_Solve(L.transpose(), y);
     return x;
 }
 

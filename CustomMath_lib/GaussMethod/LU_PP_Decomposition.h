@@ -14,16 +14,13 @@ typedef struct {
 } LU_PP_Decomposition_Result;
 
 // LU Decomposition with Partial Pivoting
-void LU_PP_Decomposition(const Matrix &A, Matrix &L, Matrix &U, Matrix &P);
-
-// LU Decomposition with Partial Pivoting
 LU_PP_Decomposition_Result LU_PP_Decomposition(const Matrix &A);
 
 // Solve Ax = b using LU decomposition with Partial Pivoting
 Vector LU_PP_Solve(const Matrix &A, const Vector &b);
 
 // LU Decomposition with Partial Pivoting, and A is stored as L + U (ignoring L's all-one diagonal)
-void LU_PP_Decomposition_InPlace(Matrix &A, Matrix &P);
+Matrix LU_PP_Decomposition_InPlace(Matrix &A);
 
 // Solve Ax = b using LU decomposition with Partial Pivoting, b is then replaced by x
 void LU_PP_Solve_InPlace(Matrix &A, Vector &b);

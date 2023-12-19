@@ -13,9 +13,6 @@ typedef struct {
 } LU_Decomposition_Result;
 
 /// Decomposition A = LU, det(L) == 1
-void LU_Decomposition(const Matrix &A, Matrix &L, Matrix &U);
-
-/// Decomposition A = LU, det(L) == 1
 LU_Decomposition_Result LU_Decomposition(const Matrix &A);
 
 /// Solve Ax = b using LU decomposition

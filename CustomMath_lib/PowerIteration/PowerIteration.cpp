@@ -28,8 +28,7 @@ RevPowerIterationOutput RevPowerIteration(const PowerIterationInput &input) {
     auto A = input.A;
     auto x = input.x_default;
 
-    Matrix P;
-    LU_PP_Decomposition_InPlace(A, P);
+    auto P = LU_PP_Decomposition_InPlace(A);
 
     ITERATION_METHOD_TIMING_START
 

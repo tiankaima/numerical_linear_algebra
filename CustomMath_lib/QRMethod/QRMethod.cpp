@@ -7,7 +7,6 @@
 MIterationMethodOutput QRMethod(const Matrix &matrix) {
     Matrix H = matrix;
     Matrix Q;
-    auto P = Matrix::identity(H.rows);
     auto n = H.rows;
 
     ITERATION_METHOD_TIMING_START
@@ -21,7 +20,6 @@ MIterationMethodOutput QRMethod(const Matrix &matrix) {
                 H.matrix[i + 1][i] = 0;
             }
         }
-//        H.print();
 
         ull m = 0;
         ull k = 0;
@@ -64,8 +62,7 @@ MIterationMethodOutput QRMethod(const Matrix &matrix) {
             };
         }
 
-        auto H22 = H.sub_matrix(l, n - m, l, n - m);
-        H22 = DoubleStepQRIteration(H22, P);
+        auto [H22, P] = DoubleShiftQRMethod(H.sub_matrix(l, n - m, l, n - m));
         H.set(l, n - m, l, n - m, H22);
 
         auto Q_tmp = Matrix::identity(n);
@@ -145,7 +142,7 @@ std::vector<llc> AllEigenValues(const Matrix &R) {
     return result;
 }
 
-void print_llc(const std::vector<llc>& vec) {
+void print_llc(const std::vector<llc> &vec) {
     for (auto i: vec) {
         std::cout << i.real << " + " << i.complex << "i" << std::endl;
     }

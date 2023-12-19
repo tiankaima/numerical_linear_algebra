@@ -7,7 +7,7 @@
 void Cholesky_Decomposition_InPlace(Matrix &A) {
     CHECK_SQUARE_MATRIX(A)
 
-    ull n = A.rows;
+    auto n = A.rows;
 
     for (ull k = 0; k < n; k++) {
 //        if (A.matrix[k][k] <= 0) {
@@ -30,7 +30,7 @@ void Cholesky_Decomposition_InPlace(Matrix &A) {
 Matrix Cholesky_Decomposition(const Matrix &A) {
     CHECK_SQUARE_MATRIX(A)
 
-    ull n = A.rows;
+    auto n = A.rows;
     auto L = Matrix(A);
     Cholesky_Decomposition_InPlace(L);
 
@@ -44,9 +44,9 @@ Matrix Cholesky_Decomposition(const Matrix &A) {
 }
 
 Vector Cholesky_Solve(const Matrix &A, const Vector &b) {
-    Matrix L = Cholesky_Decomposition(A);
-    Vector y = LowerTriangleMatrix_Solve(L, b);
-    Vector x = UpperTriangleMatrix_Solve(L.transpose(), y);
+    auto L = Cholesky_Decomposition(A);
+    auto y = LowerTriangleMatrix_Solve(L, b);
+    auto x = UpperTriangleMatrix_Solve(L.transpose(), y);
     return x;
 }
 

@@ -6,11 +6,11 @@ int main() {
     auto y = Vector(n - 1, -1);
 
     auto A = Matrix(n, n);
-    for(ull i = 0; i < n; i++) {
-        for(ull j = 0; j < n; j++) {
-            if(i == j) {
+    for (ull i = 0; i < n; i++) {
+        for (ull j = 0; j < n; j++) {
+            if (i == j) {
                 A.matrix[i][j] = 2;
-            } else if(i == j + 1 || i == j - 1) {
+            } else if (i == j + 1 || i == j - 1) {
                 A.matrix[i][j] = -1;
             }
         }

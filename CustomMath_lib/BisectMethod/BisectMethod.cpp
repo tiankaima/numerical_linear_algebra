@@ -29,6 +29,9 @@ ull CalculateSignChange(const Vector &x, const Vector &y, lld mu) {
     return s;
 }
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "misc-no-recursion"
+
 std::vector<lld> BisectMethodCall(const Vector &x, const Vector &y, lld start, lld end, lld precision) {
 #ifdef DEBUG
     if (start > end) {
@@ -71,6 +74,8 @@ std::vector<lld> BisectMethodCall(const Vector &x, const Vector &y, lld start, l
     }
     return result;
 }
+
+#pragma clang diagnostic pop
 
 Vector BisectMethod(const Vector &x, const Vector &y, lld precision) {
 #ifdef DEBUG

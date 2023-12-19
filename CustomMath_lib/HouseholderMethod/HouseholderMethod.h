@@ -23,12 +23,6 @@ HouseHolder_Result HouseHolderMethod(const Vector &x);
 /// Calculate the QR factorization of A = Q * [R; 0]^T
 QR_Decomposition_Result QR_Decomposition(const Matrix &A);
 
-/// Calculate the Householder vector v and the Householder constant beta
-void HouseHolderMethod(const Vector &x, Vector &v, lld &beta);
-
-/// Calculate the QR factorization of A = Q * [R; 0]^T
-void QR_Decomposition(const Matrix &A, Matrix &Q, Matrix &R);
-
 /// Solve Ax = b using QR factorization
 Vector QR_Solve(const Matrix &A, const Vector &b);
 

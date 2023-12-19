@@ -7,7 +7,7 @@
 void LU_Decomposition_InPlace(Matrix &A) {
     CHECK_SQUARE_MATRIX(A)
 
-    ull n = A.rows;
+    auto n = A.rows;
 
     for (ull i = 0; i < n - 1; i++) {
         for (ull j = i + 1; j < n; j++) {
@@ -20,12 +20,12 @@ void LU_Decomposition_InPlace(Matrix &A) {
     }
 }
 
-void LU_Decomposition(const Matrix &A, Matrix &L, Matrix &U) {
+LU_Decomposition_Result LU_Decomposition(const Matrix &A) {
     CHECK_SQUARE_MATRIX(A)
 
-    ull n = A.rows;
-    L = Matrix(n, n);
-    U = Matrix(A);
+    auto n = A.rows;
+    auto L = Matrix(n, n);
+    auto U = Matrix(A);
     LU_Decomposition_InPlace(U);
 
     for (ull i = 0; i < n; i++) {
@@ -38,13 +38,7 @@ void LU_Decomposition(const Matrix &A, Matrix &L, Matrix &U) {
             U.matrix[i][j] = 0;
         }
     }
-}
 
-LU_Decomposition_Result LU_Decomposition(const Matrix &A) {
-    CHECK_SQUARE_MATRIX(A)
-
-    Matrix L, U;
-    LU_Decomposition(A, L, U);
     return {L, U};
 }
 
@@ -61,8 +55,8 @@ Vector LU_Solve(const Matrix &A, const Vector &b) {
     CHECK_SQUARE_MATRIX(A)
     CHECK_EQUAL_SIZE(A, b)
 
-    Matrix A_copy = Matrix(A);
-    Vector b_copy = Vector(b);
+    auto A_copy = Matrix(A);
+    auto b_copy = Vector(b);
     LU_Solve_InPlace(A_copy, b_copy);
     return b_copy;
 }

@@ -4,12 +4,12 @@
 
 #include "LU_FP_Decomposition.h"
 
-void LU_FP_Decomposition_InPlace(Matrix &A, Matrix &P, Matrix &Q) {
+LU_FP_Decomposition_Inplace_Result LU_FP_Decomposition_InPlace(Matrix &A) {
     CHECK_SQUARE_MATRIX(A)
 
-    ull n = A.rows;
-    P = Matrix::identity(n);
-    Q = Matrix::identity(n);
+    auto n = A.rows;
+    auto P = Matrix::identity(n);
+    auto Q = Matrix::identity(n);
 
     for (ull i = 0; i < n; i++) {
         // find the pivot
@@ -53,15 +53,17 @@ void LU_FP_Decomposition_InPlace(Matrix &A, Matrix &P, Matrix &Q) {
             }
         }
     }
+
+    return {P, Q};
 }
 
-void LU_FP_Decomposition(const Matrix &A, Matrix &L, Matrix &U, Matrix &P, Matrix &Q) {
+LU_FP_Decomposition_Result LU_FP_Decomposition(const Matrix &A) {
     CHECK_SQUARE_MATRIX(A)
 
-    ull n = A.rows;
-    L = Matrix(n, n);
-    U = Matrix(A);
-    LU_FP_Decomposition_InPlace(U, P, Q);
+    auto n = A.rows;
+    auto L = Matrix(n, n);
+    auto U = Matrix(A);
+    auto [P, Q] = LU_FP_Decomposition_InPlace(U);
 
     for (ull i = 0; i < n; i++) {
         L.matrix[i][i] = 1;
@@ -72,13 +74,7 @@ void LU_FP_Decomposition(const Matrix &A, Matrix &L, Matrix &U, Matrix &P, Matri
             U.matrix[i][j] = 0;
         }
     }
-}
 
-LU_FP_Decomposition_Result LU_FP_Decomposition(const Matrix &A) {
-    CHECK_SQUARE_MATRIX(A)
-
-    Matrix L, U, P, Q;
-    LU_FP_Decomposition(A, L, U, P, Q);
     return {L, U, P, Q};
 }
 
@@ -86,11 +82,10 @@ void LU_FP_Solve_InPlace(Matrix &A, Vector &b) {
     CHECK_SQUARE_MATRIX(A)
     CHECK_EQUAL_SIZE(A, b)
 
-    Matrix P, Q;
-    LU_FP_Decomposition_InPlace(A, P, Q);
-    Vector Pb = P * b;
-    Vector UQix = LowerTriangleMatrix_Solve(A, Pb, true);
-    Vector Qix = UpperTriangleMatrix_Solve(A, UQix);
+    auto [P, Q] = LU_FP_Decomposition_InPlace(A);
+    auto Pb = P * b;
+    auto UQix = LowerTriangleMatrix_Solve(A, Pb, true);
+    auto Qix = UpperTriangleMatrix_Solve(A, UQix);
     b = Q * Qix;
 }
 
@@ -98,8 +93,8 @@ Vector LU_FP_Solve(const Matrix &A, const Vector &b) {
     CHECK_SQUARE_MATRIX(A)
     CHECK_EQUAL_SIZE(A, b)
 
-    Matrix A_copy = Matrix(A);
-    Vector b_copy = Vector(b);
+    auto A_copy = Matrix(A);
+    auto b_copy = Vector(b);
     LU_FP_Solve_InPlace(A_copy, b_copy);
     return b_copy;
 }
