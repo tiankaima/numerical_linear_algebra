@@ -5,14 +5,13 @@
 #include "Matrix.h"
 
 void Matrix::print() {
+    std::cout << std::fixed << std::setprecision(6);
+
     std::cout << "[";
     for (ull i = 0; i < this->rows; i++) {
         std::cout << "[";
         for (ull j = 0; j < this->cols; j++) {
-            std::cout << this->matrix[i][j];
-            if (j != this->cols - 1) {
-                std::cout << ", ";
-            }
+            std::cout << "\t" << this->matrix[i][j] << "\t";
         }
         std::cout << "]";
         if (i != this->rows - 1) {

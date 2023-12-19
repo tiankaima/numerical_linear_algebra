@@ -18,6 +18,18 @@ lld MatrixNorm_Infinity(const Matrix &A) {
     return max;
 }
 
+lld MatrixNorm_E(const Matrix &A) {
+    lld sum = 0;
+    for (int i = 0; i < A.rows; i++) {
+        for (int j = 0; j < A.cols; j++) {
+            if (i != j) {
+                sum += std::abs(A.matrix[i][j]);
+            }
+        }
+    }
+    return sum;
+}
+
 lld VectorNorm_Infinity(const Vector &x) {
     lld max = 0;
     for (int i = 0; i < x.size; i++) {

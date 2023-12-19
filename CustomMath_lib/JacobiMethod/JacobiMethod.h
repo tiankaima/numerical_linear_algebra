@@ -8,11 +8,18 @@
 #include "CustomMath_lib.h"
 
 typedef struct {
-    Matrix H;
+    Matrix A;
     Matrix P;
 } JacobiMethodOutput;
 
+using JIterationMethodOutput = IterationMethodOutput<JacobiMethodOutput>;
 
+enum JacobiMethodType {
+    JACOBI_METHOD_TYPE_CLASSIC, JACOBI_METHOD_TYPE_LOOP, JACOBI_METHOD_TYPE_THRESHOLD
+};
 
+/// P^T A P = H, returns H, P
+/// A must be symmetric
+JIterationMethodOutput JacobiMethod(const Matrix &matrix, JacobiMethodType type = JACOBI_METHOD_TYPE_CLASSIC);
 
 #endif //NUMERICAL_ALGEBRA_JACOBIMETHOD_H

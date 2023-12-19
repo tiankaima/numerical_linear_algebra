@@ -10,6 +10,9 @@
 /// Calculate infinity norm of a matrix
 lld MatrixNorm_Infinity(const Matrix &A);
 
+/// Calculate E(A) which is the non-diagonal norm of A
+lld MatrixNorm_E(const Matrix &A);
+
 /// Calculate infinity norm of a vector
 lld VectorNorm_Infinity(const Vector &x);
 

@@ -15,12 +15,14 @@
 #include "string"
 #include "random"
 #include "chrono"
+#include "optional"
 
 #define ull unsigned long long
 #define lld long double
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define SIGN(a) ((a) > 0 ? 1 : ((a) < 0 ? -1 : 0))
 
 bool cmp(lld a, lld b);
 
