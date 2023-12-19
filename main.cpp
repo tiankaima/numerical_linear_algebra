@@ -1,18 +1,16 @@
 #include "CustomMath_lib.h"
 
 int main() {
-    for (auto type: {JACOBI_METHOD_TYPE_CLASSIC, JACOBI_METHOD_TYPE_LOOP, JACOBI_METHOD_TYPE_THRESHOLD}) {
-        auto m = Matrix("[5 1 -2; 1 2 0; -2 0 -10]");
-        auto r = JacobiMethod(m, type);
+    auto m = Matrix("[5 1 -2; 1 2 0; -2 0 -10]");
+    auto I = Matrix::identity(m.rows);
+    auto lambda = -10.263471;
+    auto A = m - I * lambda;
+    auto x = Vector("[1 1 1]");
 
-        r.result.A.print();
-        r.result.P.print();
+    auto result = RevPowerIteration(PowerIterationInput{A, x, 1000});
 
-        (r.result.P.transpose() * r.result.A * r.result.P).print();
-
-        std::cout << r.iteration_count << std::endl;
-        std::cout << r.time_cost.count() << std::endl;
-    }
+    std::cout << "Eigenvector: " << std::endl;
+    result.result.print();
 
     return 0;
 }

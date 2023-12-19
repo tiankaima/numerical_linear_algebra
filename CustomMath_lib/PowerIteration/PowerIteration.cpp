@@ -24,6 +24,33 @@ PowerIterationOutput PowerIteration(const PowerIterationInput &input) {
     };
 }
 
+RevPowerIterationOutput RevPowerIteration(const PowerIterationInput &input) {
+    auto A = input.A;
+    auto x = input.x_default;
+
+    Matrix P;
+    LU_PP_Decomposition_InPlace(A, P);
+
+    ITERATION_METHOD_TIMING_START
+
+    for (int i = 0; i < input.iteration_times; i++) {
+        x = x / VectorNorm_Infinity(x);
+        Vector Px = P * x;
+        LowerTriangleMatrix_Solve_InPlace(A, Px);
+        UpperTriangleMatrix_Solve_InPlace(A, Px);
+        x = Px;
+    }
+
+    ITERATION_METHOD_TIMING_END
+
+    return { //
+            x / VectorNorm_Infinity(x), //
+            input.iteration_times, //
+            ITERATION_METHOD_RETURN_DURATION //
+    };
+
+}
+
 PowerIterationOutput MaxRootForPolynomial(const Vector &coefficients) {
     auto n = coefficients.size;
     auto A = Matrix(n, n);
