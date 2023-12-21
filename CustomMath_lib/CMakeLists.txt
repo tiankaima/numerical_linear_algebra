@@ -47,6 +47,8 @@ set(SOURCE_FILES
         BisectMethod/BisectMethod.h
         HouseholderMethod/Bidiagonalization.cpp
         HouseholderMethod/Bidiagonalization.h
+        SVDMethod/SVDMethod.cpp
+        SVDMethod/SVDMethod.h
 )
 
 add_library(CustomMath_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})
