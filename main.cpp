@@ -1,4 +1,4 @@
-#include "CustomMath_lib.h"
+#include "includes/NLAMethods.h"
 
 int main_1() {
     auto n = 3;

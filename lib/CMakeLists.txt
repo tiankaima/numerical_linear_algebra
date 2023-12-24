@@ -1,0 +1,52 @@
+project(nla_methods)
+
+set(HEADER_FILES
+        base.h
+        ../includes/NLAMethods.h
+        Matrix/Matrix.h
+        Vector/Vector.h
+        GaussMethod/TriangleMatrix.h
+        GaussMethod/LU_Decomposition.h
+        GaussMethod/LU_FP_Decomposition.h
+        GaussMethod/LU_PP_Decomposition.h
+        CholeskyMethod/CholeskyMethod.h
+        GaussMethod/GaussMethod.h
+        CholeskyMethod/Cholesky_Decomposition.h
+        CholeskyMethod/Cholesky_LDLT.h
+        InfinityNorm/InfinityNorm.h
+        HouseholderMethod/HouseholderMethod.h
+        IterationMethod/IterationMethod.h
+        PowerIteration/PowerIteration.h
+        HessenbergMethod/HessenbergMethod.h
+        QRMethod/DoubleShiftQRMethod.h
+        QRMethod/QRMethod.h
+        JacobiMethod/JacobiMethod.h
+        HouseholderMethod/Bidiagonalization.h
+        BisectMethod/BisectMethod.h
+        SVDMethod/SVDMethod.h)
+
+set(SOURCE_FILES
+        Matrix/MatrixProperties.cpp
+        Vector/Vector.cpp
+        GaussMethod/TriangleMatrix.cpp
+        GaussMethod/LU_Decomposition.cpp
+        GaussMethod/LU_FP_Decomposition.cpp
+        GaussMethod/LU_PP_Decomposition.cpp
+        CholeskyMethod/Cholesky_Decomposition.cpp
+        CholeskyMethod/Cholesky_LDLT.cpp
+        InfinityNorm/InfinityNorm.cpp
+        HouseholderMethod/HouseholderMethod.cpp
+        IterationMethod/IterationMethod.cpp
+        PowerIteration/PowerIteration.cpp
+        HessenbergMethod/HessenbergMethod.cpp
+        QRMethod/DoubleShiftQRMethod.cpp
+        QRMethod/QRMethod.cpp
+        Matrix/MatrixGenerations.cpp
+        Matrix/MatrixSubOperations.cpp
+        Matrix/MatrixOperations.cpp
+        JacobiMethod/JacobiMethod.cpp
+        BisectMethod/BisectMethod.cpp
+        HouseholderMethod/Bidiagonalization.cpp
+        SVDMethod/SVDMethod.cpp)
+
+add_library(nla_methods STATIC ${SOURCE_FILES} ${HEADER_FILES})

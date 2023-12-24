@@ -12,4 +12,4 @@ This work © 2023 by Tiankai Ma is licensed under Attribution-NonCommercial 4.0 
 copy of this license, visit <https://creativecommons.org/licenses/by-nc/4.0/>.
 
 > [!IMPORTANT]
-> 实验报告中可能包含个人隐私，这部分内容(`Reports/`目录下的所有内容)不在上述许可证的约束范围内。
+> 实验报告中可能包含个人隐私，这部分内容(`homewroks/`目录下的所有内容)不在上述许可证的约束范围内。
