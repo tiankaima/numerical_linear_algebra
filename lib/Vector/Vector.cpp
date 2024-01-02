@@ -4,6 +4,8 @@
 
 #include "Vector.h"
 
+#define HIDE_ZERO_IN_VECTOR_PRINT 1
+
 Vector::Vector() {
     this->size = 0;
     this->array = std::vector<lld>(0, 0);
@@ -89,11 +91,14 @@ void Vector::set(ull start, ull end, const Vector &other) {
 }
 
 void Vector::print() {
+    std::cout << std::fixed << std::setprecision(6);
+
     std::cout << "[";
     for (int i = 0; i < this->size; i++) {
-        std::cout << this->array[i];
-        if (i != this->size - 1) {
-            std::cout << ",";
+        if(std::abs(this->array[i]) < 1e-10 && HIDE_ZERO_IN_VECTOR_PRINT) {
+            std::cout << "\t" << "        " << "\t";
+        } else {
+            std::cout << "\t" << this->array[i] << "\t";
         }
     }
     std::cout << "]" << std::endl;

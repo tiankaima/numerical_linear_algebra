@@ -27,11 +27,11 @@ void Matrix::print() {
     std::cout << "]" << std::endl;
 }
 
-Matrix Matrix::clean() const {
+Matrix Matrix::clean(lld eps) const {
     auto result = Matrix(this->rows, this->cols);
     for (ull i = 0; i < this->rows; i++) {
         for (ull j = 0; j < this->cols; j++) {
-            if (std::fabs(this->matrix[i][j]) < 1e-10) {
+            if (std::abs(this->matrix[i][j]) < eps) {
                 result.matrix[i][j] = 0;
             } else {
                 result.matrix[i][j] = this->matrix[i][j];

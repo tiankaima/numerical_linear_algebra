@@ -57,7 +57,13 @@ void JacobiIteration(ull n, Matrix &A, Matrix &P, JacobiIterationPivot pivot) {
 
     auto rho = (a_pp - a_qq) / (2 * a_pq);
 
-    auto t = SIGN(rho) / (std::abs(rho) + std::sqrt(1 + rho * rho)); // tan(theta)
+    lld t;
+    if (rho == 0) {
+        t = -1;
+    } else {
+        t = SIGN(rho) / (std::abs(rho) + std::sqrt(1 + rho * rho)); // tan(theta)
+    }
+
     auto c = 1 / std::sqrt(1 + t * t); // cos(theta)
     auto s = c * t; // sin(theta)
 

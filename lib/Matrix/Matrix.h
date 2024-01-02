@@ -106,7 +106,7 @@ public:
     void print();
 
     /// Return a clean matrix, i.e. all elements with absolute value less than 1e-10 are set to 0
-    [[nodiscard]] Matrix clean() const;
+    [[nodiscard]] Matrix clean(lld eps = 1e-10) const;
 
     /// A -> A^T
     [[nodiscard]] Matrix transpose() const;

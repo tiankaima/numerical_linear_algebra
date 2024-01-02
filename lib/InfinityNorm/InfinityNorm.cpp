@@ -23,11 +23,11 @@ lld MatrixNorm_E(const Matrix &A) {
     for (int i = 0; i < A.rows; i++) {
         for (int j = 0; j < A.cols; j++) {
             if (i != j) {
-                sum += std::abs(A.matrix[i][j]);
+                sum += A.matrix[i][j] * A.matrix[i][j];
             }
         }
     }
-    return sum;
+    return std::sqrt(sum);
 }
 
 lld VectorNorm_Infinity(const Vector &x) {
