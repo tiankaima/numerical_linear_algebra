@@ -18,7 +18,7 @@ Bidiagonalization_Result BidiagonalizationMethod(const Matrix &matrix) {
     auto V = Matrix::identity(n);
 
     for (ull k = 0; k < n; k++) {
-        auto x = A.sub_array_c(k, m, k);
+        auto x = A.sub_array_col(k, m, k);
         auto [v, beta] = HouseHolderMethod(x);
 
         auto P = Matrix::identity(m - k);
@@ -31,7 +31,7 @@ Bidiagonalization_Result BidiagonalizationMethod(const Matrix &matrix) {
         U = U * P_extended;
 
         if (k < n - 2) {
-            auto x = A.sub_array_r(k, k + 1, n);
+            auto x = A.sub_array_row(k, k + 1, n);
             auto [v, beta] = HouseHolderMethod(x);
 
             auto Q = Matrix::identity(n - k - 1);

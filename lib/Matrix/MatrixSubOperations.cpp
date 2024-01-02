@@ -24,7 +24,7 @@ Matrix Matrix::sub_matrix(ull start_row, ull end_row, ull start_col, ull end_col
     return result;
 }
 
-[[nodiscard]] Vector Matrix::sub_array_r(ull row, ull start_col, ull end_col) const {
+[[nodiscard]] Vector Matrix::sub_array_row(ull row, ull start_col, ull end_col) const {
 #ifdef DEBUG
     if (end_col < start_col) {
         throw std::invalid_argument("Invalid sub_array size.");
@@ -42,7 +42,7 @@ Matrix Matrix::sub_matrix(ull start_row, ull end_row, ull start_col, ull end_col
     return result;
 }
 
-[[nodiscard]] Vector Matrix::sub_array_c(ull start_row, ull end_row, ull col) const {
+[[nodiscard]] Vector Matrix::sub_array_col(ull start_row, ull end_row, ull col) const {
 #ifdef DEBUG
     if (end_row < start_row) {
         throw std::invalid_argument("Invalid sub_array size.");
@@ -128,7 +128,7 @@ void Matrix::set(ull start_row, ull end_row, ull start_col, ull end_col, const M
     }
 }
 
-void Matrix::set_r(ull row, ull start_col, ull end_col, const Vector &other) {
+void Matrix::set_row(ull row, ull start_col, ull end_col, const Vector &other) {
 #ifdef DEBUG
     if (end_col < start_col) {
         throw std::invalid_argument("Invalid sub_array size.");
@@ -148,7 +148,7 @@ void Matrix::set_r(ull row, ull start_col, ull end_col, const Vector &other) {
     }
 }
 
-void Matrix::set_c(ull start_row, ull end_row, ull col, const Vector &other) {
+void Matrix::set_col(ull start_row, ull end_row, ull col, const Vector &other) {
 #ifdef DEBUG
     if (end_row < start_row) {
         throw std::invalid_argument("Invalid sub_array size.");
