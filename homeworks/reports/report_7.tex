@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage[UTF8]{ctex}
+\usepackage{float,indentfirst,verbatim,fancyhdr,graphicx,listings,longtable,amsmath, amsfonts,amssymb}
+
+\textheight 23.5cm \textwidth 15.8cm
+\topmargin -1.5cm \oddsidemargin 0.3cm \evensidemargin -0.3cm
+
+\title{数值代数实验报告 7}
+\author{马天开}
+
+\begin{document}
+\maketitle
+
+\section{问题描述}
+
+\subsection{求实对称三对角阵的全部特征值和特征向量}
+
+\subsubsection{}用 C++ 编制利用过关 Jacobi 方法求实对称三对角阵全部特征值和特征向量的通用子程序
+
+\subsubsection{}利用你所编制的子程序求 50, 60, 70, 80, 90, 100 阶矩阵
+
+\[
+A=\begin{bmatrix}
+\;4 & 1 & 0 & 0 & \cdots & 0 \;\\
+\;1 & 4 & 1 & 0 & \cdots & 0 \;\\
+\;0 & 1 & 4 & 1 & \cdots & 0 \;\\
+\;\vdots & & \ddots & \ddots & \ddots \;\\
+\;0 & \cdots & 0 & 1 & 4 & 1\;\\
+\;0 & 0 & \cdots & 0 & 1 & 4\;
+\end{bmatrix}
+\]
+的全部特征值和特征向量。
+
+\subsection{求实对称三对角阵的指定特征值及对应的特征向量}
+
+\subsubsection{}用 C++ 编制先利用二分法求实对称三对角阵指定特征值，再利用反幂法求对应特征向量的通用子程序
+
+\subsubsection{利用你所编制的子程序求 100 阶矩阵}
+\[
+A=\begin{bmatrix}
+\;2 & -1 & 0 & 0 & \cdots & 0 \;\\
+\;-1 & 2 & -1 & 0 & \cdots & 0 \;\\
+\;0 & -1 & 2 & -1 & \cdots & 0 \;\\
+\;\vdots & & \ddots & \ddots & \ddots \;\\
+\;0 & \cdots & 0 & -1 & 2 & -1\;\\
+\;0 & 0 & \cdots & 0 & -1 & 2\;
+\end{bmatrix}
+\]
+的最大和最小特征值及对应的特征向量
+
+\section{算法说明}
+
+必须实现的算法有：
+
+\begin{enumerate}
+    \item 经典 Jacobi 方法 & 过关 Jacobi 方法 $\Rightarrow$ \verb|JacobiMethod/JacobiMethod|
+    \item 二分法 分解 $\Rightarrow$ \verb|BisectMethod/BisectMethod|
+    \item 反幂法 $\Rightarrow$ \verb|PowerIteration/RevPowerIteraion|
+\end{enumerate}
+
+调整了大部分命名、输出格式、循环结果等。
+
+\section{运行结果}
+
+也可在 \verb|homeworks/reports/data/report_7_output.txt| 中查看。
+
+\verbatiminput{data/report_7_output.txt}
+
+\newpage
+
+\end{document}
