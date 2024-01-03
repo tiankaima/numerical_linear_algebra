@@ -17,40 +17,47 @@ WilkinsonShift_Result WilkinsonShiftIteration(const Matrix &matrix) {
     auto P = Matrix::identity(n);
     auto Q = Matrix::identity(n);
 
-    // delta_n ^ 2 + gamma_(n-1) ^ 2
-    auto alpha = B.matrix[n - 1][n - 1] * B.matrix[n - 1][n - 1] + B.matrix[n - 2][n - 1] * B.matrix[n - 2][n - 1];
-    // (delta_(n-1) ^ 2 + gamma_(n-1) ^ 2 - alpha)/ 2
-    auto delta = (B.matrix[n - 2][n - 2] * B.matrix[n - 2][n - 2] + B.matrix[n - 2][n - 1] * B.matrix[n - 2][n - 1] -
-                  alpha) / 2;
-    // delta_(n-1) * gamma_(n-1)
-    auto beta = B.matrix[n - 2][n - 2] * B.matrix[n - 2][n - 1];
+#define DELTA(i) B.matrix[i - 1][i - 1]
+#define GAMMA(i) B.matrix[i - 1][i]
 
-    auto mu = alpha - beta * beta / (delta + SIGN(delta) * sqrt(delta * delta + beta * beta));
-    auto y = B.matrix[0][0] * B.matrix[0][0] - mu;
-    auto z = B.matrix[0][0] * B.matrix[0][1];
+    auto alpha = DELTA(n) * DELTA(n) + GAMMA(n - 1) * GAMMA(n - 1);
+    auto delta = (DELTA(n - 1) * DELTA(n - 1) + GAMMA(n - 2) * GAMMA(n - 2) - alpha) / 2;
+    auto beta = DELTA(n - 1) * GAMMA(n - 1);
+    auto mu = alpha - beta * beta / (delta + SIGN(delta) * std::sqrt(delta * delta + beta * beta));
 
-    for (ull k = 0; k < n - 1; k++) {
-        auto tmpVector = Vector(std::vector<lld>{y, z});
-        auto [b, beta] = HouseHolderMethod(tmpVector);
-        auto w = product(b, b) * beta;
+    auto y = DELTA(1) * DELTA(1) - mu;
+    auto z = DELTA(1) * GAMMA(1);
 
-        auto q = MAX(1, k);
-        auto B_sub = B.sub_matrix(k, k + 2, q - 1, n);
-        B_sub = B_sub - w * B_sub;
-        B.set(k, k + 2, q - 1, n, B_sub);
+    for (ull k = 0; k < n; k++) {
+        auto t = -z / y; // tan(theta)
+        auto c = 1 / std::sqrt(1 + t * t); // cos(theta)
+        auto s = c * t; // sin(theta)
 
-        auto r = MIN(k + 2, n);
-        B_sub = B.sub_matrix(0, r, k, k + 2);
-        B_sub = B_sub - B_sub * w;
-        B.set(0, r, k, k + 2, B_sub);
+        Q = Q * RotationMatrix(n, k + 1, k + 2, c, s);
 
-        auto P_sub = P.sub_matrix(0, n, k, k + 2);
-        P_sub = P_sub - P_sub * w;
-        P.set(0, n, k, k + 2, P_sub);
+        y = c * DELTA(k + 1) - s * GAMMA(k + 1);
+        z = -s * DELTA(k + 2);
+        GAMMA(k + 1) = s * DELTA(k + 1) + c * GAMMA(k + 1);
+        DELTA(k + 2) = c * DELTA(k + 2);
 
-        y = B.matrix[k + 1][k];
-        if (k < n - 2) {
-            z = B.matrix[k + 2][k];
+        t = -z / y; // tan(theta)
+        c = 1 / std::sqrt(1 + t * t); // cos(theta)
+        s = c * t; // sin(theta)
+
+        P = RotationMatrix(n, k + 1, k + 2, c, s) * P;
+        if (k != n - 1) {
+            y = c * GAMMA(k + 1) - s * DELTA(k + 2);
+            z = -s * GAMMA(k + 2);
+            DELTA(k + 1) = s * GAMMA(k + 1) + c * DELTA(k + 2);
+            GAMMA(k + 2) = c * GAMMA(k + 2);
+        } else {
+            auto gamma_k = GAMMA(k + 1);
+            auto delta_k = DELTA(k + 2);
+
+            GAMMA(k + 1) = c * gamma_k - s * delta_k;
+            DELTA(k + 2) = s * gamma_k + c * delta_k;
         }
     }
+
+    return {B, P, Q};
 }

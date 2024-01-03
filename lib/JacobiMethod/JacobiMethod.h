@@ -18,6 +18,8 @@ enum JacobiMethodType {
     JACOBI_METHOD_TYPE_CLASSIC, JACOBI_METHOD_TYPE_LOOP, JACOBI_METHOD_TYPE_THRESHOLD
 };
 
+Matrix RotationMatrix(ull n, ull p, ull q, lld c, lld s);
+
 /// P^T A P = H, returns H, P
 /// A must be symmetric
 JIterationMethodOutput JacobiMethod(const Matrix &matrix, JacobiMethodType type = JACOBI_METHOD_TYPE_CLASSIC);
