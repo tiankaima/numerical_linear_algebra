@@ -26,14 +26,9 @@ Bidiagonalization_Result BidiagonalizationMethod(const Matrix &matrix) {
         P.set(k, m, k, m, P_sub);
         U = P * U;
 
-//        B = P * B;
-
-        // TODO: WTF WHY DOESN'T THIS WORK FUCK IT
         auto A_sub = B.sub_matrix(k, m, k, n);
         A_sub = A_sub - product(v, v) * beta * A_sub;
         B.set(k, m, k, n, A_sub);
-//
-//        B.set_col(k + 1, m, k, v.sub_vector(1, m - k));
 
         if (k < n - 2) {
             auto [v, beta] = HouseHolderMethod(B.sub_array_row(k, k + 1, n));
@@ -43,18 +38,9 @@ Bidiagonalization_Result BidiagonalizationMethod(const Matrix &matrix) {
             Q.set(k + 1, n, k + 1, n, Q_sub);
             V = Q * V;
 
-//            B = B * Q;
-
-            // TODO: WTF WHY DOESN'T THIS WORK FUCK IT
-            // NEVER MIND, the B.set_row was meant to store Q,
-            // but let's skip it as it's really confusing
-            // > what a wierd way to store stuff,
-            // > some FORTRAN programing perhaps?
             auto A_sub = B.sub_matrix(k, m, k + 1, n);
             A_sub = A_sub - A_sub * product(v, v) * beta;
             B.set(k, m, k + 1, n, A_sub);
-//
-//            B.set_row(k, k + 2, n, v.sub_vector(1, n - k - 1));
         }
     }
 

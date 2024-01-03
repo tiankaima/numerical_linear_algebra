@@ -4,12 +4,14 @@
 int main() {
     auto A = Matrix(8, 5, 1, 10);
     A = BidiagonalizationMethod(A).B;
-    A.matrix[1][1] = 0;
+    A.matrix[1][0] = 5;
 
-    auto r = ReformBidiagonalization(A, 1);
+    A.print();
+
+    auto r = WilkinsonShiftIteration(A);
 
     r.B.print();
-    r.G.print();
+    (r.P * A * r.Q).print();
 
     return 0;
 }
