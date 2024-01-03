@@ -6,8 +6,7 @@
 
 Bidiagonalization_Result BidiagonalizationMethod(const Matrix &matrix) {
 #ifdef DEBUG
-    // TODO: I'm limiting rows > cols + 1 for now, should have been rows >= cols
-    if (matrix.rows <= matrix.cols + 1) {
+    if (matrix.rows < matrix.cols) {
         throw std::invalid_argument("BidiagonalizationMethod requires rows >= cols");
     }
 #endif
@@ -36,7 +35,7 @@ Bidiagonalization_Result BidiagonalizationMethod(const Matrix &matrix) {
             auto Q = Matrix::identity(n);
             auto Q_sub = Matrix::identity(n - k - 1) - product(v, v) * beta;
             Q.set(k + 1, n, k + 1, n, Q_sub);
-            V = Q * V;
+            V = V * Q;
 
             auto A_sub = B.sub_matrix(k, m, k + 1, n);
             A_sub = A_sub - A_sub * product(v, v) * beta;

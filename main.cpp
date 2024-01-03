@@ -2,16 +2,12 @@
 
 // homework 8 (SVD):
 int main() {
-    auto A = Matrix(8, 5, 1, 10);
-    A = BidiagonalizationMethod(A).B;
-    A.matrix[1][0] = 5;
-
-    A.print();
-
-    auto r = WilkinsonShiftIteration(A);
+    auto A = Matrix(8, 8, 1, 10);
+    auto r = BidiagonalizationMethod(A);
 
     r.B.print();
-    (r.P * A * r.Q).print();
+
+    (r.U * A * r.V).print();
 
     return 0;
 }
