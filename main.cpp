@@ -59,5 +59,12 @@ int main() {
               << "eq = " << MatrixNorm_Infinity(r.V.transpose() * r.V - Matrix::identity(n)) << std::endl
               << "et = " << MatrixNorm_Infinity(r.U * A * r.V - r.B) << std::endl;
 
+    std::cout << "T=" << std::endl;
+    r.B.print();
+    std::cout << "P=" << std::endl;
+    r.U.print();
+    std::cout << "Q=" << std::endl;
+    r.V.print();
+
     return 0;
 }
