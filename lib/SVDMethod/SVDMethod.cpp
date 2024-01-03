@@ -66,8 +66,6 @@ ReformBidiagonalization_Result ReformBidiagonalization(const Matrix &matrix, ull
     auto n = B.cols;
     auto G = Matrix::identity(m);
 
-    B.print();
-
     for (ull i = k + 1; i < n; i++) {
         auto t = B.matrix[k][i] / B.matrix[i][i]; // tan(theta)
         auto c = 1 / std::sqrt(1 + t * t); // cos(theta)
@@ -75,9 +73,6 @@ ReformBidiagonalization_Result ReformBidiagonalization(const Matrix &matrix, ull
 
         G = RotationMatrix(m, k, i, c, s) * G;
         B = RotationMatrix(m, k, i, c, s) * B;
-
-        B.print();
-        G.print();
     }
 
     return {B, G};
