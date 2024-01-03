@@ -143,7 +143,7 @@ ReformBidiagonalization_Result ReformBidiagonalization(const Matrix &matrix, ull
     return {B, G};
 }
 
-SVDMethod_Result SVDMethod(const Matrix &matrix) {
+SVDMethod_Output SVDMethod(const Matrix &matrix) {
 #if DEBUG
     if (matrix.rows < matrix.cols) {
         throw std::invalid_argument("SVDMethod requires rows >= cols");
@@ -153,18 +153,19 @@ SVDMethod_Result SVDMethod(const Matrix &matrix) {
     auto m = B.rows;
     auto n = B.cols;
 
+    TIMING_START
 
     for (int count = 0; count < ITERATION_METHOD_MAX_ITERATION; count++) {
         // clean B:
         // TODO: Notice that these impl are not numerically stable, should be set to relative error
         for (ull i = 0; i < n - 1; i++) {
-            if (std::abs(B.matrix[i][i + 1]) < 1e-8) {
+            if (std::abs(B.matrix[i][i + 1]) < 1e-4) {
                 B.matrix[i][i + 1] = 0;
             }
         }
 
         for (ull i = 0; i < n; i++) {
-            if (std::abs(B.matrix[i][i]) < 1e-8) {
+            if (std::abs(B.matrix[i][i]) < 1e-4) {
                 B.matrix[i][i] = 0;
             }
         }
@@ -180,7 +181,15 @@ SVDMethod_Result SVDMethod(const Matrix &matrix) {
         }
 
         if (pivot_j == 0) {
-            return {B, U, V};
+            TIMING_END
+
+            return {
+                    B,
+                    U,
+                    V,
+                    count,
+                    TIMING_RETURN_DURATION
+            };
         }
 
         for (ull i = pivot_j - 1; i > 0; i--) {

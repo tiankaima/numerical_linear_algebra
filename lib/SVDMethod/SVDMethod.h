@@ -13,7 +13,9 @@ typedef struct {
     Matrix V;
 } SVDMethod_Result;
 
-SVDMethod_Result SVDMethod(const Matrix &matrix);
+using SVDMethod_Output = IterationMethodOutput<SVDMethod_Result>;
+
+SVDMethod_Output SVDMethod(const Matrix &matrix);
 
 typedef struct {
     Matrix B;

@@ -16,6 +16,7 @@
 #include "random"
 #include "chrono"
 #include "optional"
+#include "algorithm"
 
 #define ull unsigned long long
 #define lld long double
