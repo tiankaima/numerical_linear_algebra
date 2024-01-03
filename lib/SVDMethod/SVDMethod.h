@@ -8,11 +8,12 @@
 #include "../../includes/NLAMethods.h"
 
 typedef struct {
+    Matrix B;
     Matrix U;
-    Matrix S;
     Matrix V;
 } SVDMethod_Result;
 
+SVDMethod_Result SVDMethod(const Matrix &matrix);
 
 typedef struct {
     Matrix B;
@@ -20,6 +21,7 @@ typedef struct {
     Matrix Q;
 } WilkinsonShift_Result;
 
+WilkinsonShift_Result WilkinsonShiftIteration2D(const Matrix &A);
 WilkinsonShift_Result WilkinsonShiftIteration(const Matrix &matrix);
 
 typedef struct {

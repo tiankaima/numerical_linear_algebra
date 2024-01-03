@@ -7,8 +7,6 @@
 
 #include "../../includes/NLAMethods.h"
 
-#define ITERATION_METHOD_MAX_ITERATION 100000
-
 typedef struct {
     const Matrix &A;
     const Vector &b;
