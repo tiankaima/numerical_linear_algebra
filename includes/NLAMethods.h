@@ -20,5 +20,6 @@
 #include "JacobiMethod/JacobiMethod.h"
 #include "PowerIteration/PowerIteration.h"
 #include "QRMethod/QRMethod.h"
+#include "SVDMethod/SVDMethod.h"
 
 #endif //NUMERICAL_ALGEBRA_CUSTOMMATH_LIB_H

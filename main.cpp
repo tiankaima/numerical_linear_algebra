@@ -2,16 +2,14 @@
 
 // homework 8 (SVD):
 int main() {
-    auto A = Matrix(5, 3, 1, 10);
-//    A.print();
+    auto A = Matrix(8, 5, 1, 10);
+    A = BidiagonalizationMethod(A).B;
+    A.matrix[1][1] = 0;
 
-    auto r = BidiagonalizationMethod(A);
+    auto r = ReformBidiagonalization(A, 1);
 
     r.B.print();
-//    r.U.print();
-//    r.V.print();
-
-    (r.U * A * r.V).print();
+    r.G.print();
 
     return 0;
 }

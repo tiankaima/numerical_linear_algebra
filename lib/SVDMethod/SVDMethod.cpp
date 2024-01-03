@@ -4,11 +4,6 @@
 
 #include "SVDMethod.h"
 
-typedef struct {
-    Matrix B;
-    Matrix P;
-    Matrix Q;
-} WilkinsonShift_Result;
 
 // SVD iteration with Wilkinson shift
 WilkinsonShift_Result WilkinsonShiftIteration(const Matrix &matrix) {
@@ -60,4 +55,34 @@ WilkinsonShift_Result WilkinsonShiftIteration(const Matrix &matrix) {
     }
 
     return {B, P, Q};
+#undef DELTA
+#undef GAMMA
 }
+
+// Consider position k have DELTA(k + 1) = 0
+// Then we can use Givens rotation to make GAMMA(k) = 0 as well:
+ReformBidiagonalization_Result ReformBidiagonalization(const Matrix &matrix, ull k) {
+    auto B = Matrix(matrix);
+    auto n = B.rows;
+    auto G = Matrix::identity(n);
+
+    B.print();
+
+    for (ull i = k + 1; i < B.cols; i++) {
+        auto t = B.matrix[k][i] / B.matrix[i][i] ; // tan(theta)
+        auto c = 1 / std::sqrt(1 + t * t); // cos(theta)
+        auto s = c * t; // sin(theta)
+
+        G = RotationMatrix(n, k, i, c, s) * G;
+        B = RotationMatrix(n, k, i, c, s) * B;
+
+        B.print();
+        G.print();
+    }
+
+    return {B, G};
+}
+
+//SVDMethod_Result SVDMethod(const Matrix &matrix) {
+//
+//}

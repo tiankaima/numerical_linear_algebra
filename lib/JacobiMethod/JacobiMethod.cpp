@@ -4,7 +4,7 @@
 
 #include "JacobiMethod.h"
 
-Matrix JacobiRotationMatrix(ull n, ull p, ull q, lld c, lld s) {
+Matrix RotationMatrix(ull n, ull p, ull q, lld c, lld s) {
     auto P = Matrix::identity(n);
     P.matrix[p][p] = c;
     P.matrix[q][q] = c;
@@ -68,7 +68,7 @@ void JacobiIteration(ull n, Matrix &A, Matrix &P, JacobiIterationPivot pivot) {
     auto s = c * t; // sin(theta)
 
 
-    auto J = JacobiRotationMatrix(n, p, q, c, s);
+    auto J = RotationMatrix(n, p, q, c, s);
     P = P * J;
 
     // manually calculate A = P^T A P to speed up
