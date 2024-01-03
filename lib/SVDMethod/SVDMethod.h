@@ -22,6 +22,7 @@ typedef struct {
 } WilkinsonShift_Result;
 
 WilkinsonShift_Result WilkinsonShiftIteration2D(const Matrix &A);
+
 WilkinsonShift_Result WilkinsonShiftIteration(const Matrix &matrix);
 
 typedef struct {

@@ -95,7 +95,7 @@ void Vector::print() {
 
     std::cout << "[";
     for (int i = 0; i < this->size; i++) {
-        if(std::abs(this->array[i]) < 1e-10 && HIDE_ZERO_IN_VECTOR_PRINT) {
+        if (std::abs(this->array[i]) < 1e-10 && HIDE_ZERO_IN_VECTOR_PRINT) {
             std::cout << "\t" << "        " << "\t";
         } else {
             std::cout << "\t" << this->array[i] << "\t";

@@ -13,7 +13,7 @@ void Matrix::print() {
     for (ull i = 0; i < this->rows; i++) {
         std::cout << "[";
         for (ull j = 0; j < this->cols; j++) {
-            if(std::abs(this->matrix[i][j]) < 1e-10 && HIDE_ZERO_IN_MATRIX_PRINT) {
+            if (std::abs(this->matrix[i][j]) < 1e-10 && HIDE_ZERO_IN_MATRIX_PRINT) {
                 std::cout << "\t" << "        " << "\t";
             } else {
                 std::cout << "\t" << this->matrix[i][j] << "\t";

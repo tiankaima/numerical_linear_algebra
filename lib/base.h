@@ -6,7 +6,7 @@
 #define NUMERICAL_ALGEBRA_BASE_H
 
 #define ENABLE_TIMING
-#define ITERATION_METHOD_MAX_ITERATION 10000000
+#define ITERATION_METHOD_MAX_ITERATION 100000
 
 #include "iostream"
 #include "iomanip"

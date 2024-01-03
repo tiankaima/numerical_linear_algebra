@@ -16,7 +16,7 @@ PolarDecomposition2D_Result PolarDecomposition2D(const Matrix &A) {
     auto c = x / r;
     auto s = y / r;
     auto R = Matrix(std::vector<std::vector<lld>>{
-            {c,  -s},
+            {c, -s},
             {s, c}
     });
     auto S = R.transpose() * A;
@@ -208,7 +208,7 @@ SVDMethod_Result SVDMethod(const Matrix &matrix) {
             B.set(pivot_i, pivot_j, pivot_j, pivot_j, r.B);
             auto G_expanded = Matrix::identity(m);
             G_expanded.set(pivot_i, pivot_j, pivot_i, pivot_j, r.G);
-            U = G_expanded * U ;
+            U = G_expanded * U;
         } else {
             auto r = WilkinsonShiftIteration(B22);
             B.set(pivot_i, pivot_j, pivot_i, pivot_j, r.B);
